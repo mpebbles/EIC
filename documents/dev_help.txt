@@ -3,6 +3,7 @@ To develop front end:
 * React *
 
 - navigate to app/eic
+- if you just cloned the repo, you may need to run `npm install` to build in the required dependencies
 - run `node server.js`
 - open new window and navigate to app/eic
 - run `npm run start` after changes to front-end codebase
