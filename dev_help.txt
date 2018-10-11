@@ -1,10 +1,22 @@
 To develop front end:
 
+* React *
+
 - navigate to app/eic
 - run `node server.js`
 - open new window and navigate to app/eic
 - run `npm run start` after changes to front-end codebase
-  then navigate to http://localhost:3000/ if this is not already done for you
+  then navigate to http://localhost:3000/ if this is not already 
+  done for you
 
-- run `npm run build` when satisfied with changes in order to create production build to be served from build/ as index.html
--after this step, navigating to http://localhost:8080/ without the react server running (still running node server) should serve the built front end.
+- run `npm run build` when satisfied with changes in order
+  to create production build to be served from build/ as index.html
+- after this step, navigating to http://localhost:8080/ 
+  without the react server running (still running node 
+  server) should serve the built front end.
+
+* Sass *
+- Install compass (and ruby)
+- navigate to app/eic/public
+- run `compass watch .`
+- as you make changes to _main.scss compass with compile sass/ to css/
