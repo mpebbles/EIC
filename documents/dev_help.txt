@@ -1,6 +1,6 @@
 * to build application *
 - ensure you have done npm install under both client/ and react-backend/ 
-- navigate to eic/
+- navigate to app/
 - for mac/linux:
   run `./build.sh`
   
