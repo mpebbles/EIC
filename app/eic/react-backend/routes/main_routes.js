@@ -9,5 +9,7 @@ var user_controller = require('../controller/user_controller');
 
 
 //testing if express responds to react
-router.get('/',user_controller.list_users);
+router.get('/test',user_controller.list_diff_users);
 
+
+module.exports = router;
