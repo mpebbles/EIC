@@ -1,0 +1,14 @@
+#main {
+  background-color: #f1f1f1;
+  height: 100vh;
+}
+
+
+#middle {
+  background-color: #fafafa;
+  height: 95vh;
+  margin-right: auto;
+  margin-left: auto;
+  width: 80%;
+  vertical-align: top;
+}
