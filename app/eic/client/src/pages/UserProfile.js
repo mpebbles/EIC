@@ -6,7 +6,7 @@ export default class UserProfile extends React.Component {
     return (
       <div>
 
-        <h1>My Profile</h1>
+        <h3>My Profile</h3>
       </div>
     );
   }

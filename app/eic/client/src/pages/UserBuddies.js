@@ -6,7 +6,7 @@ export default class UserBuddies extends React.Component {
     return (
       <div>
 
-        <h1>My Buddies</h1>
+        <h3>My Buddies</h3>
       </div>
     );
   }

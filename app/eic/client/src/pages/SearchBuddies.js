@@ -6,7 +6,7 @@ export default class SearchBuddies extends React.Component {
     return (
       <div>
 
-        <h1>Search For Buddies</h1>
+        <h3>Search For Buddies</h3>
       </div>
     );
   }

@@ -22,10 +22,12 @@ export default class Layout extends React.Component {
 
           <div id="middle">
             <NavBar></NavBar>
+            <div id="content">
             <Route exact path="/" component={Resources}/>
             <Route path="/findbuddy" component={SearchBuddies}/>
             <Route path="/userbuddies" component={UserBuddies}/>
             <Route path="/userprofile" component={UserProfile}/>
+            </div>
           </div>
 
 
