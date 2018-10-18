@@ -1,0 +1,17 @@
+#nav {
+  background-color: #606060;
+  height: 50px;
+  padding: 2%;
+
+
+}
+
+.nav_item_left {
+  margin-left: 2%;
+  float: left;
+}
+
+.nav_item_right {
+  margin-right: 2%;
+  float: right;
+}
