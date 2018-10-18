@@ -1,4 +1,5 @@
-{
+1{
+
   "main.css": "/static/css/main.8516569a.chunk.css",
   "main.js": "/static/js/main.32956c00.chunk.js",
   "main.js.map": "/static/js/main.32956c00.chunk.js.map",
@@ -9,5 +10,6 @@
   "static/css/main.8516569a.chunk.css.map": "/static/css/main.8516569a.chunk.css.map",
   "index.html": "/index.html",
   "precache-manifest.e8a3424786ac059c2a13c07492061abd.js": "/precache-manifest.e8a3424786ac059c2a13c07492061abd.js",
+
   "service-worker.js": "/service-worker.js"
 }

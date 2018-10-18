@@ -4,18 +4,21 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
+
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
-
+var mainRouter = require('./routes/main_routes')
 var app = express();
 
 app.use(express.static('./public'));
 
-app.get('/index', function(req, res) {
-  res.sendFile(path.resolve(__dirname, 'public/index.html'));
-});
-
-/*
+//Set up mongoose connection
+var mongoose = require('mongoose');
+var mongoDB = ('mongodb://geoh12:albertcamusx5@ds127936.mlab.com:27936/eic_database');
+mongoose.connect(mongoDB, { useNewUrlParser: true });
+mongoose.Promise = global.Promise;
+var db = mongoose.connection;
+db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
@@ -28,7 +31,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
-
+app.use('/main',mainRouter);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
@@ -44,5 +47,5 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
-*/
+
 module.exports = app;

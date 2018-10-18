@@ -1,6 +1,6 @@
 //install asynch dependencies
 var async = require('async');
-
+var test = require('../models/test');
 exports.list_users = function(req, res, next) {
   //res.send('respond with a resource');
 
@@ -12,4 +12,12 @@ exports.list_users = function(req, res, next) {
   	id: 2,
   	username: "D0loresH4ze"
   }]);
+}
+
+exports.list_db = function(req, res, next) {
+ test.find()
+ .exec(function(err,list_test){
+ 	if(err){return next(err)};
+ 	res.json([{list_test}]);
+ });
 }
