@@ -4,6 +4,7 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
+
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var mainRouter = require('./routes/main_routes')
@@ -11,7 +12,13 @@ var app = express();
 
 app.use(express.static('./public'));
 
-
+//Set up mongoose connection
+var mongoose = require('mongoose');
+var mongoDB = ('mongodb://geoh12:albertcamusx5@ds127936.mlab.com:27936/eic_database');
+mongoose.connect(mongoDB, { useNewUrlParser: true });
+mongoose.Promise = global.Promise;
+var db = mongoose.connection;
+db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
