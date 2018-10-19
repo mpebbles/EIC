@@ -11,9 +11,10 @@ export default class Resources extends React.Component {
 
   // TODO: actually implement in Flux flow
   componentDidMount() {
-    axios.get('https://jsonplaceholder.typicode.com/users')
+    axios.get('http://localhost:3000/api/test')
       .then(res => {
-        const persons = res.data;
+        const persons = res.data[0].list_test;
+        console.log(persons);
         this.setState({ persons });
       })
   }
@@ -25,7 +26,7 @@ export default class Resources extends React.Component {
         <h3>Resources</h3>
         <p>This is dummy info from a GET request to satisfy the ajax learning requirement</p>
         <ul>
-        { this.state.persons.map(person => <li>{person.name}</li>)}
+        { this.state.persons.map(person => <li>{person.first_name}</li>)}
         </ul>
       </div>
     );
