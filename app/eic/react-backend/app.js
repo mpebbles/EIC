@@ -6,6 +6,7 @@ var logger = require('morgan');
 var favicon = require('serve-favicon');
 var bodyParser = require('body-parser');
 var cors = require('cors');
+var config = require('./config');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
@@ -24,7 +25,7 @@ app.use(cors(corsOption));
 
 //Set up mongoose connection
 var mongoose = require('mongoose');
-var mongoDB = ('mongodb://geoh12:albertcamusx5@ds127936.mlab.com:27936/eic_database');
+var mongoDB = (config.mongo-db.url);
 mongoose.connect(mongoDB, { useNewUrlParser: true });
 mongoose.Promise = global.Promise;
 var db = mongoose.connection;
