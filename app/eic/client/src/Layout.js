@@ -7,19 +7,28 @@ import UserBuddies from './pages/UserBuddies'
 import UserProfile from './pages/UserProfile'
 import './css/main.css'
 import './css/stupid.css'
-
-
+import { GoogleAPI } from 'react-google-oauth';
+import config from './config.json';
+import Login from './components/Login';
+import TokenService from './components/TokenService';
 
 export default class Layout extends React.Component {
-  render() {
 
+  constructor() {
+    super();
+    this.tokenService = new TokenService();
+  }
+
+  componentDidMount(){
+    if(!this.tokenService.loggedIn()){
+      this.props.history.replace('/login');
+    }
+  }
+
+  render() {
     return (
       <div id="main">
-      <BrowserRouter>
-
-
-
-
+        <BrowserRouter>
           <div id="middle">
             <NavBar></NavBar>
             <div id="content">
@@ -29,11 +38,9 @@ export default class Layout extends React.Component {
             <Route path="/userprofile" component={UserProfile}/>
             </div>
           </div>
-
-
-
-      </BrowserRouter>
+        </BrowserRouter>
       </div>
     );
   }
+  
 }
