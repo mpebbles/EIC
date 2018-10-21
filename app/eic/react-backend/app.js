@@ -3,7 +3,9 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-
+var favicon = require('serve-favicon');
+var bodyParser = require('body-parser');
+var cors = require('cors');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
@@ -12,6 +14,14 @@ var app = express();
 
 app.use(express.static('./public'));
 
+var corsOption = {
+    origin: true,
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+    credentials: true,
+    exposedHeaders: ['x-auth-token']
+};
+app.use(cors(corsOption));
+
 //Set up mongoose connection
 var mongoose = require('mongoose');
 var mongoDB = ('mongodb://geoh12:albertcamusx5@ds127936.mlab.com:27936/eic_database');
@@ -19,6 +29,7 @@ mongoose.connect(mongoDB, { useNewUrlParser: true });
 mongoose.Promise = global.Promise;
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
@@ -29,9 +40,9 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', indexRouter);
+app.use('/googleapi/v1/', indexRouter);
 app.use('/users', usersRouter);
-app.use('/api',mainRouter);
+app.use('/api', mainRouter);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
