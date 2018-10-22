@@ -8,9 +8,6 @@ var bodyParser = require('body-parser');
 var cors = require('cors');
 var config = require('./config');
 
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
-var mainRouter = require('./routes/main_routes')
 var app = express();
 
 app.use(express.static('./public'));
@@ -25,8 +22,9 @@ app.use(cors(corsOption));
 
 //Set up mongoose connection
 var mongoose = require('mongoose');
-var mongoDB = (config.mongo-db.url);
+var mongoDB = (config.mongoDb.url);
 mongoose.connect(mongoDB, { useNewUrlParser: true });
+require('./models/GoogleUser');
 mongoose.Promise = global.Promise;
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
@@ -34,6 +32,10 @@ db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
+
+var indexRouter = require('./routes/index');
+var usersRouter = require('./routes/users');
+var mainRouter = require('./routes/main_routes')
 
 app.use(logger('dev'));
 app.use(express.json());

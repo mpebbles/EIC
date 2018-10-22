@@ -5,7 +5,7 @@ module.exports = {
         'callbackURL'      : 'http://localhost:4000/auth/google/callback'
     },
 
-    'mongo-db' : {
+    'mongoDb' : {
     	'url' : 'mongodb://geoh12:albertcamusx5@ds127936.mlab.com:27936/eic_database'
     }
 };
