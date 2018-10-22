@@ -7,9 +7,6 @@ import UserBuddies from './pages/UserBuddies'
 import UserProfile from './pages/UserProfile'
 import './css/main.css'
 import './css/stupid.css'
-import { GoogleAPI } from 'react-google-oauth';
-import config from './config.json';
-import Login from './components/Login';
 import TokenService from './components/TokenService';
 
 export default class Layout extends React.Component {
