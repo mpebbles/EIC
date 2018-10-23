@@ -26,7 +26,7 @@ class Login extends Component {
 		            </div>
 
 		            <div>
-						<GoogleLogin onLoginSuccess={this.executeLogin}/>
+						<GoogleLogin onLoginSuccess={this.executeLogin} onLoginFailure={this.onFailure}/>
 		            </div>
 		        </center>
             </div>
@@ -34,6 +34,7 @@ class Login extends Component {
     }
 
     executeLogin = (response) => {
+    	console.log("Successfully logged in with JWT", response.getAuthResponse().access_token);
         const tokenBlob = new Blob([JSON.stringify({access_token: response.getAuthResponse().access_token}, null, 2)], {type : 'application/json'});
         const options = {
             method: 'POST',

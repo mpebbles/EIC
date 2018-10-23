@@ -5,6 +5,7 @@ import './css/index.css';
 import * as serviceWorker from './serviceWorker';
 import Layout from './Layout';
 import Login from './components/Login';
+import Register from './pages/Register';
 import { GoogleAPI } from 'react-google-oauth';
 import config from './config.json';
 import { BrowserRouter, Route } from 'react-router-dom';
@@ -17,6 +18,7 @@ ReactDOM.render(<GoogleAPI clientId={config.GOOGLE_CLIENT_ID}
                         <div>
                             <Route exact path='/' component={Layout} />
                             <Route exact path='/login' component={Login} />
+                            <Route exact path='/register' component={Register} />
                         </div>
                     </BrowserRouter>
                 </GoogleAPI>, document.getElementById('app'));

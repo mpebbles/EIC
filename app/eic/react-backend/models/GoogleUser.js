@@ -25,7 +25,9 @@ UserSchema.statics.upsertGoogleUser = function(accessToken, refreshToken, profil
 		'googleProvider.id': profile.id
 	}, function(err, user) {
             // no user was found, lets create a new one
+            console.log("User not in database, creating new entry");
             if (!user) {
+                console.log("User is not in database, creating new entry. Redirect to registration page")
             	var newUser = new that({
             		fullName: profile.displayName,
             		email: profile.emails[0].value,
