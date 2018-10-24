@@ -1,13 +1,25 @@
 
 import React from "react";
+import BuddySearch from "../components/BuddySearch"
 
 export default class EstablishConnections extends React.Component {
   render() {
-    return (
-      <div>
 
-        <h3>Establish Connections</h3>
-      </div>
-    );
+    // The below true and false will be replaced
+    if(true) {
+      return (
+        <div>
+          <h3>Find Buddies</h3>
+          <BuddySearch/>
+        </div>
+        );
+    }
+    else if (false) {
+      return (
+        <div>
+          <h3>Connection Requests</h3>
+        </div>
+      )
+    }
   }
 }

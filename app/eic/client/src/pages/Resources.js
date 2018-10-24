@@ -1,6 +1,4 @@
 import React from "react";
-//import * as ResourcesActions from "../actions/ResourcesActions";
-//import ResourcesStore from "../stores/ResourcesStore";
 import ResourcesContent from "../components/ResourcesContent"
 
 export default class Resources extends React.Component {
