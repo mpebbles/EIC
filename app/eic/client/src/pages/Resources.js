@@ -1,22 +1,43 @@
 import React from "react";
-import axios from 'axios';
+import * as ResourcesActions from "../actions/ResourcesActions";
+import ResourcesStore from "../stores/ResourcesStore";
+
 
 export default class Resources extends React.Component {
   constructor() {
     super();
+    this.getResources = this.getResources.bind(this);
     this.state = {
-      persons: []
+      resources: [],
+    };
+  }
+
+  componentWillMount() {
+    //ResourcesActions.loadResources();
+    ResourcesStore.on("change", this.getResources);
+  }
+
+  componentDidMount() {
+    // To avoid reloading data if not needed when component mounts
+    // Will be called first time component mounts
+    // We can always call ResourcesActions.loadResources() when needed
+    if (ResourcesStore.isEmpty()) {
+      ResourcesActions.loadResources();
+    }
+    else {
+      this.getResources()
     }
   }
 
-  // TODO: actually implement in Flux flow
-  componentDidMount() {
-    axios.get('http://localhost:3000/api/test')
-      .then(res => {
-        const persons = res.data[0].list_test;
-        console.log(persons);
-        this.setState({ persons });
-      })
+  componentWillUnmount() {
+    // Remember to do this to avoid memory leaks
+    ResourcesStore.removeListener("change", this.getResources);
+  }
+
+  getResources() {
+    this.setState({
+      resources: ResourcesStore.getAll(),
+    });
   }
 
   render() {
@@ -26,7 +47,7 @@ export default class Resources extends React.Component {
         <h3>Resources</h3>
         <p>This is dummy info from a GET request to satisfy the ajax learning requirement</p>
         <ul>
-        { this.state.persons.map(person => <li>{person.first_name}</li>)}
+        { this.state.resources.map(person => <li>{person.first_name}</li>)}
         </ul>
       </div>
     );
