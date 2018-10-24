@@ -35,7 +35,8 @@ app.set('view engine', 'jade');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
-var mainRouter = require('./routes/main_routes')
+var mainRouter = require('./routes/main_routes');
+var apiRouter = require('./api/resource_api');
 
 app.use(logger('dev'));
 app.use(express.json());
