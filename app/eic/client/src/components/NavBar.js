@@ -22,22 +22,22 @@ export default class NavBar extends React.Component {
               className="nav_item_left"
             />
           </Link>
-          <Link to="/findbuddy">
+          <Link to="/connect">
             <FontAwesomeIcon
               icon="user-friends"
               size="1x"
               color="white"
               className="nav_item_left"
-              title="Find Buddy"
+              title="Establish Connections"
             />
           </Link>
-          <Link to="/userbuddies">
+          <Link to="/userconnections">
             <FontAwesomeIcon
               icon="address-book"
               size="1x"
               color="white"
               className="nav_item_left"
-              title="My Buddies"
+              title="My Connections"
               />
           </Link>
           <Link to="/userprofile">
