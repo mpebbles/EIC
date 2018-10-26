@@ -1,0 +1,15 @@
+.card_holder {
+  padding: 2%;
+}
+
+.connection_card {
+  height: 200px;
+  margin-left: 2%;
+  margin-right: 2%;
+  margin-top: 2%;
+}
+
+.name {
+  margin-left: 5%;
+  margin-top: 5%;
+}
