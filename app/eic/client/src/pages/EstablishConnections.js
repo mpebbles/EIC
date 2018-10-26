@@ -1,6 +1,7 @@
 
 import React from "react";
 import BuddySearch from "../components/BuddySearch"
+import ConnectionRequest from "../components/ConnectionRequest"
 
 export default class EstablishConnections extends React.Component {
   render() {
@@ -18,6 +19,7 @@ export default class EstablishConnections extends React.Component {
       return (
         <div>
           <h3>Connection Requests</h3>
+          <ConnectionRequest />
         </div>
       )
     }

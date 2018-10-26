@@ -25,11 +25,7 @@ export default class ConnectionCards extends React.Component {
     // Will be called first time component mounts
     // We can always call CardsActions.loadCardsData() when needed
     if (CardsStore.isEmpty()) {
-      console.log("1");
-      console.log(this.state.cardsData);
       CardsActions.loadCardsData();
-      console.log("2")
-      console.log(this.state.cardsData);
     }
     else {
       this.getCardsData()
@@ -42,7 +38,6 @@ export default class ConnectionCards extends React.Component {
   }
 
   getCardsData() {
-    console.log("HEREEREREERERER")
     this.setState({
       cardsData: CardsStore.getCardsData()
     });
