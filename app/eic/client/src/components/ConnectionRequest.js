@@ -1,7 +1,7 @@
 import React from "react";
 import * as CRActions from "../actions/CRActions";
 import CRStore from "../stores/CRStore";
-
+import InfoBox from "./InfoBox"
 import '../css/stupid.css'
 
 export default class ConnectionRequest extends React.Component {
@@ -45,11 +45,14 @@ export default class ConnectionRequest extends React.Component {
   render() {
 
     return (
-      <ul>
+      <div>
+        <p>Requests will go here</p>
+        <ul className="list_container">
         { this.state.requests.map(person =>
-          <li>{person.first_name}</li>
+          <InfoBox accountId="1" name="Mitchell Pebbles"/>
         )}
-      </ul>
+        </ul>
+      </div>
     );
   }
 }

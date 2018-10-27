@@ -1,0 +1,43 @@
+.list_container {
+  width: 100%;
+}
+
+.box_li {
+  width: 80%;
+  padding: 2%;
+  background-color: #f5f5f5;
+}
+
+.expanded_box {
+  width: 100%;
+}
+
+.title {
+  float: left;
+}
+
+.top_button_div {
+  float: right;
+}
+
+.top_box_icon {
+  float: right;
+  margin-right: 2%;
+}
+
+.bottom_box_icon {
+  float: left;
+  margin-left: 2%;
+}
+
+.bottom_icon_bar {
+  margin-top: 5%;
+  width: 100%;
+  margin-bottom: 1%;
+  padding: 1%;
+}
+
+.box_content {
+  margin-top: 5%;
+  margin-bottom: 3%;
+}

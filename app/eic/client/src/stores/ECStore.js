@@ -5,13 +5,18 @@ import dispatcher from "../dispatcher";
 class ECStore extends EventEmitter {
   constructor() {
     super()
-    this.searchResults = []
+    this.searchResults = [];
+    // TODO: Change how this is set
+    this.isStudent = false;
   }
 
   getSearchResults() {
     return this.searchResults;
   }
 
+  isStudentAccount() {
+    return this.isStudent;
+  }
 
   handleActions(action) {
     switch(action.type) {
