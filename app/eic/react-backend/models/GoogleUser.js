@@ -2,8 +2,9 @@ var mongoose = require('mongoose');
 
 var Schema = mongoose.Schema;
 
-var UserSchema = new Schema({
-    email: {
+var userSchema = new Schema({
+    user_name: {type: String ,required: true, max: 100},
+    contact: {
         type: String, required: true,
         trim: true, unique: true,
         match: /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/
@@ -17,9 +18,9 @@ var UserSchema = new Schema({
     }
 });
 
-UserSchema.set('toJSON', {getters: true, virtuals: true});
+userSchema.set('toJSON', {getters: true, virtuals: true});
 
-UserSchema.statics.upsertGoogleUser = function(accessToken, refreshToken, profile, cb) {
+userSchema.statics.upsertGoogleUser = function(accessToken, refreshToken, profile, cb) {
 	var that = this;
 	return this.findOne({
 		'googleProvider.id': profile.id
@@ -47,4 +48,4 @@ UserSchema.statics.upsertGoogleUser = function(accessToken, refreshToken, profil
         });
 };
 
-exports.GoogleUser = mongoose.model('GoogleUser', UserSchema);
+exports.GoogleUser = mongoose.model('GoogleUser', userSchema);
