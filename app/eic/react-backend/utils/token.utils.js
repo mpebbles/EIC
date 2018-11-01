@@ -9,6 +9,18 @@ var createToken = function(auth) {
         });
 };
 
+var validate_student_call = function(req) {
+  return true;
+};
+
+var validate_buddy_call = function(req) {
+  return true;
+};
+
+var validate_company_call = function (req) {
+  return true;
+};
+
 module.exports = {
   generateToken: function(req, res, next) {
       req.token = createToken(req.auth);
@@ -19,3 +31,4 @@ module.exports = {
       return res.status(200).send(JSON.stringify(req.user));
   }
 };
+
