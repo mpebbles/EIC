@@ -6,6 +6,6 @@ module.exports = {
     },
 
     'mongoDb' : {
-    	'url' : 'mongodb://geoh12:albertcamusx5@ds127936.mlab.com:27936/eic_database'
+    	'url' : 'mongodb://eic_admin:equipinvestcontract3@ds127936.mlab.com:27936/eic_database'
     }
 };

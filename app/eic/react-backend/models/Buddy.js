@@ -1,14 +1,13 @@
 var mongoose = require('mongoose');
-var user = require('.../models/GoogleUser');
+var user = require('../models/User');
 
 var Schema = mongoose.Schema;
 
-var buddySchema = userSchema.discriminator('Buddy', new Schema({
-	full_name: {type: String , required: true, max: 100},
+var buddySchema = user.discriminator('Buddy', new Schema({
 	student: [{type: Schema.Types.ObjectId , required: false , ref: 'student'}],
+	pending_student: [{type: Schema.Types.ObjectId , required: false , ref: 'student'}],
 	company: {type: Schema.Types.ObjectId, required: false, ref: 'company'}
-	skills: [{type: String , required: false , max: 100}],
 
-});
+}));
 
-exports.Buddy = mongoose.model('Buddy', buddySchema );
+module.exports = mongoose.model('Buddy');
