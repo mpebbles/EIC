@@ -30,7 +30,7 @@ exports.user_detail = function(req, res, next) {
     async.parallel({
         user: function(callback) {
 
-            User.find({ 'user': req.params.user_name)
+            User.find({ 'user': req.params.user_name})
               .exec(callback);
         },
     }, function(err, results) {
