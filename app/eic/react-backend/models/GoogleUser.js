@@ -2,8 +2,10 @@ var mongoose = require('mongoose');
 
 var Schema = mongoose.Schema;
 
-var userSchema = new Schema({
+var googleUserSchema = new Schema({
     user_name: {type: String ,required: true, max: 100},
+    full_name: {type: String , required: true, max: 100},
+    skills: [{type: String , required: false , max: 100}],
     contact: {
         type: String, required: true,
         trim: true, unique: true,
@@ -18,9 +20,9 @@ var userSchema = new Schema({
     }
 });
 
-userSchema.set('toJSON', {getters: true, virtuals: true});
+googleUserSchema.set('toJSON', {getters: true, virtuals: true});
 
-userSchema.statics.upsertGoogleUser = function(accessToken, refreshToken, profile, cb) {
+googleUserSchema.statics.upsertGoogleUser = function(accessToken, refreshToken, profile, cb) {
 	var that = this;
 	return this.findOne({
 		'googleProvider.id': profile.id
@@ -48,4 +50,4 @@ userSchema.statics.upsertGoogleUser = function(accessToken, refreshToken, profil
         });
 };
 
-exports.GoogleUser = mongoose.model('GoogleUser', userSchema);
+exports.GoogleUser = mongoose.model('GoogleUser', googleUserSchema);
