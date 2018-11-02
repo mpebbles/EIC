@@ -6,11 +6,6 @@ var router = express.Router();
 
 //controllers
 var user_controller = require('../controller/student_controller');
-
-
-//testing if express responds to react
-router.get('/api/get_student/:id)',student_controller.list_db);
-
-
+var student_controller = require('../controller/user_controller');
 
 module.exports = router;
