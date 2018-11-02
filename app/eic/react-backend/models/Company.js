@@ -8,4 +8,4 @@ var companySchema = user.discriminator('Company', new Schema({
 	contracts: [{type: Schema.Type.ObjectId , required: false , ref: 'contract'}]
 });
 
-exports.Company = mongoose.model('Company', companySchema );
+module.exports = mongoose.model('Company');

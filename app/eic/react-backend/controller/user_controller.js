@@ -1,6 +1,6 @@
 //install asynch dependencies
 var async = require('async');
-var test = require('../models/test');
+var test = require('../models/Test');
 var User = require('../models/GoogleUser');
 exports.list_users = function(req, res, next) {
   //res.send('respond with a resource');
