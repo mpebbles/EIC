@@ -89,3 +89,48 @@ exports.accept_pending_student = function(req, res, next) {
 		});
 	}
 }
+
+//View this buddy's pending students
+exports.get_pending_student = function(req, res, next) {
+	if(!goog_token.validate_student_call(req)){
+		res.send('401 ERROR UNAUTHORISED TOKEN');
+	}
+	else{
+		googleUser.find({ googleProvider.token : req.params.goog_token })
+		.exec(function(err,a_user){
+		if(err){return next(err)};
+			buddy.find({ 'contact': a_user.contact})
+     			.exec(function(err, a_buddy){
+         			if (err) return err;
+         			a_buddy.pending_student.find()
+				.exec(function(err, a_student){
+             			if(err) return err;
+             			res.json({a_student});
+         			})
+     			});
+		});
+	}
+}
+
+//View this buddy's accepted students
+exports.get_student = function(req, res, next) {
+	if(!goog_token.validate_student_call(req)){
+		res.send('401 ERROR UNAUTHORISED TOKEN');
+	}
+	else{
+		googleUser.find({ googleProvider.token : req.params.goog_token })
+		.exec(function(err,a_user){
+		if(err){return next(err)};
+			buddy.find({ 'contact': a_user.contact})
+     			.exec(function(err, a_buddy){
+         			if (err) return err;
+         			a_buddy.student.find()
+				.exec(function(err, a_student){
+             			if(err) return err;
+             			res.json({a_student});
+         			})
+     			});
+		});
+	}
+}
+
