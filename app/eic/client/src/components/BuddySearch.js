@@ -3,6 +3,7 @@ import * as ECActions from "../actions/ECActions";
 import ECStore from "../stores/ECStore";
 import InfoBox from "./InfoBox"
 
+import '../css/generic.css'
 
 export default class BuddySearch extends React.Component {
   constructor() {
@@ -42,10 +43,9 @@ export default class BuddySearch extends React.Component {
     return (
       <div>
         <input placeholder={this.state.searchBarValue} onChange={(e) => {this.handleChange(e)}}/>
-        <p>Search results will go down here</p>
         <ul className="list_container">
         { this.state.searchResults.map(person =>
-          <InfoBox accountId="1" name="Mitchell Pebbles"/>
+          <InfoBox email={person.contact} name={person.user_name}/>
         )}
         </ul>
       </div>

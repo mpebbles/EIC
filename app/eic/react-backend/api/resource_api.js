@@ -8,7 +8,7 @@ var router = express.Router();
 var buddy_controller = require('../controller/buddy_controller');
 var student_controller = require('../controller/student_controller');
 
-//get all students 
+//get all students
 router.get('/get_all_student', student_controller.get_student_info);
 
 //get specific user by email

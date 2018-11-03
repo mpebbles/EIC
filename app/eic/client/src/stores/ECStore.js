@@ -7,7 +7,7 @@ class ECStore extends EventEmitter {
     super()
     this.searchResults = [];
     // TODO: Change how this is set
-    this.isStudent = false;
+    this.isStudent = true;
   }
 
   getSearchResults() {

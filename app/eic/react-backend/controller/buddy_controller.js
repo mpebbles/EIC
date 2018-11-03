@@ -14,7 +14,7 @@ exports.get_buddy_info = function(req,res,next){
 		if(err){return next(err)};
 		res.json([{buddy}]);
 		});
-	}	
+	}
 }
 //Gets buddy based on email
 exports.get_buddy_email = function(req,res,next){
@@ -27,7 +27,7 @@ exports.get_buddy_email = function(req,res,next){
 		if(err){return next(err)};
 		res.json([{buddy}]);
 		});
-	}	
+	}
 }
 //Gets buddy based on partial matches
 exports.get_buddy_partial = function(req,res,next){
@@ -35,6 +35,7 @@ exports.get_buddy_partial = function(req,res,next){
 		res.send('401 ERROR UNAUTHORISED TOKEN');
 	}
 	else{
+		console.log(req.params.id);
 		buddy.find({"user_name":{"$regex":req.params.id,"$options":"i"}})
 		.limit(10)
 		.exec(function(err,buddy){
@@ -42,5 +43,5 @@ exports.get_buddy_partial = function(req,res,next){
 		res.json([{buddy}]);
 	});
 	}
-	
+
 }

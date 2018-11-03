@@ -43,8 +43,7 @@ export default class InfoBox extends React.Component {
   }
 
   sendRequest() {
-    // TODO call function, reset searchResults, gray out icon
-    alert("Send request in ECActions will be called");
+    ECActions.sendRequest(this.props.email)
   }
 
   render() {
@@ -77,7 +76,7 @@ export default class InfoBox extends React.Component {
             {this.state.isOpened && (
               <div className="expanded_box">
                 <div className="box_content">
-                  "Inside of the box"!!!
+                  {this.props.email}
                 </div>
 
                 {ECStore.isStudentAccount() && (
