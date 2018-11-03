@@ -1,3 +1,10 @@
+//**********************************************************************
+//NOTE FOR BRADLY:
+//If you can find a better way to export all these functions 
+//it would be appreciated I had to quickly export these functions for 
+//the validation calls
+//**********************************************************************
+
 var jwt = require('jsonwebtoken');
 
 var createToken = function(auth) {
@@ -29,6 +36,9 @@ module.exports = {
   sendToken: function(req, res) {
       res.setHeader('x-auth-token', req.token);
       return res.status(200).send(JSON.stringify(req.user));
-  }
+  },
+  validate_student_call,
+  validate_buddy_call,
+  validate_company_call
 };
 
