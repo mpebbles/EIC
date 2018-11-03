@@ -2,6 +2,19 @@ var test = require('../models/Test');
 var User = require('../models/GoogleUser');
 var goog_token = require('../utils/token.utils');
 
+exports.list_users = function(req, res, next) {
+  //res.send('respond with a resource');
+
+  // And insert something like this instead:
+  res.json([{
+  	id: 1,
+  	username: "samsepi0l"
+  }, {
+  	id: 2,
+  	username: "D0loresH4ze"
+  }]);
+}
+
 exports.list_db = function(req, res, next) {
 	test.find()
 	.exec(function(err,list_test){
