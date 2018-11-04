@@ -6,9 +6,10 @@
 //**********************************************************************
 
 var jwt = require('jsonwebtoken');
+var user = require('../models/GoogleUser');
 
 var createToken = function(auth) {
-    return jwt.sign({
+	return jwt.sign({
             id: auth.id
         }, 'my-secret',
         {
@@ -17,28 +18,33 @@ var createToken = function(auth) {
 };
 
 var validate_student_call = function(req) {
-  return true;
+	return true;
 };
 
 var validate_buddy_call = function(req) {
-  return true;
+	return true;
 };
 
 var validate_company_call = function (req) {
-  return true;
+	return true;
 };
 
 module.exports = {
-  generateToken: function(req, res, next) {
-      req.token = createToken(req.auth);
-      return next();
-  },
-  sendToken: function(req, res) {
-      res.setHeader('x-auth-token', req.token);
-      return res.status(200).send(JSON.stringify(req.user));
-  },
-  validate_student_call,
-  validate_buddy_call,
-  validate_company_call
-};
+	generateToken: function(req, res, next) {
+     		req.token = createToken(req.auth);
+		user.findOne({ googleProvider.token : req.user._id})
+		.exec(function(err,a_user){
+			if(err){return next(err)};
+ 			a_user.eic_token = req.token;
+		});
 
+     		return next();
+  	},
+  	sendToken: function(req, res) {
+      	res.setHeader('x-auth-token', req.token);
+      	return res.status(200).send(JSON.stringify(req.user));
+  	},
+  	validate_student_call,
+  	validate_buddy_call,
+  	validate_company_call
+};
