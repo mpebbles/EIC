@@ -41,7 +41,7 @@ googleUserSchema.statics.upsertGoogleUser = function(accessToken, refreshToken, 
             		},
                 eic_token: "",
             	});
-              console.log("HERE!!!!!!")
+              //console.log("HERE!!!!!!")
             	newUser.save(function(error, savedUser) {
             		if (error) {
             			console.log(error);

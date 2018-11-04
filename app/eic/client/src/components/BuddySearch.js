@@ -45,7 +45,7 @@ export default class BuddySearch extends React.Component {
         <input placeholder={this.state.searchBarValue} onChange={(e) => {this.handleChange(e)}}/>
         <ul className="list_container">
         { this.state.searchResults.map(person =>
-          <InfoBox email={person.contact} name={person.user_name}/>
+          <InfoBox email={person.contact} biography={person.biography} name={person.user_name}/>
         )}
         </ul>
       </div>

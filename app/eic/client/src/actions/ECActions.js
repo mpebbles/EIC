@@ -20,5 +20,15 @@ export function loadBuddySearchResults(searchText) {
 }
 
 export function sendRequest(buddyEmail) {
-  alert("Post request with student token, " + buddyEmail + " will be sent");
+  const token = localStorage.getItem('id_token');
+  try {
+    axios({ method: 'get', url: 'http://localhost:3000/api/add_pending_buddy/' + buddyEmail, headers: { Authorization: `Bearer ${token}` },
+    }).then(res => {
+      const persons = res.data[0].buddy;
+    })
+    alert("Your connection request to " + buddyEmail + " has been sent!");
+  }
+  catch(err) {
+    // No matches
+  }
 }

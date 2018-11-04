@@ -76,7 +76,7 @@ export default class InfoBox extends React.Component {
             {this.state.isOpened && (
               <div className="expanded_box">
                 <div className="box_content">
-                  {this.props.email}
+                  {this.props.biography}
                 </div>
 
                 {ECStore.isStudentAccount() && (
