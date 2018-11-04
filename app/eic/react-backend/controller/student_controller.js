@@ -56,7 +56,7 @@ exports.add_pending_buddy = function(req, res, next) {
 		res.send('401 ERROR UNAUTHORISED TOKEN');
 	}
 	else{
-		googleUser.find({ googleProvider.token : req.params.goog_token })
+		googleUser.find({ eic_token : req.params.goog_token })
 		.exec(function(err,a_user){
 		if(err){return next(err)};
 			student.find({ 'contact': a_user.contact})
@@ -79,7 +79,7 @@ exports.accept_pending_buddy = function(req, res, next) {
 		res.send('401 ERROR UNAUTHORISED TOKEN');
 	}
 	else{
-		googleUser.find({ googleProvider.token : req.params.goog_token })
+		googleUser.find({ eic_token : req.params.goog_token })
 		.exec(function(err,a_user){
 		if(err){return next(err)};
 			student.find({ 'contact': a_user.contact})
@@ -101,7 +101,7 @@ exports.get_pending_buddy = function(req, res, next) {
 		res.send('401 ERROR UNAUTHORISED TOKEN');
 	}
 	else{
-		googleUser.find({ googleProvider.token : req.params.goog_token })
+		googleUser.find({ eic_token : req.params.goog_token })
 		.exec(function(err,a_user){
 		if(err){return next(err)};
 			student.find({ 'contact': a_user.contact})
@@ -123,7 +123,7 @@ exports.get_buddy = function(req, res, next) {
 		res.send('401 ERROR UNAUTHORISED TOKEN');
 	}
 	else{
-		googleUser.find({ googleProvider.token : req.params.goog_token })
+		googleUser.find({ eic_token : req.params.goog_token })
 		.exec(function(err,a_user){
 		if(err){return next(err)};
 			student.find({ 'contact': a_user.contact})
