@@ -7,6 +7,7 @@ var router = express.Router();
 //controllers
 var buddy_controller = require('../controller/buddy_controller');
 var student_controller = require('../controller/student_controller');
+var user_controller = require('../controller/user_controller')
 
 //get all students
 router.get('/get_all_student', student_controller.get_student_info);
@@ -26,7 +27,7 @@ router.get('/get_buddy_email/:id',buddy_controller.get_buddy_email);
 //Gets partial matches for buddy
 router.get('/get_buddy_partial/:id',buddy_controller.get_buddy_partial);
 
-
+router.get('/get_user_type',user_controller.get_user_type);
 
 
 

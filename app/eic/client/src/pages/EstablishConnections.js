@@ -8,10 +8,30 @@ import ConnectionRequest from "../components/ConnectionRequest"
 import ECStore from "../stores/ECStore";
 
 export default class EstablishConnections extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      isStudent: ECStore.isStudentAccount(),
+    }
+    this.setAccountType = this.setAccountType.bind(this);
+  }
+
+  componentWillMount() {
+    ECStore.on("change", this.setAccountType);
+  }
+
+  componentWillUnmount() {
+    ECStore.removeListener("change", this.setAccountType);
+  }
+
+  setAccountType() {
+    this.setState({isStudent: ECStore.isStudentAccount()});
+  }
+
   render() {
 
     // The below true and false will be replaced
-    if(ECStore.isStudentAccount()) {
+    if(this.state.isStudent) {
       return (
         <div>
           <h3>Find Buddies</h3>

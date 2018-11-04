@@ -61,7 +61,14 @@ googleUserSchema.statics.addEICToken = function(req, res, next) {
    });
 };
 
+googleUserSchema.statics.findEmailByToken = function(token_str, next_func) {
+  mongoose.model('GoogleUser').findOne({"eic_token": token_str}).exec(function(err, user){
+    next_func(err, user.contact);
+  });
+}
+
 exports.GoogleUser = mongoose.model('GoogleUser', googleUserSchema);
 module.exports = {
   addEICToken: googleUserSchema.statics.addEICToken,
+  findEmailByToken: googleUserSchema.statics.findEmailByToken,
 }

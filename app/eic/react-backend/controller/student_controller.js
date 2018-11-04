@@ -40,7 +40,7 @@ exports.get_student_partial = function(req,res,next){
 		res.send('401 ERROR UNAUTHORISED TOKEN');
 	}
 	else{
-		console.log(googleUser.find());
+		//console.log(googleUser.find());
 		student.find({"user_name":{"$regex":req.params.id,"$options":"i"}})
 		.limit(10)
 		.exec(function(err,student){
