@@ -91,6 +91,27 @@ exports.accept_pending_student = function(req, res, next) {
 	}
 }
 
+//Delete student from this buddy's pending_student[]
+exports.reject_pending_student = function(req, res, next) {
+	if(!goog_token.validate_buddy_call(req)){
+		res.send('401 ERROR UNAUTHORISED TOKEN');
+	}
+	else{
+		googleUser.find({ eic_token : req.params.goog_token })
+		.exec(function(err,a_user){
+		if(err){return next(err)};
+			buddy.find({ 'contact': a_user.contact})
+     			.exec(function(err, a_buddy){
+         			if (err) return err;
+         			a_buddy.pending_student.deleteOne({'contact': req.params.student_email }
+				.exec(function(err, a_student){
+             			if(err) return err;
+         			})
+     			});
+		});
+	}
+}
+
 //View this buddy's pending students
 exports.get_pending_student = function(req, res, next) {
 	if(!goog_token.validate_student_call(req)){
