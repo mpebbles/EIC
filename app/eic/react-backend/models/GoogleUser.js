@@ -5,6 +5,7 @@ var Schema = mongoose.Schema;
 var googleUserSchema = new Schema({
     user_name: {type: String ,required: true, max: 100},
     full_name: {type: String , required: true, max: 100},
+    eic_token: {type: String , required: false},
     skills: [{type: String , required: false , max: 100}],
     contact: {
         type: String, required: true,
@@ -30,8 +31,9 @@ googleUserSchema.statics.upsertGoogleUser = function(accessToken, refreshToken, 
             // no user was found, lets create a new one
             if (!user) {
             	var newUser = new that({
-            		fullName: profile.displayName,
-            		email: profile.emails[0].value,
+            		full_name: profile.displayName,
+            		user_name: profile.emails[0].value,
+            		contact: profile.emails[0].value,
             		googleProvider: {
             			id: profile.id,
             			token: accessToken
