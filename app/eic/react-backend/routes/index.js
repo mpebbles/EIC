@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-var { generateToken, sendToken } = require('../utils/token.utils');
+var { generateToken, putTokenInDB, sendToken } = require('../utils/token.utils');
 var passport = require('passport');
 var config = require('../config');
 var request = require('request');
@@ -21,7 +21,7 @@ router.route('/auth/google')
         };
 
         next();
-    }, generateToken, sendToken);
+    }, generateToken, putTokenInDB, sendToken);
 
 
 module.exports = router;

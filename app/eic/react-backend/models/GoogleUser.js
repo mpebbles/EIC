@@ -1,6 +1,7 @@
 var mongoose = require('mongoose');
 
 var Schema = mongoose.Schema;
+var ObjectId = mongoose.ObjectId;
 
 var googleUserSchema = new Schema({
     user_name: {type: String ,required: true, max: 100},
@@ -37,9 +38,10 @@ googleUserSchema.statics.upsertGoogleUser = function(accessToken, refreshToken, 
             		googleProvider: {
             			id: profile.id,
             			token: accessToken
-            		}
+            		},
+                eic_token: "",
             	});
-
+              console.log("HERE!!!!!!")
             	newUser.save(function(error, savedUser) {
             		if (error) {
             			console.log(error);
@@ -52,4 +54,14 @@ googleUserSchema.statics.upsertGoogleUser = function(accessToken, refreshToken, 
         });
 };
 
+googleUserSchema.statics.addEICToken = function(req, res, next) {
+  mongoose.model('GoogleUser').update({ "_id": req.user._id },
+   { $set: { "eic_token": req.token } }, function(err, result) {
+    //console.log(err);
+   });
+};
+
 exports.GoogleUser = mongoose.model('GoogleUser', googleUserSchema);
+module.exports = {
+  addEICToken: googleUserSchema.statics.addEICToken,
+}

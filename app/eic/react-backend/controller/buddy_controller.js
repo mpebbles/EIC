@@ -44,8 +44,9 @@ exports.get_buddy_partial = function(req,res,next){
 		if(err){return next(err)};
 		res.json([{buddy}]);
 	});
+  }
 }
-
+/*
 //Adds student to this buddy's pending_student[]
 exports.add_pending_student = function(req, res, next) {
 	if(!goog_token.validate_buddy_call(req)){
@@ -133,4 +134,4 @@ exports.get_student = function(req, res, next) {
 		});
 	}
 }
-
+*/
