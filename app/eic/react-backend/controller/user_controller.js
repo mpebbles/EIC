@@ -1,5 +1,6 @@
 var test = require('../models/Test');
 var User = require('../models/GoogleUser');
+var eic_user = require('../models/User');
 var goog_token = require('../utils/token.utils');
 
 exports.list_users = function(req, res, next) {
@@ -31,4 +32,15 @@ exports.get_user_type = function(req,res,next){
 		res.send('Buddy');
 	else if(goog_token.validate_company_call(req))
 		res.send('Company');
+}
+
+exports.check_user_exists = function(email) {
+	eic_user.count({contact: email}, function (err, count){ 
+    	if(count>0){
+    		console.log("Count is greater than zero")
+        	return true;
+    	}
+	}); 
+	console.log("Count is zero");
+	return false;
 }

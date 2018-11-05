@@ -24,7 +24,9 @@ class Login extends Component {
 		                    Log In Here
 		                </h1>
 		            </div>
-
+		            <div>
+		            Username: <input type="text" id="user"/>
+		            </div>	
 		            <div>
 						<GoogleLogin onLoginSuccess={this.executeLogin}/>
 		            </div>
@@ -41,20 +43,22 @@ class Login extends Component {
             mode: 'cors',
             cache: 'default'
         };
-        fetch('http://localhost:3000/googleapi/v1/auth/google', options).then(r => {
-            const token = r.headers.get('x-auth-token');
-            r.json().then(user => {
-                if (token) {
-                	this.tokenService.setToken(token);
-                    this.props.history.replace('/');
+        fetch('http://localhost:3000/googleapi/v1/auth/google-login', options).then(r => {
+            if(r.ok) {
+                const token = r.headers.get('x-auth-token');
+                r.json().then(user => {
+                    if (token) {
+                    	this.tokenService.setToken(token);
+                        this.props.history.replace('/');
+                    }
+                });
+            } else {
+                if(r.status == 406) {
+                    this.props.history.replace('/register');
                 }
-            });
+            }
         })
     };
-
-    onFailure = (error) => {
-      alert(error);
-    }
 
 }
 

@@ -1,17 +1,12 @@
 var express = require('express');
 var router = express.Router();
-var { generateToken, putTokenInDB, sendToken } = require('../utils/token.utils');
+var { generateToken, ensureUserExists, putTokenInDB, registerUser, sendToken } = require('../utils/token.utils');
 var passport = require('passport');
 var config = require('../config');
 var request = require('request');
 require('../passport')();
 
-/* GET home page. */
-//router.get('/', function(req, res, next) {
-//  res.render('index', { title: 'Express' });
-//});
-
-router.route('/auth/google')
+router.route('/auth/google-login')
     .post(passport.authenticate('google-token', {session: false}), function(req, res, next) {
         if (!req.user) {
             return res.send(401, 'User Not Authenticated');
@@ -21,7 +16,19 @@ router.route('/auth/google')
         };
 
         next();
-    }, generateToken, putTokenInDB, sendToken);
+    }, generateToken, ensureUserExists, putTokenInDB, sendToken);
+
+router.route('/auth/google-register')
+    .post(passport.authenticate('google-token', {session: false}), function(req, res, next) {
+        if (!req.user) {
+            return res.send(401, 'User Not Authenticated');
+        }
+        req.auth = {
+            id: req.user.id
+        };
+
+        next();
+    }, generateToken, putTokenInDB, registerUser, sendToken);
 
 
 module.exports = router;
