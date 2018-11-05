@@ -11,12 +11,17 @@ class ECStore extends EventEmitter {
     this.searchResults = [];
     // TODO: Change how this is set
 
-    this.isStudent =  true; // default?
+    this.isStudent =  true;
+    // this is here to keep value from changing after redirect, since the isStudent
+    // var is set initially after login
+    this.type_received = false;
   }
 
   // TODO: call setAccountType if not already called by other componenent from any component
   // that needs to know account type
   setAccountType() {
+    // account type already known
+    if(this.type_received) return;
     const token = localStorage.getItem('id_token');
     try {
       axios({ method: 'get', url: 'http://localhost:3000/api/get_user_type/',  headers: { Authorization: `Bearer ${token}` },
@@ -25,7 +30,6 @@ class ECStore extends EventEmitter {
           this.isStudent = true;
         }
         else {
-          console.log("HERE!")
           this.isStudent = false;
         }
         this.emit("change");

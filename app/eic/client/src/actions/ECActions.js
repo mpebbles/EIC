@@ -24,7 +24,7 @@ export function sendRequest(buddyEmail) {
   try {
     axios({ method: 'get', url: 'http://localhost:3000/api/add_pending_buddy/' + buddyEmail, headers: { Authorization: `Bearer ${token}` },
     }).then(res => {
-      const persons = res.data[0].buddy;
+      // if anything needs to be done after, write it here
     })
     alert("Your connection request to " + buddyEmail + " has been sent!");
   }

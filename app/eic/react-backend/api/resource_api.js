@@ -31,6 +31,6 @@ router.get('/get_user_type',user_controller.get_user_type);
 
 router.get('/add_pending_buddy/:buddy_email', student_controller.add_pending_buddy);
 
-
+router.get('/get_pending_student/', buddy_controller.get_pending_student);
 
 module.exports = router;

@@ -46,10 +46,9 @@ export default class ConnectionRequest extends React.Component {
 
     return (
       <div>
-        <p>Requests will go here</p>
         <ul className="list_container">
         { this.state.requests.map(person =>
-          <InfoBox accountId="1" name="Mitchell Pebbles"/>
+          <InfoBox email={person.contact} biography={person.biography} name={person.user_name}/>
         )}
         </ul>
       </div>
