@@ -1,5 +1,6 @@
 import React from "react";
 import * as ECActions from "../actions/ECActions";
+import * as CRActions from "../actions/CRActions";
 import ECStore from "../stores/ECStore";
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -35,11 +36,11 @@ export default class InfoBox extends React.Component {
   }
 
   acceptRequest() {
-    alert("Accept request in ECActions will be called")
+    CRActions.acceptRequest(this.props.email);
   }
 
   denyRequest() {
-    alert("Deny request in ECActions will be called");
+    CRActions.denyRequest(this.props.email);
   }
 
   sendRequest() {

@@ -17,6 +17,7 @@ export default class EstablishConnections extends React.Component {
   }
 
   componentWillMount() {
+    ECStore.setAccountType();
     ECStore.on("change", this.setAccountType);
   }
 

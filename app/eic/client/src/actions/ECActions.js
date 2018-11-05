@@ -26,6 +26,7 @@ export function sendRequest(buddyEmail) {
     }).then(res => {
       // if anything needs to be done after, write it here
     })
+    dispatcher.dispatch({type: "RECEIVE_BUDDY_SEARCH", resources: []})
     alert("Your connection request to " + buddyEmail + " has been sent!");
   }
   catch(err) {
