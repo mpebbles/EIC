@@ -165,26 +165,26 @@ exports.get_pending_student = function(req, res, next) {
 		});
 	}
 }
-/*
+
 //View this buddy's accepted students
 exports.get_student = function(req, res, next) {
 	if(!goog_token.validate_student_call(req)){
 		res.send('401 ERROR UNAUTHORISED TOKEN');
 	}
 	else{
-		googleUser.find({ eic_token : req.params.goog_token })
-		.exec(function(err,a_user){
+		var token_to_find_in_db = JSON.stringify(req.headers.authorization).split(" ")[1];
+		token_to_find_in_db = token_to_find_in_db.substring(0,token_to_find_in_db.length - 1);
+		findEmailByToken(token_to_find_in_db, function(err, contact) {
 		if(err){return next(err)};
-			buddy.find({ 'contact': a_user.contact})
-     			.exec(function(err, a_buddy){
-         			if (err) return err;
-         			a_buddy.student.find()
+			buddy.findOne({ 'contact': contact})
+     	.exec(function(err, a_buddy){
+        if (err) return err;
+				student.find({"_id": {$in: a_buddy.student}})
 				.exec(function(err, a_student){
-             			if(err) return err;
-             			res.json({a_student});
-         			})
-     			});
+        	if(err) return err;
+          res.json([{a_student}]);
+         	})
+     	});
 		});
 	}
 }
-*/

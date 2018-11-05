@@ -37,4 +37,8 @@ router.get('/reject_pending_student/:student_email', buddy_controller.reject_pen
 
 router.get('/accept_pending_student/:student_email', buddy_controller.accept_pending_student);
 
+router.get('/get_student/', buddy_controller.get_student);
+
+router.get('/get_buddy/', student_controller.get_buddy);
+
 module.exports = router;

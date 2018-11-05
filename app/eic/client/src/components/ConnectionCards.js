@@ -49,7 +49,8 @@ export default class ConnectionCards extends React.Component {
       <ul className="container card_holder">
         { this.state.cardsData.map(person =>
           <li className="card lifted padded third connection_card">
-            <p className="name">{person.first_name}</p>
+            <p className="name">{person.user_name}</p>
+            <p className="contact_info">{person.contact}</p>
           </li>
         )}
       </ul>

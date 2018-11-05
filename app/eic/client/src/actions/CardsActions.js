@@ -2,9 +2,27 @@ import dispatcher from "../dispatcher";
 import axios from 'axios';
 
 export function loadCardsData() {
-  console.log("Implement me");
-  //axios.get("http://localhost:3000/api/test")
-  //.then(res => {
-  //  const persons = res.data[0].list_test;
-  //  dispatcher.dispatch({type: "RECEIVE_CARDS_DATA", cardData: persons})})
+  const token = localStorage.getItem('id_token');
+  try {
+    axios({ method: 'get', url: 'http://localhost:3000/api/get_user_type/',  headers: { Authorization: `Bearer ${token}` },
+    }).then(res => {
+      if(res.data == 'Student') {
+        axios({ method: 'get', url: 'http://localhost:3000/api/get_buddy/',  headers: { Authorization: `Bearer ${token}` },
+      }).then(res_1 => {
+          const persons = res_1.data[0].a_buddy;
+          dispatcher.dispatch({type: "RECEIVE_CARDS_DATA", cardData: persons});
+        })
+      }
+      else if(res.data == 'Buddy') {
+        axios({ method: 'get', url: 'http://localhost:3000/api/get_student/',  headers: { Authorization: `Bearer ${token}` },
+      }).then(res_2 => {
+          const persons = res_2.data[0].a_student;
+          dispatcher.dispatch({type: "RECEIVE_CARDS_DATA", cardData: persons});
+        })
+      }
+    })
+  }
+  catch(err) {
+    console.log(err);
+  }
 }

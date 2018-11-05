@@ -1,5 +1,5 @@
 .card_holder {
-  padding: 2%;  
+  padding: 2%;
 }
 
 .connection_card {
@@ -10,6 +10,11 @@
 }
 
 .name {
+  margin-left: 5%;
+  margin-top: 5%;
+}
+
+.contact_info {
   margin-left: 5%;
   margin-top: 5%;
 }
