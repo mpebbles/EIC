@@ -20,6 +20,7 @@ exports.get_buddy_info = function(req,res,next){
 		});
 	}
 }
+
 //Gets buddy based on email
 exports.get_buddy_email = function(req,res,next){
 	if(!goog_token.validate_buddy_call(req)){
@@ -33,6 +34,25 @@ exports.get_buddy_email = function(req,res,next){
 		});
 	}
 }
+
+// Gets buddy profile info based off of token
+exports.get_buddy_profile = function(req,res,next){
+	if(!goog_token.validate_buddy_call(req)){
+		res.send('401 ERROR UNAUTHORISED TOKEN');
+	}
+	else{
+		var token_to_find_in_db = JSON.stringify(req.headers.authorization).split(" ")[1];
+		token_to_find_in_db = token_to_find_in_db.substring(0,token_to_find_in_db.length - 1);
+		findEmailByToken(token_to_find_in_db, function(err, contact) {
+			if(err){return next(err)};
+			buddy.findOne({ 'contact': contact})
+			.exec(function(err, a_buddy){
+				res.json([{a_buddy}]);
+			})
+		});
+	}
+}
+
 //Gets buddy based on partial matches
 exports.get_buddy_partial = function(req,res,next){
 	if(!goog_token.validate_buddy_call(req)){

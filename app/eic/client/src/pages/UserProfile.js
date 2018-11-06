@@ -1,6 +1,8 @@
 import React from "react";
 import { GoogleLogout } from "react-google-oauth";
 import TokenService from "../components/TokenService";
+import * as ProfileActions from "../actions/ProfileActions";
+import ProfileStore from "../stores/ProfileStore";
 
 export default class UserProfile extends React.Component {
 
