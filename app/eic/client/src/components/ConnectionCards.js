@@ -46,6 +46,7 @@ export default class ConnectionCards extends React.Component {
   render() {
 
     return (
+      <div>
       <ul className="container card_holder">
         { this.state.cardsData.map(person =>
           <li className="card lifted padded third connection_card">
@@ -54,6 +55,10 @@ export default class ConnectionCards extends React.Component {
           </li>
         )}
       </ul>
+      {this.state.cardsData.length == 0 && (
+        <p> You have no connections at this time. </p>
+      )}
+      </div>
     );
   }
 }

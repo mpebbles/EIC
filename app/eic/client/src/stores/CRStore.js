@@ -6,7 +6,6 @@ class CRStore extends EventEmitter {
   constructor() {
     super()
     this.requests = [];
-
   }
 
   getAll() {
@@ -24,12 +23,14 @@ class CRStore extends EventEmitter {
 
   handleActions(action) {
     switch(action.type) {
-      //case "CREATE_RESOURCE": {
-      //  this.createResource(action.text);
-      //  break;
-      //}
       case "RECEIVE_REQUESTS": {
         this.requests = action.requests;
+        this.emit("change");
+        break;
+      }
+      case "REMOVE_REQUEST": {
+        this.requests = this.requests.filter(
+          person=> person.contact != action.removeEmail);
         this.emit("change");
         break;
       }

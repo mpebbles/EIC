@@ -26,7 +26,9 @@ export function sendRequest(buddyEmail) {
     }).then(res => {
       // if anything needs to be done after, write it here
     })
+    // called in order to clear results on page - makes the UX nicer since something happens
     dispatcher.dispatch({type: "RECEIVE_BUDDY_SEARCH", resources: []})
+    dispatcher.dispatch({type: "REMOVE_BUDDY_SEND", email: buddyEmail})
     alert("Your connection request to " + buddyEmail + " has been sent!");
   }
   catch(err) {

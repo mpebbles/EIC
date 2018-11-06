@@ -9,6 +9,7 @@ class ECStore extends EventEmitter {
     this.setAccountType = this.setAccountType.bind(this);
     //this.setAccountType();
     this.searchResults = [];
+    this.sentRequests = [];
     // TODO: Change how this is set
 
     this.isStudent =  true;
@@ -49,10 +50,22 @@ class ECStore extends EventEmitter {
     return this.isStudent;
   }
 
+  requestNotSent(email) {
+    if (this.sentRequests.indexOf(email) >= 0) {
+      return false;
+    }
+    return true;
+  }
+
   handleActions(action) {
     switch(action.type) {
       case "RECEIVE_BUDDY_SEARCH": {
         this.searchResults = action.resources;
+        this.emit("change");
+        break;
+      }
+      case "REMOVE_BUDDY_SEND": {
+        this.sentRequests.push(action.email);
         this.emit("change");
         break;
       }

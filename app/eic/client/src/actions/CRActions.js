@@ -1,6 +1,6 @@
 import dispatcher from "../dispatcher";
 import axios from 'axios';
-import CRStore from '../stores/CRStore';
+
 
 export function loadRequests() {
   const token = localStorage.getItem('id_token');
@@ -23,9 +23,7 @@ export function denyRequest(email) {
     axios({ method: 'get', url: 'http://localhost:3000/api/reject_pending_student/' + email, headers: { Authorization: `Bearer ${token}` },
     }).then(res => {
        alert("Request deleted!");
-       dispatcher.dispatch({type: "RECEIVE_REQUESTS", requests: CRStore.requests.filter(
-         person=> person.contact != email)
-       })
+       dispatcher.dispatch({type: "REMOVE_REQUEST", removeEmail: email})
     })
   }
   catch(err) {
@@ -39,9 +37,7 @@ export function acceptRequest(email) {
     axios({ method: 'get', url: 'http://localhost:3000/api/accept_pending_student/' + email, headers: { Authorization: `Bearer ${token}` },
     }).then(res => {
        alert("Request accepted!");
-       dispatcher.dispatch({type: "RECEIVE_REQUESTS", requests: CRStore.requests.filter(
-         person=> person.contact != email)
-       })
+       dispatcher.dispatch({type: "REMOVE_REQUEST", removeEmail: email})
     })
   }
   catch(err) {

@@ -25,6 +25,10 @@ export default class InfoBox extends React.Component {
     this.sendRequest = this.sendRequest.bind(this);
   }
 
+  componentWillMount() {
+
+  }
+
   toggleBox() {
     // check if box is currently opened
     const { isOpened } = this.state;
@@ -80,7 +84,8 @@ export default class InfoBox extends React.Component {
                   {this.props.biography}
                 </div>
 
-                {ECStore.isStudentAccount() && (
+                {  ECStore.isStudentAccount()
+                  && ECStore.requestNotSent(this.props.email) && (
                   <div className="link">
                     <FontAwesomeIcon
                       icon="arrow-circle-right"
@@ -89,6 +94,18 @@ export default class InfoBox extends React.Component {
                       color="#5478e4"
                       className="bottom_box_icon"
                       onClick={this.sendRequest}
+                    />
+                  </div>
+                )}
+                {ECStore.isStudentAccount()
+                  && !ECStore.requestNotSent(this.props.email) && (
+                  <div className="link">
+                    <FontAwesomeIcon
+                      icon="arrow-circle-right"
+                      size="1x"
+                      title="Send Request"
+                      color="#c0c0c0"
+                      className="bottom_box_icon"
                     />
                   </div>
                 )}
