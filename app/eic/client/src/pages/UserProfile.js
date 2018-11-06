@@ -9,6 +9,34 @@ export default class UserProfile extends React.Component {
   constructor() {
     super();
     this.tokenService = new TokenService();
+    this.getInfo = this.getInfo.bind(this);
+    this.state = {
+      info: []
+    }
+  }
+
+  componentWillMount() {
+    ProfileStore.on("change", this.getInfo);
+  }
+
+  componentDidMount() {
+    // To avoid reloading data if not needed when component mounts
+    // Will be called first time component mounts
+    // We can always call ProfileActions.loadProfileInfo() when needed
+    if (ProfileStore.isEmpty()) {
+      ProfileActions.loadProfileInfo();
+    }
+    else {
+      this.getInfo();
+    }
+  }
+
+  componentWillUnmount() {
+    ProfileStore.removeListener("change", this.getInfo);
+  }
+
+  getInfo() {
+    this.setState({info: ProfileStore.getInfo()});
   }
 
   logout = () => {
@@ -17,6 +45,11 @@ export default class UserProfile extends React.Component {
     window.location.reload(true);
   };
 
+
+  // the logic for editing info works genericly for all account types
+  // i.e. if a field type we want the user to be able to edit is present in then
+  // info returned by the server, it will be displayed to the user
+  // One call to get, one call to update
   render() {
     return (
       <div>
@@ -26,6 +59,13 @@ export default class UserProfile extends React.Component {
 	      <div>
 	        <GoogleLogout onLogoutSuccess={this.logout}/>
 	      </div>
+        <div>
+          <ul>
+            {this.state.info.length && this.state.info[0].hasOwnProperty('biography') && (
+              <li>{this.state.info[0].biography}</li>
+            )}
+          </ul>
+        </div>
 	  </div>
     );
   }

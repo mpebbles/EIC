@@ -44,8 +44,9 @@ exports.get_student_profile = function(req,res,next){
 		findEmailByToken(token_to_find_in_db, function(err, contact) {
 			if(err){return next(err)};
 			student.findOne({ 'contact': contact})
-			.exec(function(err, a_student){
-				res.json([{a_student}]);
+			// this is a_user to make front end logic easier
+			.exec(function(err, a_user){
+				res.json([{a_user}]);
 			})
 		});
 	}

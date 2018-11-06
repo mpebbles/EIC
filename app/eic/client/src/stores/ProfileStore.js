@@ -25,11 +25,13 @@ class ProfileStore extends EventEmitter {
   handleActions(action) {
     switch(action.type) {
       case "GET_INFO": {
-        //this.cardInfo = action.cardData;
+        this.profileInfo = [];
+        this.profileInfo.push(action.info);
+        console.log("profileInfo in store: " + this.profileInfo);
         this.emit("change");
         break;
       }
-      case "LOAD_INFO": {
+      case "CHANGE_INFO": {
         //this.cardInfo = this.cardInfo.filter(
         //  person=>person.contact != action.cardEmail);
         this.emit("change");
