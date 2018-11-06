@@ -1,6 +1,10 @@
 import React from "react";
 import * as CardsActions from "../actions/CardsActions";
 import CardsStore from "../stores/CardsStore";
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { fas } from '@fortawesome/free-solid-svg-icons';
+import { fab } from '@fortawesome/free-brands-svg-icons';
 
 import '../css/stupid.css'
 import '../css/cards.css'
@@ -43,6 +47,7 @@ export default class ConnectionCards extends React.Component {
     });
   }
 
+
   render() {
 
     return (
@@ -52,6 +57,14 @@ export default class ConnectionCards extends React.Component {
           <li className="card lifted padded third connection_card">
             <p className="name">{person.user_name}</p>
             <p className="contact_info">{person.contact}</p>
+              <FontAwesomeIcon
+                icon="trash"
+                size="1x"
+                title="Send Request"
+                color="#5478e4"
+                className="delete_icon"
+                onClick={CardsActions.deleteConnection.bind(this, person.contact)}
+                />
           </li>
         )}
       </ul>

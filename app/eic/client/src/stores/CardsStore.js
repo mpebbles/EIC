@@ -29,6 +29,13 @@ class CardsStore extends EventEmitter {
         this.emit("change");
         break;
       }
+      case "REMOVE_CARD": {
+        this.cardInfo = this.cardInfo.filter(
+          person=>person.contact != action.cardEmail);
+        console.log("Here");
+        this.emit("change");
+        break;
+      }
     }
   }
 }
