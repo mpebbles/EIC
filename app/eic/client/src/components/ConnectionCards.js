@@ -62,7 +62,7 @@ export default class ConnectionCards extends React.Component {
                 icon="trash"
                 size="1x"
                 title="Send Request"
-                color="#5478e4"
+                color="#444444"
                 className="delete_icon"
                 onClick={CardsActions.deleteConnection.bind(this, person.contact)}
                 />
