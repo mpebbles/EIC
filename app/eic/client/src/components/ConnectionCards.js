@@ -58,6 +58,7 @@ export default class ConnectionCards extends React.Component {
           <li className="card lifted padded third connection_card">
             <p className="name">{person.user_name}</p>
             <p className="contact_info">{person.contact}</p>
+            <p className="card_skills">{person.skills}{person.interests}</p>
               <FontAwesomeIcon
                 icon="trash"
                 size="1x"

@@ -4,18 +4,32 @@ import axios from 'axios';
 export function loadProfileInfo() {
   const token = localStorage.getItem('id_token');
   try {
-    axios({ method: 'get', url: 'http://localhost:3000/api/get_buddy_profile/',
-            headers: { Authorization: `Bearer ${token}` },
+    axios({ method: 'get', url: 'http://localhost:3000/api/get_user_type/',
+    headers: { Authorization: `Bearer ${token}` },
     }).then(res => {
-
-      const person = res.data[0].a_user;
-      dispatcher.dispatch({type: "GET_INFO", info: person})
+      if(res.data == 'Student') {
+        axios({ method: 'get', url: 'http://localhost:3000/api/get_student_profile/',
+        headers: { Authorization: `Bearer ${token}` },
+      }).then(res_1 => {
+        const person = res_1.data[0].a_user;
+        dispatcher.dispatch({type: "GET_INFO", info: person})
+        })
+      }
+      else if(res.data == 'Buddy') {
+        axios({ method: 'get', url: 'http://localhost:3000/api/get_buddy_profile',
+        headers: { Authorization: `Bearer ${token}` },
+      }).then(res_2 => {
+          const persons = res_2.data[0].a_user;
+          dispatcher.dispatch({type: "GET_INFO", info: persons});
+        })
+      }
     })
   }
   catch(err) {
-    // No matches
+    //console.log(err);
   }
 }
+
 
 export function updateProfileInfo() {
   const token = localStorage.getItem('id_token');

@@ -19,9 +19,6 @@ export default class UserProfile extends React.Component {
 
   componentWillMount() {
     ProfileStore.on("change", this.getInfo);
-  }
-
-  componentDidMount() {
     // To avoid reloading data if not needed when component mounts
     // Will be called first time component mounts
     // We can always call ProfileActions.loadProfileInfo() when needed
@@ -31,6 +28,10 @@ export default class UserProfile extends React.Component {
     else {
       this.getInfo();
     }
+  }
+
+  componentDidMount() {
+
   }
 
   componentWillUnmount() {
