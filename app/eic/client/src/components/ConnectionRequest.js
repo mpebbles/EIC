@@ -3,8 +3,10 @@ import * as CRActions from "../actions/CRActions";
 import CRStore from "../stores/CRStore";
 import InfoBox from "./InfoBox"
 import '../css/stupid.css'
+import '../css/generic.css'
 
 export default class ConnectionRequest extends React.Component {
+
   constructor() {
     super();
     this.getRequests = this.getRequests.bind(this);
@@ -43,6 +45,12 @@ export default class ConnectionRequest extends React.Component {
   }
 
   render() {
+    // Had to break convention; could not get style to render correctly
+    // unless I did this.
+    const defaultMessage = {
+      marginLeft: '4%',
+      color: '#999999',
+    };
 
     return (
       <div>
@@ -52,7 +60,7 @@ export default class ConnectionRequest extends React.Component {
         )}
         </ul>
         {this.state.requests.length == 0 && (
-          <p> You have no requests at this time. </p>
+          <p style={defaultMessage}> You have no requests at this time. </p>
         )}
       </div>
     );

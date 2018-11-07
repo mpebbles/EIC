@@ -4,6 +4,8 @@ import TokenService from "../components/TokenService";
 import * as ProfileActions from "../actions/ProfileActions";
 import ProfileStore from "../stores/ProfileStore";
 
+import '../css/profile.css'
+
 export default class UserProfile extends React.Component {
 
   constructor() {
@@ -56,13 +58,66 @@ export default class UserProfile extends React.Component {
 	      <div>
 	        <h3>My Profile</h3>
 	      </div>
-	      <div>
+	      <div class="edit_profile_info">
 	        <GoogleLogout onLogoutSuccess={this.logout}/>
 	      </div>
-        <div>
+
+        <div class="edit_profile_info">
+        <div><br />A profile image uploader will go here.<br /></div>
           <ul>
             {this.state.info.length && this.state.info[0].hasOwnProperty('biography') && (
-              <li>{this.state.info[0].biography}</li>
+              <li>
+                <p className="input_name">Biography</p>
+                <input value={this.state.info[0].biography}></input>
+              </li>
+            )}
+            {this.state.info.length && this.state.info[0].hasOwnProperty('itemtype')
+              && this.state.info[0].itemtype == "Buddy"
+              && !this.state.info[0].hasOwnProperty('company') && (
+                <li>
+                  <p className="input_name">My Company</p>
+                  <input></input>
+                </li>
+            )}
+            {this.state.info.length && this.state.info[0].hasOwnProperty('itemtype')
+              && this.state.info[0].itemtype == "Buddy"
+              && this.state.info[0].hasOwnProperty('company') && (
+                <li>
+                  <p className="input_name">My Company</p>
+                  <input value={this.state.info[0].company}></input>
+                </li>
+            )}
+            {this.state.info.length && this.state.info[0].hasOwnProperty('itemtype')
+              && this.state.info[0].itemtype == "Buddy"
+              && !this.state.info[0].hasOwnProperty('skills') && (
+                <li>
+                  <p className="input_name">My Skills</p>
+                  <input></input>
+                </li>
+            )}
+            {this.state.info.length && this.state.info[0].hasOwnProperty('itemtype')
+              && this.state.info[0].itemtype == "Buddy"
+              && this.state.info[0].hasOwnProperty('skills') && (
+                <li>
+                  <p className="input_name">My Skills</p>
+                  <input value={this.state.info[0].skills}></input>
+                </li>
+            )}
+            {this.state.info.length && this.state.info[0].hasOwnProperty('itemtype')
+              && this.state.info[0].itemtype == "Student"
+              && !this.state.info[0].hasOwnProperty('interests') && (
+                <li>
+                  <p className="input_name">My Interests</p>
+                  <input></input>
+                </li>
+            )}
+            {this.state.info.length && this.state.info[0].hasOwnProperty('itemtype')
+              && this.state.info[0].itemtype == "Student"
+              && this.state.info[0].hasOwnProperty('interests') && (
+                <li>
+                  <p className="input_name">My Interests</p>
+                  <input value={this.state.info[0].interests}></input>
+                </li>
             )}
           </ul>
         </div>

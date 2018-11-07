@@ -27,7 +27,6 @@ class ProfileStore extends EventEmitter {
       case "GET_INFO": {
         this.profileInfo = [];
         this.profileInfo.push(action.info);
-        console.log("profileInfo in store: " + this.profileInfo);
         this.emit("change");
         break;
       }

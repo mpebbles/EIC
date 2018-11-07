@@ -8,6 +8,7 @@ import { fab } from '@fortawesome/free-brands-svg-icons';
 
 import '../css/stupid.css'
 import '../css/cards.css'
+import '../css/generic.css'
 
 export default class ConnectionCards extends React.Component {
   constructor() {
@@ -69,7 +70,7 @@ export default class ConnectionCards extends React.Component {
         )}
       </ul>
       {this.state.cardsData.length == 0 && (
-        <p> You have no connections at this time. </p>
+        <p className="default_mesage"> You have no connections at this time. </p>
       )}
       </div>
     );

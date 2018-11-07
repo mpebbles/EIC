@@ -32,8 +32,10 @@ export function deleteConnection(email) {
   try {
     //axios({ method: 'get', url: 'http://localhost:3000/api/get_user_type/',  headers: { Authorization: `Bearer ${token}` },
     //}).then(res => {
-      alert("Connection deleted!");
-      dispatcher.dispatch({type: "REMOVE_CARD", cardEmail: email});
+      if(window.confirm("Are you sure you want to delete this connection?")) {
+        alert("Connection deleted!");
+        dispatcher.dispatch({type: "REMOVE_CARD", cardEmail: email});
+      }
     //});
   }
   catch(err) {
