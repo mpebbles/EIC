@@ -1,15 +1,10 @@
-//**********************************************************************
-//NOTE FOR BRADLY:
-//If you can find a better way to export all these functions
-//it would be appreciated I had to quickly export these functions for
-//the validation calls
-//**********************************************************************
 var mongoose = require('mongoose');
 var jwt = require('jsonwebtoken');
 var googleUser = require('../models/GoogleUser');
 var { addEICToken } = require('../models/GoogleUser');
 var eic_user = require('../models/User');
 var user_controller = require('../controller/user_controller');
+var buddy_controller = require('../controller/buddy_controller');
 
 var createToken = function(auth) {
 	return jwt.sign({
@@ -18,18 +13,6 @@ var createToken = function(auth) {
         {
             expiresIn: 60 * 120
         });
-};
-
-var validate_student_call = function(req) {
-	return true;
-};
-
-var validate_buddy_call = function(req) {
-	return true;
-};
-
-var validate_company_call = function (req) {
-	return true;
 };
 
 module.exports = {
@@ -58,13 +41,30 @@ module.exports = {
       let user_name = req.header("x-user-name");
       let user_email = JSON.parse(JSON.stringify(req.user)).email;
       console.log("Insert into database", account_type, user_name, user_email);
-      return next();
+
+      if(account_type === "Buddy"){
+        return buddy_controller.create_buddy_account(req, res, next);
+      } else if (account_type == "Student") {
+        return next();
+      } else if (account_type == "Company") {
+        return next();
+      } else {
+        return res.status(500);
+      }
     },
   	sendToken: function(req, res) {
       	res.setHeader('x-auth-token', req.token);
       	return res.status(200).send(JSON.stringify(req.user));
   	},
-  	validate_student_call,
-  	validate_buddy_call,
-  	validate_company_call
+    validate_student_call: function(req) {
+      return true;
+    },
+
+    validate_buddy_call: function(req) {
+      return true;
+    },
+
+    validate_company_call: function (req) {
+      return true;
+    }
 };

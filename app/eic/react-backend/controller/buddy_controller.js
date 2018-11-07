@@ -4,6 +4,21 @@ var student = require('../models/Student');
 var googleUser = require('../models/GoogleUser');
 var goog_token = require('../utils/token.utils');
 
+//Gets all buddies in the db
+exports.create_buddy_account = function(req,res,next){
+	if(!goog_token.validate_buddy_call(req)){
+		res.send('401 ERROR UNAUTHORISED TOKEN');
+	}
+	else{
+		new buddy({
+			user_name : req.header("x-user-name"),
+			contact : JSON.parse(JSON.stringify(req.user)).email
+		}).save(function(err, doc) {
+			if(err){return next(err)};
+			res.send();
+		});
+	}
+}
 
 //Gets all buddies in the db
 exports.get_buddy_info = function(req,res,next){

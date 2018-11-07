@@ -3,7 +3,6 @@ var user_main = require('../models/User');
 
 var Schema = mongoose.Schema;
 
-
 var studentSchema = user_main.discriminator('Student', new Schema({
 	biography: {type: String , required: false, max:100},
 	interests: {type: String , required: false, max:100},
