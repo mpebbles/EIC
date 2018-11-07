@@ -15,11 +15,8 @@ export default class UserProfile extends React.Component {
     this.handleInputChange = this.handleInputChange.bind(this);
     this.state = {
       info: [],
+	    
       // for getting new values on save
-      // 1 has existing value
-      // 2 means user has left value blank
-      // 1 and 2 make the input sources unique since one input has a defaultValue
-      // of the user's previous input, and the other has a defaultValue of ""
       bio: "",
       company: "",
       skills: "",
