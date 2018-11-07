@@ -12,8 +12,18 @@ export default class UserProfile extends React.Component {
     super();
     this.tokenService = new TokenService();
     this.getInfo = this.getInfo.bind(this);
+    this.handleInputChange = this.handleInputChange.bind(this);
     this.state = {
-      info: []
+      info: [],
+      // for getting new values on save
+      // 1 has existing value
+      // 2 means user has left value blank
+      // 1 and 2 make the input sources unique since one input has a defaultValue
+      // of the user's previous input, and the other has a defaultValue of ""
+      bio: "",
+      company: "",
+      skills: "",
+      interests: ""
     }
   }
 
@@ -30,24 +40,38 @@ export default class UserProfile extends React.Component {
     }
   }
 
-  componentDidMount() {
-
-  }
-
   componentWillUnmount() {
     ProfileStore.removeListener("change", this.getInfo);
   }
 
   getInfo() {
     this.setState({info: ProfileStore.getInfo()});
+    if(this.state.info[0].hasOwnProperty('biography')) {
+      this.setState({bio: this.state.info[0].biography})
+    }
+    if(this.state.info[0].hasOwnProperty('company')) {
+      this.setState({company: this.state.info[0].company})
+    }
+    if(this.state.info[0].hasOwnProperty('skills')) {
+      this.setState({skills: this.state.info[0].skills})
+    }
+    if(this.state.info[0].hasOwnProperty('interests')) {
+      this.setState({interests: this.state.info[0].interests})
+    }
+  }
+
+  handleInputChange(e) {
+    this.setState()
   }
 
   logout = () => {
     this.tokenService.logout();
+  };
+
+  goHome = () => {
     this.props.history.replace('/');
     window.location.reload(true);
   };
-
 
   // the logic for editing info works genericly for all account types
   // i.e. if a field type we want the user to be able to edit is present in then
@@ -66,61 +90,42 @@ export default class UserProfile extends React.Component {
         <div class="edit_profile_info">
         <div><br />A profile image uploader will go here.<br /></div>
           <ul>
-            {this.state.info.length && this.state.info[0].hasOwnProperty('biography') && (
+            {this.state.info.length && (
               <li>
                 <p className="input_name">Biography</p>
-                <input value={this.state.info[0].biography}></input>
+                <input onChange={e => this.setState({bio:e.target.value})} value={this.state.bio}></input>
               </li>
             )}
             {this.state.info.length && this.state.info[0].hasOwnProperty('itemtype')
-              && this.state.info[0].itemtype == "Buddy"
-              && !this.state.info[0].hasOwnProperty('company') && (
+              && this.state.info[0].itemtype == "Buddy" && (
                 <li>
                   <p className="input_name">My Company</p>
-                  <input></input>
+                  <input onChange={e => this.setState({company:e.target.value})} value={this.state.company}></input>
                 </li>
             )}
+
             {this.state.info.length && this.state.info[0].hasOwnProperty('itemtype')
-              && this.state.info[0].itemtype == "Buddy"
-              && this.state.info[0].hasOwnProperty('company') && (
-                <li>
-                  <p className="input_name">My Company</p>
-                  <input value={this.state.info[0].company}></input>
-                </li>
-            )}
-            {this.state.info.length && this.state.info[0].hasOwnProperty('itemtype')
-              && this.state.info[0].itemtype == "Buddy"
-              && !this.state.info[0].hasOwnProperty('skills') && (
+              && this.state.info[0].itemtype == "Buddy" && (
                 <li>
                   <p className="input_name">My Skills</p>
-                  <input></input>
+                  <input onChange={e => this.setState({skills:e.target.value})} value={this.state.skills}></input>
                 </li>
             )}
+
             {this.state.info.length && this.state.info[0].hasOwnProperty('itemtype')
-              && this.state.info[0].itemtype == "Buddy"
-              && this.state.info[0].hasOwnProperty('skills') && (
-                <li>
-                  <p className="input_name">My Skills</p>
-                  <input value={this.state.info[0].skills}></input>
-                </li>
-            )}
-            {this.state.info.length && this.state.info[0].hasOwnProperty('itemtype')
-              && this.state.info[0].itemtype == "Student"
-              && !this.state.info[0].hasOwnProperty('interests') && (
+              && this.state.info[0].itemtype == "Student" && (
                 <li>
                   <p className="input_name">My Interests</p>
-                  <input></input>
-                </li>
-            )}
-            {this.state.info.length && this.state.info[0].hasOwnProperty('itemtype')
-              && this.state.info[0].itemtype == "Student"
-              && this.state.info[0].hasOwnProperty('interests') && (
-                <li>
-                  <p className="input_name">My Interests</p>
-                  <input value={this.state.info[0].interests}></input>
+                  <input onChange={e => this.setState({interests:e.target.value})} value={this.state.interests}></input>
                 </li>
             )}
           </ul>
+          <div className="buttons">
+            <button onClick={ProfileActions.updateProfileInfo.bind(this,
+              this.state)}>Save
+            </button>
+            <button onClick={this.goHome.bind(this)}>Cancel</button>
+          </div>
         </div>
 	  </div>
     );

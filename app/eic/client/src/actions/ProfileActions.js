@@ -31,9 +31,13 @@ export function loadProfileInfo() {
 }
 
 
-export function updateProfileInfo() {
+export function updateProfileInfo(stateValues) {
   const token = localStorage.getItem('id_token');
   try {
+    alert("Server will receive post request containing new document values");
+    // TODO: create object with all values
+    // TODO: send to Server
+    // TODO: update local state in flux
   //  axios({ method: 'get', url: 'http://localhost:3000/api/get_buddy_partial/' + searchText, headers: { Authorization: `Bearer ${token}` },
   //  }).then(res => {
       //const persons = res.data[0].buddy;

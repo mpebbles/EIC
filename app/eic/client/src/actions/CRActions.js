@@ -8,7 +8,6 @@ export function loadRequests() {
     axios({ method: 'get', url: 'http://localhost:3000/api/get_pending_student/', headers: { Authorization: `Bearer ${token}` },
     }).then(res => {
        const persons = res.data[0].a_student;
-       console.log(persons);
        dispatcher.dispatch({type: "RECEIVE_REQUESTS", requests: persons})
     })
   }
@@ -27,7 +26,7 @@ export function denyRequest(email) {
     })
   }
   catch(err) {
-    console.log(err);
+    //console.log(err);
   }
 }
 
@@ -41,6 +40,6 @@ export function acceptRequest(email) {
     })
   }
   catch(err) {
-    console.log(err);
+    //console.log(err);
   }
 }
