@@ -17,7 +17,6 @@ exports.get_student_info = function(req,res,next){
 		res.json([{student}]);
 	});
 	}
-
 }
 
 //Gets information based on the specific email
@@ -32,8 +31,27 @@ exports.get_student_email = function(req,res,next){
 		res.json([{student}]);
 		});
 	}
-
 }
+
+// Gets buddy profile info based off of token
+exports.get_student_profile = function(req,res,next){
+	if(!goog_token.validate_buddy_call(req)){
+		res.send('401 ERROR UNAUTHORISED TOKEN');
+	}
+	else{
+		var token_to_find_in_db = JSON.stringify(req.headers.authorization).split(" ")[1];
+		token_to_find_in_db = token_to_find_in_db.substring(0,token_to_find_in_db.length - 1);
+		findEmailByToken(token_to_find_in_db, function(err, contact) {
+			if(err){return next(err)};
+			student.findOne({ 'contact': contact})
+			// this is a_user to make front end logic easier
+			.exec(function(err, a_user){
+				res.json([{a_user}]);
+			})
+		});
+	}
+}
+
 //Get students who have partial matches based on the user name
 exports.get_student_partial = function(req,res,next){
 	if(!goog_token.validate_student_call(req)){

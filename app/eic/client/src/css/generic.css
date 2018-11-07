@@ -43,3 +43,20 @@
   margin-bottom: 2%;
   padding: 2%;
 }
+
+.default_mesage {
+  margin-left: 4%;
+  color: #999999;
+}
+
+.skills {
+  float: left;
+  margin-left: 2%;
+  font-style: italic;
+  font-size: 1em;
+  color: #999999;
+}
+
+.searchBar {
+  margin-top: 2%;
+}

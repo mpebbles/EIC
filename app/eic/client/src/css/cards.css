@@ -7,14 +7,48 @@
   margin-left: 2%;
   margin-right: 2%;
   margin-top: 2%;
+  position: relative;
+  padding: 2%;
 }
 
 .name {
   margin-left: 5%;
   margin-top: 5%;
+  font-weight: bold;
+  font-size: 1.2em;
+  color: #323232;
 }
 
 .contact_info {
   margin-left: 5%;
   margin-top: 5%;
+  font-style: italic;
+  font-size: 1em;
+  color: #999999;
+}
+
+.button_bottom{
+  width: 100%;
+  float: right;
+  padding: 2%;
+}
+
+.delete_icon {
+  position:absolute;
+  bottom:10px;
+  right:10px;
+}
+
+.card_skills {
+  margin-left: 5%;
+  margin-top: 2%;
+  font-size: 1em;
+  color: #656565;
+}
+
+.buddy_company {
+  margin-left: 5%;
+  margin-top: 5%;
+  font-size: 1em;
+  color: #999999;
 }

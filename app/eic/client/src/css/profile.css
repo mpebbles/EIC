@@ -1,0 +1,18 @@
+.edit_profile_info {
+  padding-top: 5%;
+  padding-left: 5%;
+  padding-right: 5%;
+}
+
+.input_name {
+  padding-top: 3%;
+  padding-bottom: 1%;
+  font-size: 1em;
+  color: #606060;
+  font-weight: bold;
+}
+
+.buttons {
+  margin-left: 2%;
+  margin-top: 2%;
+}

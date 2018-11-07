@@ -20,6 +20,7 @@ exports.get_buddy_info = function(req,res,next){
 		});
 	}
 }
+
 //Gets buddy based on email
 exports.get_buddy_email = function(req,res,next){
 	if(!goog_token.validate_buddy_call(req)){
@@ -33,6 +34,26 @@ exports.get_buddy_email = function(req,res,next){
 		});
 	}
 }
+
+// Gets buddy profile info based off of token
+exports.get_buddy_profile = function(req,res,next){
+	if(!goog_token.validate_buddy_call(req)){
+		res.send('401 ERROR UNAUTHORISED TOKEN');
+	}
+	else{
+		var token_to_find_in_db = JSON.stringify(req.headers.authorization).split(" ")[1];
+		token_to_find_in_db = token_to_find_in_db.substring(0,token_to_find_in_db.length - 1);
+		findEmailByToken(token_to_find_in_db, function(err, contact) {
+			if(err){return next(err)};
+			buddy.findOne({ 'contact': contact})
+			// this is a_user to make front end logic easier
+			.exec(function(err, a_user){
+				res.json([{a_user}]);
+			})
+		});
+	}
+}
+
 //Gets buddy based on partial matches
 exports.get_buddy_partial = function(req,res,next){
 	if(!goog_token.validate_buddy_call(req)){
@@ -40,7 +61,8 @@ exports.get_buddy_partial = function(req,res,next){
 	}
 	else{
 		console.log(req.params.id);
-		buddy.find({"user_name":{"$regex":req.params.id,"$options":"i"}})
+		buddy.find({$or:[{"user_name":{"$regex":req.params.id,"$options":"i"}},
+									{"skills":{"$regex":req.params.id,"$options":"i"}}]})
 		.limit(10)
 		.exec(function(err,buddy){
 		if(err){return next(err)};

@@ -41,4 +41,8 @@ router.get('/get_student/', buddy_controller.get_student);
 
 router.get('/get_buddy/', student_controller.get_buddy);
 
+router.get('/get_buddy_profile/', buddy_controller.get_buddy_profile);
+
+router.get('/get_student_profile/', student_controller.get_student_profile);
+
 module.exports = router;
