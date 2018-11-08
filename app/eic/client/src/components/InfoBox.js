@@ -57,6 +57,7 @@ export default class InfoBox extends React.Component {
           <li className="box_li">
             <div className="title_and_button">
               <div className="title">{this.props.name}</div>
+              <div className="skills">{this.props.skills}</div>
               <div className="top_button_div" onClick={this.toggleBox}>
                 {!this.state.isOpened && (
                   <FontAwesomeIcon

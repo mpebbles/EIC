@@ -48,7 +48,11 @@ header, main, footer {display:block; with:100%} /* IE fix */
 }
 
 /*** buttons ***/
-.btn, button, [type=button], [type=submit] {padding:0.5em 1em; margin:0 0.5em 0.5em 0; display:inline-block; background-color:#26a69a; color:white}
+.btn, button, [type=button], [type=submit] {padding:0.5em 1em; margin:0 0.5em 0.5em 0; display:inline-block;
+  /*changed by Mitchell*/
+  background-color:#1245A8;
+  /*end change*/
+  color:white}
 .btn:hover, button:hover, [type=button]:hover, [type=submit]:hover {box-shadow:0 0 10px #666; text-decoration:none; cursor:pointer}
 .btn.small, table .btn {padding:0.25em 0.5em; font-size:0.8em}
 .btn.large {padding:1em 2em; font-size:1.2em}

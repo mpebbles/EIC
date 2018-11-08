@@ -38,3 +38,17 @@
   bottom:10px;
   right:10px;
 }
+
+.card_skills {
+  margin-left: 5%;
+  margin-top: 2%;
+  font-size: 1em;
+  color: #656565;
+}
+
+.buddy_company {
+  margin-left: 5%;
+  margin-top: 5%;
+  font-size: 1em;
+  color: #999999;
+}

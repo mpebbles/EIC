@@ -12,7 +12,7 @@ export default class BuddySearch extends React.Component {
     this.getSearchResults = this.getSearchResults.bind(this);
 
     this.state = {
-      searchBarValue: "Search for buddies...",
+      searchBarValue: "Search for a buddy by name or by skills...",
       searchResults: [],
     };
   }
@@ -42,10 +42,11 @@ export default class BuddySearch extends React.Component {
 
     return (
       <div>
-        <input placeholder={this.state.searchBarValue} onChange={(e) => {this.handleChange(e)}}/>
+        <input className="searchBar" placeholder={this.state.searchBarValue} onChange={(e) => {this.handleChange(e)}}/>
         <ul className="list_container">
         { this.state.searchResults.map(person =>
-          <InfoBox email={person.contact} biography={person.biography} name={person.user_name}/>
+          <InfoBox email={person.contact} biography={person.biography}
+            skills={person.skills} name={person.user_name}/>
         )}
         </ul>
       </div>

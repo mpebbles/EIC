@@ -77,7 +77,8 @@ exports.get_buddy_partial = function(req,res,next){
 	}
 	else{
 		console.log(req.params.id);
-		buddy.find({"user_name":{"$regex":req.params.id,"$options":"i"}})
+		buddy.find({$or:[{"user_name":{"$regex":req.params.id,"$options":"i"}},
+									{"skills":{"$regex":req.params.id,"$options":"i"}}]})
 		.limit(10)
 		.exec(function(err,buddy){
 		if(err){return next(err)};
