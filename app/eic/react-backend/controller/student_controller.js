@@ -124,7 +124,7 @@ exports.accept_pending_buddy = function(req, res, next) {
 }
 
 //Deletes student from this buddy's pending_student[]
-exports.reject_pending_buddy = function(req, res, next) {
+exports.delete_pending_buddy = function(req, res, next) {
 	if(!goog_token.validate_student_call(req)){
 		res.send('401 ERROR UNAUTHORISED TOKEN');
 	}
@@ -136,6 +136,27 @@ exports.reject_pending_buddy = function(req, res, next) {
      			.exec(function(err, a_student){
          			if (err) return err;
          			a_student.pending_buddy.deleteOne({'contact': req.params.buddy_email }
+				.exec(function(err, a_buddy){
+             			if(err) return err;
+         			})
+     			});
+		});
+	}
+}
+
+//Deletes student from this buddy's student[]
+exports.delete_buddy = function(req, res, next) {
+	if(!goog_token.validate_student_call(req)){
+		res.send('401 ERROR UNAUTHORISED TOKEN');
+	}
+	else{
+		googleUser.find({ eic_token : req.params.goog_token })
+		.exec(function(err,a_user){
+		if(err){return next(err)};
+			student.find({ 'contact': a_user.contact})
+     			.exec(function(err, a_student){
+         			if (err) return err;
+         			a_student.buddy.deleteOne({'contact': req.params.buddy_email }
 				.exec(function(err, a_buddy){
              			if(err) return err;
          			})
