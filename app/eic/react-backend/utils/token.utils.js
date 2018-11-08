@@ -5,6 +5,7 @@ var { addEICToken } = require('../models/GoogleUser');
 var eic_user = require('../models/User');
 var user_controller = require('../controller/user_controller');
 var buddy_controller = require('../controller/buddy_controller');
+var db_functions = require('../db_input');
 
 var createToken = function(auth) {
 	return jwt.sign({
@@ -43,9 +44,9 @@ module.exports = {
       console.log("Insert into database", account_type, user_name, user_email);
 
       if(account_type === "Buddy"){
-        return buddy_controller.create_buddy_account(req, res, next);
+        return db_functions.buddy_create(user_name,user_email, next());
       } else if (account_type == "Student") {
-        return next();
+        return db_functions.student_create(user_name,user_email,"", "",next());
       } else if (account_type == "Company") {
         return next();
       } else {
