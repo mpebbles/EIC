@@ -53,7 +53,7 @@ class Login extends Component {
                     }
                 });
             } else {
-                if(r.status == 406) {
+                if(r.status === 406) {
                     this.props.history.replace('/register');
                 }
             }

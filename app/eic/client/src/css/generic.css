@@ -39,7 +39,12 @@
 }
 
 .box_content {
-  margin-top: 5%;
-  margin-bottom: 3%;
-  padding: 5%;
+  margin-top: 2%;
+  margin-bottom: 2%;
+  padding: 2%;
+}
+
+.default_mesage {
+  margin-left: 4%;
+  color: #999999;
 }

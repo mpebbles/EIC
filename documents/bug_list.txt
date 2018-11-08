@@ -1,1 +1,4 @@
 "There are two ways to write error-free programs; only the third one works." (Alan J. Perlis)
+
+- Google authentication when a browser is already logged into with an account doesn't seem to work.
+- Displaying correct component (according to user type) sometimes has a small delay

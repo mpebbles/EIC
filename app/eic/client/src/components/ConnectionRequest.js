@@ -3,8 +3,10 @@ import * as CRActions from "../actions/CRActions";
 import CRStore from "../stores/CRStore";
 import InfoBox from "./InfoBox"
 import '../css/stupid.css'
+import '../css/generic.css'
 
 export default class ConnectionRequest extends React.Component {
+
   constructor() {
     super();
     this.getRequests = this.getRequests.bind(this);
@@ -43,15 +45,23 @@ export default class ConnectionRequest extends React.Component {
   }
 
   render() {
+    // Had to break convention; could not get style to render correctly
+    // unless I did this.
+    const defaultMessage = {
+      marginLeft: '4%',
+      color: '#999999',
+    };
 
     return (
       <div>
-        <p>Requests will go here</p>
         <ul className="list_container">
         { this.state.requests.map(person =>
-          <InfoBox accountId="1" name="Mitchell Pebbles"/>
+          <InfoBox email={person.contact} biography={person.biography} name={person.user_name}/>
         )}
         </ul>
+        {this.state.requests.length === 0 && (
+          <p style={defaultMessage}> You have no requests at this time. </p>
+        )}
       </div>
     );
   }

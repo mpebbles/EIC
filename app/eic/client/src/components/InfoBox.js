@@ -1,5 +1,6 @@
 import React from "react";
 import * as ECActions from "../actions/ECActions";
+import * as CRActions from "../actions/CRActions";
 import ECStore from "../stores/ECStore";
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -24,6 +25,10 @@ export default class InfoBox extends React.Component {
     this.sendRequest = this.sendRequest.bind(this);
   }
 
+  componentWillMount() {
+
+  }
+
   toggleBox() {
     // check if box is currently opened
     const { isOpened } = this.state;
@@ -35,11 +40,11 @@ export default class InfoBox extends React.Component {
   }
 
   acceptRequest() {
-    alert("Accept request in ECActions will be called")
+    CRActions.acceptRequest(this.props.email);
   }
 
   denyRequest() {
-    alert("Deny request in ECActions will be called");
+    CRActions.denyRequest(this.props.email);
   }
 
   sendRequest() {
@@ -76,10 +81,11 @@ export default class InfoBox extends React.Component {
             {this.state.isOpened && (
               <div className="expanded_box">
                 <div className="box_content">
-                  {this.props.email}
+                  {this.props.biography}
                 </div>
 
-                {ECStore.isStudentAccount() && (
+                {  ECStore.isStudentAccount()
+                  && ECStore.requestNotSent(this.props.email) && (
                   <div className="link">
                     <FontAwesomeIcon
                       icon="arrow-circle-right"
@@ -88,6 +94,18 @@ export default class InfoBox extends React.Component {
                       color="#5478e4"
                       className="bottom_box_icon"
                       onClick={this.sendRequest}
+                    />
+                  </div>
+                )}
+                {ECStore.isStudentAccount()
+                  && !ECStore.requestNotSent(this.props.email) && (
+                  <div className="link">
+                    <FontAwesomeIcon
+                      icon="arrow-circle-right"
+                      size="1x"
+                      title="Send Request"
+                      color="#c0c0c0"
+                      className="bottom_box_icon"
                     />
                   </div>
                 )}
