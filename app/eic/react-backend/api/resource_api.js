@@ -45,4 +45,6 @@ router.get('/get_buddy_profile/', buddy_controller.get_buddy_profile);
 
 router.get('/get_student_profile/', student_controller.get_student_profile);
 
+router.post('/edit_buddy_profile/',buddy_controller.edit_buddy_profile);
+
 module.exports = router;

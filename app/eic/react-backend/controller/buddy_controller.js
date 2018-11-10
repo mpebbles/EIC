@@ -6,6 +6,8 @@ var goog_token = require('../utils/token.utils');
 var { findEmailByToken } = require('../models/GoogleUser')
 var mongoose = require('mongoose');
 var ObjectId = mongoose.ObjectId;
+const {body,validationResult} = require('express-validator/check');
+const  { sanitizeBody } = require('express-validator/filter');
 
 //Gets all buddies in the db
 exports.get_buddy_info = function(req,res,next){
@@ -241,3 +243,28 @@ exports.get_student = function(req, res, next) {
 		});
 	}
 }
+
+
+exports.edit_buddy_profile = [
+	body('biography').isLength({min: 1 }).trim(),
+	body('skills').isLength({min: 1 }).trim(),
+
+	(req,res,next)=>{
+		if(!goog_token.validate_student_call(req)){
+		res.send('401 ERROR UNAUTHORISED TOKEN');
+		}
+		else{
+			var token_to_find_in_db = JSON.stringify(req.headers.authorization).split(" ")[1];
+			token_to_find_in_db = token_to_find_in_db.substring(0,token_to_find_in_db.length - 1);
+			findEmailByToken(token_to_find_in_db, function(err, contact) {
+				buddy.findOneAndUpdate(
+					{'contact': contact},
+					{
+						biography:req.body.biography,
+						skills: req.body.skills
+					});
+				
+     	});
+		};
+	}	
+]
