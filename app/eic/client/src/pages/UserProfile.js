@@ -14,13 +14,13 @@ export default class UserProfile extends React.Component {
     this.getInfo = this.getInfo.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
     this.state = {
-      info: [],
+      info: [{}],
       // for getting new values on save
       // 1 has existing value
       // 2 means user has left value blank
       // 1 and 2 make the input sources unique since one input has a defaultValue
       // of the user's previous input, and the other has a defaultValue of ""
-      bio: "",
+      biography: "",
       company: "",
       skills: "",
       interests: ""
@@ -45,19 +45,21 @@ export default class UserProfile extends React.Component {
   }
 
   getInfo() {
-    this.setState({info: ProfileStore.getInfo()});
-    if(this.state.info[0].hasOwnProperty('biography')) {
-      this.setState({bio: this.state.info[0].biography})
-    }
-    if(this.state.info[0].hasOwnProperty('company')) {
-      this.setState({company: this.state.info[0].company})
-    }
-    if(this.state.info[0].hasOwnProperty('skills')) {
-      this.setState({skills: this.state.info[0].skills})
-    }
-    if(this.state.info[0].hasOwnProperty('interests')) {
-      this.setState({interests: this.state.info[0].interests})
-    }
+    this.setState({info: ProfileStore.getInfo()},
+      () => {
+        if(this.state.info[0].hasOwnProperty('biography')) {
+          this.setState({biography: this.state.info[0].biography})
+        }
+        if(this.state.info[0].hasOwnProperty('company')) {
+          this.setState({company: this.state.info[0].company})
+        }
+        if(this.state.info[0].hasOwnProperty('skills')) {
+          this.setState({skills: this.state.info[0].skills})
+        }
+        if(this.state.info[0].hasOwnProperty('interests')) {
+          this.setState({interests: this.state.info[0].interests})
+        }
+      })
   }
 
   handleInputChange(e) {
@@ -93,7 +95,7 @@ export default class UserProfile extends React.Component {
             {this.state.info.length && (
               <li>
                 <p className="input_name">Biography</p>
-                <input onChange={e => this.setState({bio:e.target.value})} value={this.state.bio}></input>
+                <input onChange={e => this.setState({biography:e.target.value})} value={this.state.biography}></input>
               </li>
             )}
             {this.state.info.length && this.state.info[0].hasOwnProperty('itemtype')

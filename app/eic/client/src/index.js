@@ -9,6 +9,11 @@ import { GoogleAPI } from 'react-google-oauth';
 import config from './config.json';
 import { BrowserRouter, Route } from 'react-router-dom';
 
+import { runAll } from './testing/driver';
+
+// also remember to set supplyTestValues to true in factory.js if any test will be run
+runAll();
+
 
 ReactDOM.render(<GoogleAPI clientId={config.GOOGLE_CLIENT_ID}
                            onUpdateSigninStatus={console.log("Sign in status updated")}

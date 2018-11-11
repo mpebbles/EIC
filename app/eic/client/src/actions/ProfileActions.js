@@ -1,5 +1,6 @@
 import dispatcher from "../dispatcher";
 import axios from 'axios';
+import { factoryUpdateProfileInfo } from '../factory'
 
 export function loadProfileInfo() {
   const token = localStorage.getItem('id_token');
@@ -31,20 +32,38 @@ export function loadProfileInfo() {
 }
 
 
-export function updateProfileInfo(stateValues) {
+export function updateProfileInfo(state) {
+  var sendObj = {};
+  sendObj['biography'] = state.biography;
+  // set new local value to update
+  state.info[0]['biography'] = state.biography;
+  if(state.info[0].hasOwnProperty('itemtype')
+    && state.info[0].itemtype == "Student") {
+      sendObj['interests'] = state.interests;
+      // set new local value to update
+      state.info[0]['interests'] = state.interests;
+  }
+  else if(state.info[0].hasOwnProperty('itemtype')
+      && state.info[0].itemtype == "Buddy") {
+        sendObj['skills'] = state.interests;
+        sendObj['company'] = state.company;
+        // set new local value to update
+        state.info[0]['skills'] = state.skills;
+        state.info[0]['company'] = state.company;
+    }
+
   const token = localStorage.getItem('id_token');
   try {
-    alert("Server will receive post request containing new document values");
-    // TODO: create object with all values
-    // TODO: send to Server
-    // TODO: update local state in flux
-  //  axios({ method: 'get', url: 'http://localhost:3000/api/get_buddy_partial/' + searchText, headers: { Authorization: `Bearer ${token}` },
-  //  }).then(res => {
-      //const persons = res.data[0].buddy;
-      //dispatcher.dispatch({type: "RECEIVE_BUDDY_SEARCH", resources: persons})
-  //  })
+    const args = { method: 'get', url: '', data: JSON.stringify(sendObj),
+     headers: { Authorization: `Bearer ${token}` }}
+    // call factory to get API function if not unit test, else don't call actual API
+    // Then will fail if not axios call, so return value in catch for unit test
+    factoryUpdateProfileInfo(args).then(res => {
+      dispatcher.dispatch({type: "GET_INFO", info: state.info[0]})
+    })
   }
   catch(err) {
-    // No matches
+    // return for the sake of unit test
+    return state.info[0];
   }
 }
