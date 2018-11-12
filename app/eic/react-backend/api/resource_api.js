@@ -31,11 +31,21 @@ router.get('/get_user_type',user_controller.get_user_type);
 
 router.get('/add_pending_buddy/:buddy_email', student_controller.add_pending_buddy);
 
+router.get('/add_pending_student/:student_email', buddy_controller.add_pending_student);
+
 router.get('/get_pending_student/', buddy_controller.get_pending_student);
 
 router.get('/reject_pending_student/:student_email', buddy_controller.reject_pending_student);
 
+router.get('/reject_pending_buddy/:buddy_email', student_controller.reject_pending_buddy);
+
 router.get('/accept_pending_student/:student_email', buddy_controller.accept_pending_student);
+
+router.get('/accept_pending_buddy/:buddy_email', student_controller.accept_pending_buddy);
+
+router.get('/reject_student/:student_email', buddy_controller.reject_student);
+
+router.get('/reject_buddy/:buddy_email', student_controller.reject_buddy);
 
 router.get('/get_student/', buddy_controller.get_student);
 
