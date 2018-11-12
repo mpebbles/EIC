@@ -231,3 +231,29 @@ exports.get_buddy = function(req, res, next) {
 		});
 	}
 }
+
+
+
+exports.edit_student_profile = [
+	body('biography').isLength({min: 1 }).trim(),
+	body('skills').isLength({min: 1 }).trim(),
+
+	(req,res,next)=>{
+		if(!goog_token.validate_student_call(req)){
+		res.send('401 ERROR UNAUTHORISED TOKEN');
+		}
+		else{
+			var token_to_find_in_db = JSON.stringify(req.headers.authorization).split(" ")[1];
+			token_to_find_in_db = token_to_find_in_db.substring(0,token_to_find_in_db.length - 1);
+			findEmailByToken(token_to_find_in_db, function(err, contact) {
+				buddy.findOneAndUpdate(
+					{'contact': contact},
+					{
+						biography:req.body.biography,
+						interests: req.body.interests
+					});
+				
+     	});
+		};
+	}	
+]

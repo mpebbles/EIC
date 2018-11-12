@@ -261,7 +261,8 @@ exports.edit_buddy_profile = [
 					{'contact': contact},
 					{
 						biography:req.body.biography,
-						skills: req.body.skills
+						skills: req.body.skills,
+						company: req.body.comopany
 					});
 				
      	});
