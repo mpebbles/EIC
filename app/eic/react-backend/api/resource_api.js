@@ -1,8 +1,6 @@
-
 //Dependencies
 var express = require('express');
 var router = express.Router();
-
 
 //controllers
 var buddy_controller = require('../controller/buddy_controller');

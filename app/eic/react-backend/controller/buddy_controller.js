@@ -2,61 +2,59 @@ var test = require('../models/Test');
 var buddy = require('../models/Buddy');
 var student = require('../models/Student');
 var googleUser = require('../models/GoogleUser');
-var goog_token = require('../utils/token.utils');
+var token_utils = require('../utils/token.utils');
 var { findEmailByToken } = require('../models/GoogleUser')
 var mongoose = require('mongoose');
-var ObjectId = mongoose.ObjectId;
 
-//Gets all buddies in the db
+//Insert new buddy into database
+//Token validation not needed due to registration workflow
 exports.create_buddy_account = function(req,res,next){
-	if(!goog_token.validate_buddy_call(req)){
-		res.send('401 ERROR UNAUTHORISED TOKEN');
-	}
-	else{
-		new buddy({
-			user_name : req.header("x-user-name"),
-			contact : JSON.parse(JSON.stringify(req.user)).email
-		}).save(function(err, doc) {
-			if(err){return next(err)};
-			res.send();
-		});
-	}
+	new buddy({
+		user_name : req.header("x-user-name"),
+		contact : JSON.parse(JSON.stringify(req.user)).email
+	}).save(function(err, doc) {
+		if(err){console.log(err)};
+		return next();
+	});
 }
 
 //Gets all buddies in the db
 exports.get_buddy_info = function(req,res,next){
-	if(!goog_token.validate_buddy_call(req)){
-		res.send('401 ERROR UNAUTHORISED TOKEN');
-	}
-	else{
+	token_utils.validate_buddy_call(req, res);
+	// if(!goog_token.validate_buddy_call(req)){
+	// 	res.send('401 ERROR UNAUTHORISED TOKEN');
+	// }
+	// else{
 		buddy.find()
 		.exec(function(err,buddy){
 		if(err){return next(err)};
 		res.json([{buddy}]);
 		});
-	}
+//	}
 }
 
 //Gets buddy based on email
 exports.get_buddy_email = function(req,res,next){
-	if(!goog_token.validate_buddy_call(req)){
-		res.send('401 ERROR UNAUTHORISED TOKEN');
-	}
-	else{
+	token_utils.validate_buddy_call(req, res);
+	// if(!goog_token.validate_buddy_call(req)){
+	// 	res.send('401 ERROR UNAUTHORISED TOKEN');
+	// }
+	// else{
 		buddy.find({contact:req.params.id})
 		.exec(function(err,buddy){
 		if(err){return next(err)};
 		res.json([{buddy}]);
 		});
-	}
+//	}
 }
 
 // Gets buddy profile info based off of token
 exports.get_buddy_profile = function(req,res,next){
-	if(!goog_token.validate_buddy_call(req)){
-		res.send('401 ERROR UNAUTHORISED TOKEN');
-	}
-	else{
+	token_utils.validate_buddy_call(req, res);
+	// if(!goog_token.validate_buddy_call(req)){
+	// 	res.send('401 ERROR UNAUTHORISED TOKEN');
+	// }
+	// else{
 		var token_to_find_in_db = JSON.stringify(req.headers.authorization).split(" ")[1];
 		token_to_find_in_db = token_to_find_in_db.substring(0,token_to_find_in_db.length - 1);
 		findEmailByToken(token_to_find_in_db, function(err, contact) {
@@ -67,15 +65,16 @@ exports.get_buddy_profile = function(req,res,next){
 				res.json([{a_user}]);
 			})
 		});
-	}
+//	}
 }
 
 //Gets buddy based on partial matches
 exports.get_buddy_partial = function(req,res,next){
-	if(!goog_token.validate_buddy_call(req)){
-		res.send('401 ERROR UNAUTHORISED TOKEN');
-	}
-	else{
+	token_utils.validate_buddy_call(req, res);
+	// if(!goog_token.validate_buddy_call(req)){
+	// 	res.send('401 ERROR UNAUTHORISED TOKEN');
+	// }
+	// else{
 		console.log(req.params.id);
 		buddy.find({$or:[{"user_name":{"$regex":req.params.id,"$options":"i"}},
 									{"skills":{"$regex":req.params.id,"$options":"i"}}]})
@@ -84,15 +83,17 @@ exports.get_buddy_partial = function(req,res,next){
 		if(err){return next(err)};
 		res.json([{buddy}]);
 	});
-  }
+ // }
 }
+
 /*
 //Adds student to this buddy's pending_student[]
 exports.add_pending_student = function(req, res, next) {
-	if(!goog_token.validate_buddy_call(req)){
-		res.send('401 ERROR UNAUTHORISED TOKEN');
-	}
-	else{
+	token_utils.validate_buddy_call(req, res);
+	// if(!goog_token.validate_buddy_call(req)){
+	// 	res.send('401 ERROR UNAUTHORISED TOKEN');
+	// }
+	// else{
 		googleUser.find({ eic_token : req.params.goog_token })
 		.exec(function(err,a_user){
 		if(err){return next(err)};
@@ -106,16 +107,19 @@ exports.add_pending_student = function(req, res, next) {
          			})
      			});
 		});
-	}
+	//}
 }
 */
+
 // Adds student to this buddy's student[] from pending_student[]
 // Also adds buddy to student's buddy[]
 exports.accept_pending_student = function(req, res, next) {
-	if(!goog_token.validate_buddy_call(req)){
-		res.send('401 ERROR UNAUTHORISED TOKEN');
-	}
-	else{
+	token_utils.validate_buddy_call(req, res);
+
+	// if(!goog_token.validate_buddy_call(req)){
+	// 	res.send('401 ERROR UNAUTHORISED TOKEN');
+	// }
+	// else{
 		var token_to_find_in_db = JSON.stringify(req.headers.authorization).split(" ")[1];
 		token_to_find_in_db = token_to_find_in_db.substring(0,token_to_find_in_db.length - 1);
 		findEmailByToken(token_to_find_in_db, function(err,contact){
@@ -146,16 +150,18 @@ exports.accept_pending_student = function(req, res, next) {
 		});
 		res.send();
 		});
-	}
+//	}
 }
 
 
 //Delete student from this buddy's pending_student[]
 exports.reject_pending_student = function(req, res, next) {
-	if(!goog_token.validate_buddy_call(req)){
-		res.send('401 ERROR UNAUTHORISED TOKEN');
-	}
-	else{
+	token_utils.validate_buddy_call(res, req);
+
+	// if(!goog_token.validate_buddy_call(req)){
+	// 	res.send('401 ERROR UNAUTHORISED TOKEN');
+	// }
+	// else{
 		var token_to_find_in_db = JSON.stringify(req.headers.authorization).split(" ")[1];
 		token_to_find_in_db = token_to_find_in_db.substring(0,token_to_find_in_db.length - 1);
 		findEmailByToken(token_to_find_in_db, function(err,contact){
@@ -178,15 +184,17 @@ exports.reject_pending_student = function(req, res, next) {
 		});
 		res.send();
 		});
-	}
+//	}
 }
 
 //Delete student from this buddy's student[]
 exports.reject_student = function(req, res, next) {
-	if(!goog_token.validate_buddy_call(req)){
-		res.send('401 ERROR UNAUTHORISED TOKEN');
-	}
-	else{
+	token_utils.validate_buddy_call(req, res);
+
+	// if(!goog_token.validate_buddy_call(req)){
+	// 	res.send('401 ERROR UNAUTHORISED TOKEN');
+	// }
+	// else{
 		var token_to_find_in_db = JSON.stringify(req.headers.authorization).split(" ")[1];
 		token_to_find_in_db = token_to_find_in_db.substring(0,token_to_find_in_db.length - 1);
 		findEmailByToken(token_to_find_in_db, function(err,contact){
@@ -209,15 +217,17 @@ exports.reject_student = function(req, res, next) {
 		});
 		res.send();
 		});
-	}
+	//}
 }
 
 //View this buddy's pending students
 exports.get_pending_student = function(req, res, next) {
-	if(!goog_token.validate_student_call(req)){
-		res.send('401 ERROR UNAUTHORISED TOKEN');
-	}
-	else{
+		token_utils.validate_student_call(req, res);
+
+	// if(!goog_token.validate_student_call(req)){
+	// 	res.send('401 ERROR UNAUTHORISED TOKEN');
+	// }
+	// else{
 		var token_to_find_in_db = JSON.stringify(req.headers.authorization).split(" ")[1];
 		token_to_find_in_db = token_to_find_in_db.substring(0,token_to_find_in_db.length - 1);
 		findEmailByToken(token_to_find_in_db, function(err, contact) {
@@ -232,15 +242,13 @@ exports.get_pending_student = function(req, res, next) {
          	})
      	});
 		});
-	}
+//	}
 }
 
 //View this buddy's accepted students
 exports.get_student = function(req, res, next) {
-	if(!goog_token.validate_student_call(req)){
-		res.send('401 ERROR UNAUTHORISED TOKEN');
-	}
-	else{
+	token_utils.validate_student_call(req, res);
+
 		var token_to_find_in_db = JSON.stringify(req.headers.authorization).split(" ")[1];
 		token_to_find_in_db = token_to_find_in_db.substring(0,token_to_find_in_db.length - 1);
 		findEmailByToken(token_to_find_in_db, function(err, contact) {
@@ -255,5 +263,4 @@ exports.get_student = function(req, res, next) {
          	})
      	});
 		});
-	}
 }

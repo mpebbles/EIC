@@ -2,7 +2,7 @@ var mongoose = require('mongoose');
 
 const baseOptions = {
   discriminatorKey: 'itemtype', // our discriminator key, could be anything
-  collection: 'items', // the name of our collection
+  collection: 'users', // the name of our collection
 };
 
 // Our Base schema: these properties will be shared with our "real" schemas

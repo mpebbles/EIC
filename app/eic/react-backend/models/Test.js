@@ -7,4 +7,4 @@ var testSchema = new Schema({
 	last_name: {type:String , required: true , max: 100},
 });
 
-module.exports = mongoose.model('test',testSchema);
+module.exports = mongoose.model('test', testSchema);
