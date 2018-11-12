@@ -35,6 +35,8 @@ router.get('/add_pending_student/:student_email', buddy_controller.add_pending_s
 
 router.get('/get_pending_student/', buddy_controller.get_pending_student);
 
+router.get('/get_pending_buddy/', student_controller.get_pending_buddy);
+
 router.get('/reject_pending_student/:student_email', buddy_controller.reject_pending_student);
 
 router.get('/reject_pending_buddy/:buddy_email', student_controller.reject_pending_buddy);
