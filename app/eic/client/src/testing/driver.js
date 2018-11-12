@@ -1,9 +1,6 @@
 //import Factory from "../src/Factory"
 import * as ProfileActions from "../actions/profileActions";
 
-
-
-
 // put all functions to call here
 export function runAll() {
     if(!testUpdateProfileInfo()) {

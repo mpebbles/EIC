@@ -54,7 +54,14 @@ export function updateProfileInfo(state) {
 
   const token = localStorage.getItem('id_token');
   try {
-    const args = { method: 'get', url: '', data: JSON.stringify(sendObj),
+    var postURL = "";
+    if(this.state.info[0].itemtype == "Buddy") {
+       postURL = "http://localhost:3000/edit_buddy_profile/";
+    }
+    else if(this.state.info[0].itemtype == "Student") {
+      postURL = "http://localhost:3000/edit_student_profile/";
+    }
+    const args = { method: 'post', url: postURL, data: sendObj,
      headers: { Authorization: `Bearer ${token}` }}
     // call factory to get API function if not unit test, else don't call actual API
     // Then will fail if not axios call, so return value in catch for unit test
