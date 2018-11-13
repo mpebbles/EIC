@@ -22,7 +22,7 @@ export function loadBuddySearchResults(searchText) {
 export function sendRequest(buddyEmail) {
   const token = localStorage.getItem('id_token');
   try {
-    axios({ method: 'get', url: 'http://localhost:3000/api/add_pending_buddy/' + buddyEmail, headers: { Authorization: `Bearer ${token}` },
+    axios({ method: 'get', url: 'http://localhost:3000/api/add_pending_student/' + buddyEmail, headers: { Authorization: `Bearer ${token}` },
     }).then(res => {
       // if anything needs to be done after, write it here
     })

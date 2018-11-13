@@ -13,6 +13,7 @@ export default class UserProfile extends React.Component {
     this.tokenService = new TokenService();
     this.getInfo = this.getInfo.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
+    this.goHome.bind(this)
     this.state = {
       info: [{}],
       // for getting new values on save
@@ -68,6 +69,7 @@ export default class UserProfile extends React.Component {
 
   logout = () => {
     this.tokenService.logout();
+    this.goHome();
   };
 
   goHome = () => {

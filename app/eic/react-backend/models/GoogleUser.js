@@ -66,7 +66,9 @@ googleUserSchema.statics.findEmailByToken = function(token_str, next_func) {
     if(user == null) {
       console.log(token_str);
     }
-    next_func(err, user.contact);
+    else {
+      next_func(err, user.contact);
+    }
   });
 }
 

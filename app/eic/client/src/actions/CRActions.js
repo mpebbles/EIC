@@ -26,7 +26,7 @@ export function denyRequest(email) {
     })
   }
   catch(err) {
-    //console.log(err);
+    console.log(err);
   }
 }
 
@@ -35,11 +35,12 @@ export function acceptRequest(email) {
   try {
     axios({ method: 'get', url: 'http://localhost:3000/api/accept_pending_student/' + email, headers: { Authorization: `Bearer ${token}` },
     }).then(res => {
+      console.log("in promise")
        alert("Request accepted!");
        dispatcher.dispatch({type: "REMOVE_REQUEST", removeEmail: email})
     })
   }
   catch(err) {
-    //console.log(err);
+    console.log(err);
   }
 }

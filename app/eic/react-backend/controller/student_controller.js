@@ -4,6 +4,7 @@ var student = require('../models/Student');
 var googleUser = require('../models/GoogleUser');
 var goog_token = require('../utils/token.utils');
 var { findEmailByToken } = require('../models/GoogleUser');
+const {body,validationResult} = require('express-validator/check');
 
 //Returns all students and their info
 exports.get_student_info = function(req,res,next){
@@ -167,7 +168,7 @@ exports.reject_pending_buddy = function(req, res, next) {
 }
 
 //Delete buddy/student connection
-exports.reject_student = function(req, res, next) {
+exports.reject_buddy = function(req, res, next) {
 	if(!goog_token.validate_buddy_call(req)){
 		res.send('401 ERROR UNAUTHORISED TOKEN');
 	}
@@ -244,7 +245,6 @@ exports.get_buddy = function(req, res, next) {
 }
 
 
-
 exports.edit_student_profile = [
 	body('biography').isLength({min: 1 }).trim(),
 	body('skills').isLength({min: 1 }).trim(),
@@ -263,8 +263,8 @@ exports.edit_student_profile = [
 						biography:req.body.biography,
 						interests: req.body.interests
 					});
-				
+
      	});
 		};
-	}	
+	}
 ]
