@@ -38,7 +38,7 @@ export function deleteConnection(email) {
                 headers: { Authorization: `Bearer ${token}` },
       }).then(res_1 => {
           if(window.confirm("Are you sure you want to delete this connection?")) {
-            alert("Connection deleted!");
+            //alert("Connection deleted!");
             dispatcher.dispatch({type: "REMOVE_CARD", cardEmail: email});
           }
         })
@@ -48,7 +48,7 @@ export function deleteConnection(email) {
                 headers: { Authorization: `Bearer ${token}` },
       }).then(res_2 => {
           if(window.confirm("Are you sure you want to delete this connection?")) {
-            alert("Connection deleted!");
+            //alert("Connection deleted!");
             dispatcher.dispatch({type: "REMOVE_CARD", cardEmail: email});
           }
         })

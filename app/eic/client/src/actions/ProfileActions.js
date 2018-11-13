@@ -51,7 +51,7 @@ export function updateProfileInfo(state) {
   }
   else if(state.info[0].hasOwnProperty('itemtype')
       && state.info[0].itemtype == "Buddy") {
-        sendObj['skills'] = state.interests;
+        sendObj['skills'] = state.skills;
         sendObj['company'] = state.company;
         // set new local value to update
         state.info[0]['skills'] = state.skills;
@@ -62,10 +62,10 @@ export function updateProfileInfo(state) {
   try {
     var postURL = "";
     if(this.state.info[0].itemtype == "Buddy") {
-       postURL = "http://localhost:3000/edit_buddy_profile/";
+       postURL = "http://localhost:3000/api/edit_buddy_profile/";
     }
     else if(this.state.info[0].itemtype == "Student") {
-      postURL = "http://localhost:3000/edit_student_profile/";
+      postURL = "http://localhost:3000/api/edit_student_profile/";
     }
     const args = { method: 'post', url: postURL, data: sendObj,
      headers: { Authorization: `Bearer ${token}` }}

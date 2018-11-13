@@ -254,11 +254,10 @@ exports.get_student = function(req, res, next) {
 
 
 exports.edit_buddy_profile = [
-	body('biography').isLength({min: 1 }).trim(),
-	body('skills').isLength({min: 1 }).trim(),
+
 	(req,res,next)=>{
 		if(!goog_token.validate_student_call(req)){
-		res.send('401 ERROR UNAUTHORISED TOKEN');
+			res.send('401 ERROR UNAUTHORISED TOKEN');
 		}
 		else{
 			var token_to_find_in_db = JSON.stringify(req.headers.authorization).split(" ")[1];
@@ -269,8 +268,8 @@ exports.edit_buddy_profile = [
 					{
 						biography:req.body.biography,
 						skills: req.body.skills,
-						company: req.body.comopany
-					});
+						company: req.body.company,
+					}).exec();
 
      	});
 		};
