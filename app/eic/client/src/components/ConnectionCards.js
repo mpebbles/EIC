@@ -56,6 +56,7 @@ export default class ConnectionCards extends React.Component {
       <ul className="container card_holder">
         { this.state.cardsData.map(person =>
           <li className="card lifted padded third connection_card">
+            <img src="" className="user_image"/>
             <p className="name">{person.user_name}</p>
             <p className="contact_info">{person.contact}</p>
             <p className="buddy_company">{person.company}</p>

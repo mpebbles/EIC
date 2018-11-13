@@ -52,3 +52,12 @@
   font-size: 1em;
   color: #999999;
 }
+
+.user_image {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  height: 75px;
+  width: 75px;
+  background-color: #c0c0c0;
+}

@@ -12,8 +12,11 @@ export default class UserProfile extends React.Component {
     super();
     this.tokenService = new TokenService();
     this.getInfo = this.getInfo.bind(this);
-    this.handleInputChange = this.handleInputChange.bind(this);
-    this.goHome.bind(this)
+    this.logout = this.logout.bind(this);
+    this.goHome = this.goHome.bind(this)
+    this.uploadImageHandler = this.uploadImageHandler.bind(this);
+    this.fileChangedHandler = this.fileChangedHandler.bind(this);
+    this.getImage = this.getImage.bind(this);
     this.state = {
       info: [{}],
       // for getting new values on save
@@ -24,12 +27,15 @@ export default class UserProfile extends React.Component {
       biography: "",
       company: "",
       skills: "",
-      interests: ""
+      interests: "",
+      selectedFile: null,
+      profileImage: null,
     }
   }
 
   componentWillMount() {
     ProfileStore.on("change", this.getInfo);
+    ProfileStore.on("change", this.getImage)
     // To avoid reloading data if not needed when component mounts
     // Will be called first time component mounts
     // We can always call ProfileActions.loadProfileInfo() when needed
@@ -43,6 +49,11 @@ export default class UserProfile extends React.Component {
 
   componentWillUnmount() {
     ProfileStore.removeListener("change", this.getInfo);
+    ProfileStore.removeListener("change", this.getImage);
+  }
+
+  getImage() {
+    this.setState({profileImage: ProfileStore.getImage()});
   }
 
   getInfo() {
@@ -63,8 +74,21 @@ export default class UserProfile extends React.Component {
       })
   }
 
-  handleInputChange(e) {
-    this.setState()
+
+  fileChangedHandler = (event) => {
+    // roughly 5MB
+    if(event.target.files[0].size > 5000000){
+      alert("File is too big!");
+      return;
+    };
+    this.setState({selectedFile: event.target.files[0]})
+  //  console.log(this.state.selectedFile);
+  }
+
+  uploadImageHandler = () => {
+    if(this.state.selectedFile != null) {
+      ProfileActions.uploadImage(this.state.selectedFile);
+    }
   }
 
   logout = () => {
@@ -92,8 +116,17 @@ export default class UserProfile extends React.Component {
 	      </div>
 
         <div class="edit_profile_info">
-        <div><br />A profile image uploader will go here.<br /></div>
           <ul>
+              <li>
+                <p className="input_name">Profile Image</p>
+                <img className="profile_image"
+                  src={this.state.profileImage}/>
+                <div>
+                  <input className="upload_input" type="file" onChange={this.fileChangedHandler}/>
+                  <br />
+                  <button className="upload_button" onClick={this.uploadImageHandler}>Upload</button>
+                </div>
+              </li>
             {this.state.info.length && (
               <li>
                 <p className="input_name">Biography</p>

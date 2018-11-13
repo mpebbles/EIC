@@ -2,6 +2,12 @@ import dispatcher from "../dispatcher";
 import axios from 'axios';
 import { factoryUpdateProfileInfo } from '../factory'
 
+
+export function uploadImage(uploadImage) {
+    alert("Image upload API call");
+    dispatcher.dispatch({type: "UPDATE_IMAGE", image: uploadImage});
+}
+
 export function loadProfileInfo() {
   const token = localStorage.getItem('id_token');
   try {

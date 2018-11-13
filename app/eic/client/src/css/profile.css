@@ -16,3 +16,17 @@
   margin-left: 2%;
   margin-top: 2%;
 }
+
+.profile_image {
+  width: 100px;
+  height: 100px;
+  background-color: #c0c0c0;
+}
+
+.upload_input {
+
+}
+
+.upload_button {
+  margin-top: 2%;
+}

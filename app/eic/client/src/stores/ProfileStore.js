@@ -6,10 +6,15 @@ class ProfileStore extends EventEmitter {
   constructor() {
     super()
     this.profileInfo = [];
+    this.profileImage = null;
   }
 
   getInfo() {
     return this.profileInfo;
+  }
+
+  getImage() {
+    return this.profileImage;
   }
 
   isEmpty() {
@@ -34,6 +39,16 @@ class ProfileStore extends EventEmitter {
         //this.cardInfo = this.cardInfo.filter(
         //  person=>person.contact != action.cardEmail);
         this.emit("change");
+        break;
+      }
+      case "UPDATE_IMAGE": {
+        var reader = new FileReader();
+        const that = this;
+        reader.onload = function(event) {
+          that.profileImage = event.target.result;
+          that.emit("change");
+        };
+        reader.readAsDataURL(action.image);
         break;
       }
     }
