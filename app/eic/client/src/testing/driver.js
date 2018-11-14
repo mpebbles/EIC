@@ -1,10 +1,15 @@
 //import Factory from "../src/Factory"
 //import * as ProfileActions from "../actions/ProfileActions";
 import { testUpdateProfileInfo } from './actions/testProfileActions';
+import { testReceiveAndLoadCard} from './stores/testCardsStore';
 // put all functions to call here
 export function runAll() {
     if(!testUpdateProfileInfo()) {
       alert("testUpdateProfileInfo did not pass");
+      return;
+    }
+    if(!testReceiveAndLoadCard()) {
+      alert("testReceiveAndLoadCard did not pass");
       return;
     }
     alert("All unit tests passed!");
