@@ -2,6 +2,8 @@
 //import * as ProfileActions from "../actions/ProfileActions";
 import { testUpdateProfileInfo } from './actions/testProfileActions';
 import { testReceiveAndLoadCard} from './stores/testCardsStore';
+import { verifyInfoBoxTitle } from './components/testInfoBox';
+
 // put all functions to call here
 export function runAll() {
     if(!testUpdateProfileInfo()) {
@@ -12,6 +14,11 @@ export function runAll() {
       alert("testReceiveAndLoadCard did not pass");
       return;
     }
+    if(!verifyInfoBoxTitle()) {
+      alert("verifyInfoBoxTitle did not pass");
+      return;
+    }
+
     alert("All unit tests passed!");
 }
 

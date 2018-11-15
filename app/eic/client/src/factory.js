@@ -4,7 +4,7 @@ import axios from 'axios';
 // This file serves as a link between production code and tests
 
 // if this variable true, supply testing values instead of actual
-var supplyTestValues = false;//true;
+var supplyTestValues = true;//true;
 
 //export function factoryFunction() {
 //  if(supplyTestValues) {

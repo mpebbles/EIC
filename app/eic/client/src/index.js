@@ -12,7 +12,7 @@ import { BrowserRouter, Route } from 'react-router-dom';
 import { runAll } from './testing/driver';
 
 // also remember to set supplyTestValues to true in factory.js if any test will be run
-//runAll();
+runAll();
 
 
 ReactDOM.render(<GoogleAPI clientId={config.GOOGLE_CLIENT_ID}
