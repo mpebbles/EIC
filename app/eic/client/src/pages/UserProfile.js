@@ -77,7 +77,7 @@ export default class UserProfile extends React.Component {
 
   fileChangedHandler = (event) => {
     // roughly 5MB
-    if(event.target.files[0].size > 5000000){
+    if(event.target.files[0].size > 8000000){
       alert("File is too big!");
       return;
     };
