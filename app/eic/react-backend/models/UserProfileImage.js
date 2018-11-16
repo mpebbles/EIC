@@ -7,4 +7,4 @@ var UserImageSchema = new Schema({
 	UserImage: {data: Buffer,contentType: String}
 });
 
-module.exports = mongoose.model('UserProfileImage');
+module.exports = mongoose.model('UserProfileImage',UserImageSchema);
