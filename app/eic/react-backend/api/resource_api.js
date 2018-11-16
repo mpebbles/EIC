@@ -61,6 +61,8 @@ router.post('/edit_buddy_profile/', buddy_controller.edit_buddy_profile);
 
 router.post('/edit_student_profile/', student_controller.edit_student_profile);
 
-router.post('/add_user_image/',user_controller.add_user_image);
+router.post('/add_user_image/',user_controller.addUserImage);
+
+router.get('/get_user_image/',user_controller.getUserProfileImage);
 
 module.exports = router;
