@@ -2,7 +2,8 @@
 //Dependencies
 var express = require('express');
 var router = express.Router();
-
+var multer = require('multer');
+var upload = multer({ dest: 'uploads/' })
 
 //controllers
 var buddy_controller = require('../controller/buddy_controller');
@@ -61,7 +62,7 @@ router.post('/edit_buddy_profile/', buddy_controller.edit_buddy_profile);
 
 router.post('/edit_student_profile/', student_controller.edit_student_profile);
 
-router.post('/add_user_image/',user_controller.addUserImage);
+router.post('/add_user_image/',upload.single('avatar'),user_controller.addUserImage);
 
 
 

@@ -5,6 +5,7 @@ var student = require('../models/Student');
 var buddy = require('../models/Buddy');
 var userProfileImage = require('../models/UserProfileImage');
 var goog_token = require('../utils/token.utils');
+var fs = require('fs');
 var { findEmailByToken } = require('../models/GoogleUser');
 const {body,validationResult} = require('express-validator/check');
 exports.list_users = function(req, res, next) {
@@ -49,44 +50,23 @@ exports.get_user_type = function(req,res,next){
 }
 
 //this is the post request to add/update a user's profile image
+
 exports.addUserImage = [
   (res, req, next) => {
     if(!goog_token.validate_student_call(req)){
       res.send('401 ERROR UNAUTHORISED TOKEN');
     }
     else{
-      var token_to_find_in_db = JSON.stringify(req.headers.authorization).split(" ")[1];
-      token_to_find_in_db = token_to_find_in_db.substring(0,token_to_find_in_db.length - 1);
-      findEmailByToken(token_to_find_in_db, function(err, contact) {
-        var user = user.findOne({'contact': contact}).exec(function(err, user){
-          userProfileImage.findOne({'id': user.userProfileImageId},function(err, userImage){
-            if(err){return err};
-            //this checks if there's no image for the user if there isn't then create new image
-            if(!userImage){
-              var newUserProfileImage = new userProfileImage({
-                UserImage: req.body.image
-            });
-            newUserProfileImage.save(function(err){
-              if(err) return handleError(err);
-            });
-            user.userProfileImageId = newUserProfileImage.id;
-            user.save();
-          }
-          //if theres an image it will update with new image
-          else{
-            userImage.UserImage= req.body.image;
-            userImage.save();
-          }
-        })
-
-        });
-       
-      });
-    };
+      user.findOne({'contact': "hycheng@ucsc.edu"})
+      .exec(function(err, user){
+        console.log(req.file.filename);
+      })
+      
+    }
   }
 ]
 /*
-exports.add_user_image = [
+exports.addUserImage = [
   (res, req, next) => {
     if(!goog_token.validate_student_call(req)){
       res.send('401 ERROR UNAUTHORISED TOKEN');
