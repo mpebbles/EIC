@@ -8,7 +8,9 @@ var upload = multer({ dest: 'uploads/' })
 //controllers
 var buddy_controller = require('../controller/buddy_controller');
 var student_controller = require('../controller/student_controller');
-var user_controller = require('../controller/user_controller')
+var user_controller = require('../controller/user_controller');
+var resourceController = require('../controller/resourceController');
+
 
 //get all students
 router.get('/get_all_student', student_controller.get_student_info);
@@ -64,6 +66,16 @@ router.post('/edit_student_profile/', student_controller.edit_student_profile);
 
 router.post('/add_user_image/',upload.single('uploadedImage'),user_controller.addUserImage);
 
+// requires: title, skills[](optional in model), content
+router.post('/createResource/',resourceController.createResource);
+
+router.get('/getResource/', resourceController.getResources);
+
+router.get('/getResourceByCreator/', resourceController.getResourceByCreator);
+
+router.get('/getResourceByTitle/', resourceController.getResourceByTitle);
+
+router.post('/deleteResourceByTitle/', resourceController.deleteResourceByTitle);
 
 
 module.exports = router;
