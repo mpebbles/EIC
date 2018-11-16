@@ -4,8 +4,17 @@ import { factoryUpdateProfileInfo } from '../factory'
 
 
 export function uploadImage(uploadImage) {
-    alert("Image upload API call");
-    dispatcher.dispatch({type: "UPDATE_IMAGE", image: uploadImage});
+  const token = localStorage.getItem('id_token');
+  try {
+    axios({ method: 'post', url: 'http://localhost:3000/api/add_user_image/',
+    data: uploadImage, headers: { Authorization: `Bearer ${token}` },
+    }).then(res => {
+      dispatcher.dispatch({type: "UPDATE_IMAGE", image: uploadImage});
+    })
+  }
+  catch(err) {
+    console.log(err);
+  }
 }
 
 export function loadProfileInfo() {
@@ -79,4 +88,6 @@ export function updateProfileInfo(state) {
     // return for the sake of unit test
     return state.info[0];
   }
+  // so the user can tell something happened after save
+  window.location.reload(true);
 }
