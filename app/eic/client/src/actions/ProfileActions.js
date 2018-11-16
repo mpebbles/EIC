@@ -5,9 +5,13 @@ import { factoryUpdateProfileInfo } from '../factory'
 
 export function uploadImage(uploadImage) {
   const token = localStorage.getItem('id_token');
+  //console.log(uploadImage);
+  const file = new Blob([uploadImage], { type: 'image/png' });
+  const formData = new FormData();
+  formData.append('uploadedImage', file, file.filename);
   try {
     axios({ method: 'post', url: 'http://localhost:3000/api/add_user_image/',
-    data: uploadImage, headers: { Authorization: `Bearer ${token}` },
+    data: formData, headers: {'Content-Type': 'false', Authorization: `Bearer ${token}` },
     }).then(res => {
       dispatcher.dispatch({type: "UPDATE_IMAGE", image: uploadImage});
     })

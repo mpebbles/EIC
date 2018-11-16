@@ -38,11 +38,8 @@ var usersRouter = require('./routes/users');
 var mainRouter = require('./routes/main_routes');
 var apiRouter = require('./api/resource_api');
 
- app.use(bodyParser.urlencoded({
-    parameterLimit: 100000,
-    limit: '50mb',
-    extended: true
-  }));
+app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies.
+app.use(bodyParser.json({limit: '5mb'}));
 
 app.use(logger('dev'));
 app.use(express.json());

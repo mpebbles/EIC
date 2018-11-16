@@ -57,11 +57,18 @@ exports.addUserImage = [
       res.send('401 ERROR UNAUTHORISED TOKEN');
     }
     else{
+      console.log(req.files.file);
+      console.log(req.file);
+      //console.log(req.body);
+      //console.log("\n\\n\n\n")
+      //console.log(req.body.uploadedImage);
       user.findOne({'contact': "hycheng@ucsc.edu"})
       .exec(function(err, user){
-        console.log(req.file.filename);
+        //console.log(req.file.filename);
+        //console.log(req.body);
+        //console.log(req.body);
       })
-      
+
     }
   }
 ]
@@ -106,7 +113,10 @@ exports.getUserProfileImage = function(req, res, next){
     res.send('401 ERROR UNAUTHORISED TOKEN');
   }
   else{
+    console.log("Here");
+    console.log(req);
     var token_to_find_in_db = JSON.stringify(req.headers.authorization).split(" ")[1];
+    console.log(token_to_find_in_db);
     token_to_find_in_db = token_to_find_in_db.substring(0,token_to_find_in_db.length - 1);
     findEmailByToken(token_to_find_in_db, function(err, contact) {
       var user = user.findOne({'contact': contact},function(err, user){
@@ -114,7 +124,7 @@ exports.getUserProfileImage = function(req, res, next){
           res.contentType(userImage.UserImage.contentType);
         })
 
-      });  
+      });
 
     });
   }
