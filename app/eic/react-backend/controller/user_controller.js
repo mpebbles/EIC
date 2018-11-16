@@ -1,11 +1,12 @@
 var test = require('../models/Test');
 var googleUser = require('../models/GoogleUser');
-var User = require('../models/User');
-var Student = require('../models/Student')
-var Buddy = require('../models/Buddy')
+var user = require('../models/User');
+var student = require('../models/Student');
+var buddy = require('../models/Buddy');
+var userProfileImage = require('../models/UserProfileImage');
 var goog_token = require('../utils/token.utils');
 var { findEmailByToken } = require('../models/GoogleUser');
-
+const {body,validationResult} = require('express-validator/check');
 exports.list_users = function(req, res, next) {
   //res.send('respond with a resource');
 
@@ -40,9 +41,49 @@ exports.get_user_type = function(req,res,next){
   //console.log(token_to_find_in_db)
   findEmailByToken(token_to_find_in_db, function(err, contact) {
     console.log(contact);
-    User.findOne({'contact': contact})
+    user.findOne({'contact': contact})
     .exec(function(err, account){
       res.send(account.itemtype);
     });
   });
+}
+
+//this is the post request to add/update a user's profile image
+exports.add_user_image = [
+  (res, req, next) => {
+    if(!goog_token.validate_student_call(req)){
+      res.send('401 ERROR UNAUTHORISED TOKEN');
+    }
+    else{
+      var token_to_find_in_db = JSON.stringify(req.headers.authorization).split(" ")[1];
+      token_to_find_in_db = token_to_find_in_db.substring(0,token_to_find_in_db.length - 1);
+      findEmailByToken(token_to_find_in_db, function(err, contact) {
+        var user = user.findOne({'contact': contact});
+        userProfileImage.findOne({'id': user.userProfileImageId},function(err, userImage){
+          if(err){return err};
+          //this checks if there's no image for the user if there isn't then create new image
+          if(!userImage){
+            var newUserProfileImage = new userProfileImage({
+              UserImage: req.body.image
+            });
+            newUserProfileImage.save(function(err){
+              if(err) return handleError(err);
+            });
+            user.userProfileImageId = newUserProfileImage.id;
+            user.save();
+          }
+          //if theres an image it will update with new image
+          else{
+            userImage.UserImage= req.body.image;
+            userImage.save();
+
+          }
+        })
+      });
+    };
+  }
+]
+
+exports.getUserProfileImage = function(req, res, next){
+
 }

@@ -246,7 +246,7 @@ exports.get_buddy = function(req, res, next) {
 
 
 exports.edit_student_profile = [
-	(req,res,next)=>{
+	(req,res,next) => {
 		if(!goog_token.validate_student_call(req)){
 			res.send('401 ERROR UNAUTHORISED TOKEN');
 		}
