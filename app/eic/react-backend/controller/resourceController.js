@@ -24,7 +24,7 @@ exports.createResource = [ (req, res, next) => {
 			newResource.save(function (err) {
                      if (err) { return next(err); }
                 });
-		}
+		});
 	}
 }];
 
@@ -38,7 +38,7 @@ exports.getResources = function(req, res, next) {
 		.exec(function(err,resources){
 			if(err){return next(err)};
 			res.json([{resources}]);
-		}
+		});
 	}
 }
 
@@ -51,7 +51,7 @@ exports.getResourceByCreator = function(req, res, next) {
 		.exec(function(err, resources){
 			if(err){return next(err)};
 			res.json([{resources}]);
-		}
+		});
 	}
 }
 
@@ -64,7 +64,7 @@ exports.getResourceByTitle = function(req, res, next) {
 		.exec(function(err, resources){
 			if(err){return next(err)};
 			res.json([{resources}]);
-		}
+		});
 	}
 }
 
@@ -79,6 +79,6 @@ exports.deleteResourceByTitle = function(req, res, next) {
 			aResource.drop(function (err) {
                      if (err) { return next(err); }
                 });
-		}
+		});
 	}
 }
