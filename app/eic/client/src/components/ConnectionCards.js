@@ -1,10 +1,10 @@
 import React from "react";
 import * as CardsActions from "../actions/CardsActions";
 import CardsStore from "../stores/CardsStore";
-import { library } from '@fortawesome/fontawesome-svg-core';
+//import { library } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { fas } from '@fortawesome/free-solid-svg-icons';
-import { fab } from '@fortawesome/free-brands-svg-icons';
+//import { fas } from '@fortawesome/free-solid-svg-icons';
+//import { fab } from '@fortawesome/free-brands-svg-icons';
 
 import '../css/stupid.css'
 import '../css/cards.css'
@@ -56,7 +56,7 @@ export default class ConnectionCards extends React.Component {
       <ul className="container card_holder">
         { this.state.cardsData.map(person =>
           <li className="card lifted padded third connection_card">
-            <img src="" className="user_image"/>
+            <img src="" className="user_image" alt=""/>
             <p className="name">{person.user_name}</p>
             <p className="contact_info">{person.contact}</p>
             <p className="buddy_company">{person.company}</p>
@@ -72,7 +72,7 @@ export default class ConnectionCards extends React.Component {
           </li>
         )}
       </ul>
-      {this.state.cardsData.length == 0 && (
+      {this.state.cardsData.length === 0 && (
         <p className="default_mesage"> You have no connections at this time. </p>
       )}
       </div>

@@ -38,12 +38,14 @@ var usersRouter = require('./routes/users');
 var mainRouter = require('./routes/main_routes');
 var apiRouter = require('./api/resource_api');
 
+app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies.
+app.use(bodyParser.json({limit: '5mb'}));
+
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-
 app.use('/googleapi/v1/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/api', apiRouter);
