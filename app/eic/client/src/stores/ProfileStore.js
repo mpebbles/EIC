@@ -51,12 +51,14 @@ class ProfileStore extends EventEmitter {
         reader.readAsDataURL(action.image);
         break;
       }
+      default:
+        break;
     }
   }
 }
 
 
-const profileStore = new ProfileStore;
+const profileStore = new ProfileStore();
 dispatcher.register(profileStore.handleActions.bind(profileStore));
 
 export default profileStore;

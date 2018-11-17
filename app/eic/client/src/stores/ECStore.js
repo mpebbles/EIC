@@ -27,7 +27,7 @@ class ECStore extends EventEmitter {
     try {
       axios({ method: 'get', url: 'http://localhost:3000/api/get_user_type/',  headers: { Authorization: `Bearer ${token}` },
       }).then(res => {
-        if(res.data == 'Student') {
+        if(res.data === 'Student') {
           this.isStudent = true;
         }
         else {
@@ -69,12 +69,14 @@ class ECStore extends EventEmitter {
         this.emit("change");
         break;
       }
+      default:
+        break;
     }
   }
 }
 
 
-const ecStore = new ECStore;
+const ecStore = new ECStore();
 dispatcher.register(ecStore.handleActions.bind(ecStore));
 
 export default ecStore;

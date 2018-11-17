@@ -1,5 +1,5 @@
-import dispatcher from "../dispatcher";
-import axios from 'axios';
+//import dispatcher from "../dispatcher";
+//import axios from 'axios';
 
 export function loadResources() {
   console.log("Implement me");

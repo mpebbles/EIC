@@ -31,16 +31,18 @@ class CardsStore extends EventEmitter {
       }
       case "REMOVE_CARD": {
         this.cardInfo = this.cardInfo.filter(
-          person=>person.contact != action.cardEmail);
+          person=>person.contact !== action.cardEmail);
         this.emit("change");
         break;
       }
+      default:
+        break;
     }
   }
 }
 
 
-const cardsStore = new CardsStore;
+const cardsStore = new CardsStore();
 dispatcher.register(cardsStore.handleActions.bind(cardsStore));
 
 export default cardsStore;

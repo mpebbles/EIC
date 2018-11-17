@@ -12,7 +12,7 @@ exports.createResource = [ (req, res, next) => {
 		var token_to_find_in_db = JSON.stringify(req.headers.authorization).split(" ")[1];
 		token_to_find_in_db = token_to_find_in_db.substring(0,token_to_find_in_db.length - 1);
 		findEmailByToken(token_to_find_in_db, function(err, contact) {
-			if(err) { return next(err) };	
+			if(err) { return next(err) };
 			var date1 = new Date(Date.now());
 			var newResource = new resource ({
 				title: req.body.title,
@@ -23,8 +23,7 @@ exports.createResource = [ (req, res, next) => {
 			});
 			newResource.save(function (err) {
                      if (err) { return next(err); }
-                });
-		});
+                });		});
 	}
 }];
 

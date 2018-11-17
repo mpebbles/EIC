@@ -27,7 +27,7 @@ export function loadProfileInfo() {
     axios({ method: 'get', url: 'http://localhost:3000/api/get_user_type/',
     headers: { Authorization: `Bearer ${token}` },
     }).then(res => {
-      if(res.data == 'Student') {
+      if(res.data === 'Student') {
         axios({ method: 'get', url: 'http://localhost:3000/api/get_student_profile/',
         headers: { Authorization: `Bearer ${token}` },
       }).then(res_1 => {
@@ -35,7 +35,7 @@ export function loadProfileInfo() {
         dispatcher.dispatch({type: "GET_INFO", info: person})
         })
       }
-      else if(res.data == 'Buddy') {
+      else if(res.data === 'Buddy') {
         axios({ method: 'get', url: 'http://localhost:3000/api/get_buddy_profile',
         headers: { Authorization: `Bearer ${token}` },
       }).then(res_2 => {
@@ -57,13 +57,13 @@ export function updateProfileInfo(state) {
   // set new local value to update
   state.info[0]['biography'] = state.biography;
   if(state.info[0].hasOwnProperty('itemtype')
-    && state.info[0].itemtype == "Student") {
+    && state.info[0].itemtype === "Student") {
       sendObj['interests'] = state.interests;
       // set new local value to update
       state.info[0]['interests'] = state.interests;
   }
   else if(state.info[0].hasOwnProperty('itemtype')
-      && state.info[0].itemtype == "Buddy") {
+      && state.info[0].itemtype === "Buddy") {
         sendObj['skills'] = state.skills;
         sendObj['company'] = state.company;
         // set new local value to update
@@ -74,10 +74,10 @@ export function updateProfileInfo(state) {
   const token = localStorage.getItem('id_token');
   try {
     var postURL = "";
-    if(this.state.info[0].itemtype == "Buddy") {
+    if(this.state.info[0].itemtype === "Buddy") {
        postURL = "http://localhost:3000/api/edit_buddy_profile/";
     }
-    else if(this.state.info[0].itemtype == "Student") {
+    else if(this.state.info[0].itemtype === "Student") {
       postURL = "http://localhost:3000/api/edit_student_profile/";
     }
     const args = { method: 'post', url: postURL, data: sendObj,

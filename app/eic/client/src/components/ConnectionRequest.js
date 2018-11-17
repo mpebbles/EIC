@@ -59,7 +59,7 @@ export default class ConnectionRequest extends React.Component {
           <InfoBox email={person.contact} biography={person.biography} name={person.user_name}/>
         )}
         </ul>
-        {this.state.requests.length == 0 && (
+        {this.state.requests.length === 0 && (
           <p style={defaultMessage}> You have no requests at this time. </p>
         )}
       </div>
