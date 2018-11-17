@@ -1,5 +1,5 @@
-import * as ProfileActions from "./actions/ProfileActions"
-import dispatcher from "./dispatcher";
+//import * as ProfileActions from "./actions/ProfileActions"
+//import dispatcher from "./dispatcher";
 import axios from 'axios';
 // This file serves as a link between production code and tests
 

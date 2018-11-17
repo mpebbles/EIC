@@ -120,7 +120,7 @@ export default class UserProfile extends React.Component {
               <li>
                 <p className="input_name">Profile Image</p>
                 <img className="profile_image"
-                  src={this.state.profileImage}/>
+                  src={this.state.profileImage} alt=""/>
                 <div>
                   <input className="upload_input" type="file" onChange={this.fileChangedHandler}/>
                   <br />
@@ -134,7 +134,7 @@ export default class UserProfile extends React.Component {
               </li>
             )}
             {this.state.info.length && this.state.info[0].hasOwnProperty('itemtype')
-              && this.state.info[0].itemtype == "Buddy" && (
+              && this.state.info[0].itemtype === "Buddy" && (
                 <li>
                   <p className="input_name">My Company</p>
                   <input onChange={e => this.setState({company:e.target.value})} value={this.state.company}></input>
@@ -142,7 +142,7 @@ export default class UserProfile extends React.Component {
             )}
 
             {this.state.info.length && this.state.info[0].hasOwnProperty('itemtype')
-              && this.state.info[0].itemtype == "Buddy" && (
+              && this.state.info[0].itemtype === "Buddy" && (
                 <li>
                   <p className="input_name">My Skills</p>
                   <input onChange={e => this.setState({skills:e.target.value})} value={this.state.skills}></input>
@@ -150,7 +150,7 @@ export default class UserProfile extends React.Component {
             )}
 
             {this.state.info.length && this.state.info[0].hasOwnProperty('itemtype')
-              && this.state.info[0].itemtype == "Student" && (
+              && this.state.info[0].itemtype === "Student" && (
                 <li>
                   <p className="input_name">My Interests</p>
                   <input onChange={e => this.setState({interests:e.target.value})} value={this.state.interests}></input>

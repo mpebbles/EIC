@@ -33,13 +33,15 @@ class ResourcesStore extends EventEmitter {
         this.emit("change");
         break;
       }
+      default:
+        break;
     }
   }
 }
 
 
 
-const resourcesStore = new ResourcesStore;
+const resourcesStore = new ResourcesStore();
 dispatcher.register(resourcesStore.handleActions.bind(resourcesStore));
 
 export default resourcesStore;

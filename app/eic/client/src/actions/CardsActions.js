@@ -6,14 +6,14 @@ export function loadCardsData() {
   try {
     axios({ method: 'get', url: 'http://localhost:3000/api/get_user_type/',  headers: { Authorization: `Bearer ${token}` },
     }).then(res => {
-      if(res.data == 'Student') {
+      if(res.data === 'Student') {
         axios({ method: 'get', url: 'http://localhost:3000/api/get_buddy/',  headers: { Authorization: `Bearer ${token}` },
       }).then(res_1 => {
           const persons = res_1.data[0].a_buddy;
           dispatcher.dispatch({type: "RECEIVE_CARDS_DATA", cardData: persons});
         })
       }
-      else if(res.data == 'Buddy') {
+      else if(res.data === 'Buddy') {
         axios({ method: 'get', url: 'http://localhost:3000/api/get_student/',  headers: { Authorization: `Bearer ${token}` },
       }).then(res_2 => {
           const persons = res_2.data[0].a_student;
@@ -33,7 +33,7 @@ export function deleteConnection(email) {
     axios({ method: 'get', url: 'http://localhost:3000/api/get_user_type/',
             headers: { Authorization: `Bearer ${token}` },
     }).then(res => {
-      if(res.data == 'Student') {
+      if(res.data === 'Student') {
         axios({ method: 'get', url: 'http://localhost:3000/api/reject_buddy/' + email,
                 headers: { Authorization: `Bearer ${token}` },
       }).then(res_1 => {
@@ -43,7 +43,7 @@ export function deleteConnection(email) {
           }
         })
       }
-      else if(res.data == 'Buddy') {
+      else if(res.data === 'Buddy') {
         axios({ method: 'get', url: 'http://localhost:3000/api/reject_student/' + email,
                 headers: { Authorization: `Bearer ${token}` },
       }).then(res_2 => {
