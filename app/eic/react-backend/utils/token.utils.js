@@ -22,12 +22,6 @@ module.exports = {
      	req.token = createToken(req.auth);
      	return next();
   	},
-    ensureUserExists: function(req, res, next) {
-      let user_info = JSON.parse(JSON.stringify(req.user));
-	  let user_email = user_info.email;
-      console.log("Checking if user exists", user_email);
-      user_controller.log_in_user(req, res, next);
-    },
     putTokenInDB: function(req, res, next) {
       addEICToken(req, res, next);
       return next();
@@ -40,16 +34,20 @@ module.exports = {
 
       if(account_type === "Buddy"){
         buddy_controller.create_buddy_account(req, res, next);
+				res.locals.eicUserType = "Buddy";
       } else if (account_type === "Student") {
         student_controller.create_student_account(req, res, next);
+				res.locals.eicUserType = "Student";
       } else if (account_type === "Company") {
         company_controller.create_company_account(req, res, next);
+				res.locals.eicUserType = "Company";
       } else {
         return res.status(500);
       }
     },
   	sendToken: function(req, res) {
       	res.setHeader('x-auth-token', req.token);
+				res.setHeader('x-user-type', String(res.locals.eicUserType));
       	return res.status(200).send(JSON.stringify(req.user));
   	},
     validate_student_call: function(req, res) {

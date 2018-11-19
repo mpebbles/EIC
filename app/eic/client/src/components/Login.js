@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import TokenService from './TokenService';
 import { GoogleLogin } from 'react-google-oauth'
+import TokenService from './TokenService';
+import ProfileActions from '../actions/ProfileActions';
 
 class Login extends Component {
 
@@ -25,9 +26,6 @@ class Login extends Component {
 		                </h1>
 		            </div>
 		            <div>
-		            Username: <input type="text" id="user"/>
-		            </div>	
-		            <div>
 						<GoogleLogin onLoginSuccess={this.executeLogin}/>
 		            </div>
 		        </center>
@@ -46,6 +44,8 @@ class Login extends Component {
         fetch('http://localhost:3000/googleapi/v1/auth/google-login', options).then(r => {
             if(r.ok) {
                 const token = r.headers.get('x-auth-token');
+								const userType = r.headers.get('x-user-type');
+
                 r.json().then(user => {
                     if (token) {
                     	this.tokenService.setToken(token);

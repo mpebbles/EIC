@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var { generateToken, ensureUserExists, putTokenInDB, registerUser, sendToken } = require('../utils/token.utils');
+var { log_in_user } = require('../controller/user_controller');
 var passport = require('passport');
 var config = require('../config');
 var request = require('request');
@@ -14,9 +15,8 @@ router.route('/auth/google-login')
         req.auth = {
             id: req.user.id
         };
-
         next();
-    }, generateToken, ensureUserExists, putTokenInDB, sendToken);
+    }, generateToken, log_in_user, putTokenInDB, sendToken);
 
 router.route('/auth/google-register')
     .post(passport.authenticate('google-token', {session: false}), function(req, res, next) {
@@ -26,7 +26,6 @@ router.route('/auth/google-register')
         req.auth = {
             id: req.user.id
         };
-
         next();
     }, generateToken, putTokenInDB, registerUser, sendToken);
 

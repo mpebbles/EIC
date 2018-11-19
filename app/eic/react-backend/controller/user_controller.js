@@ -32,7 +32,7 @@ exports.list_db = function(req, res, next) {
 //return user type
 exports.get_user_type = function(req,res,next){
   console.log("Getting user type");
-  
+
   User.findOne({ contact: 'bpuckett@ucsc.edu' }, function (err, user) {
     console.log("Found user type", user.itemtype);
     res.send(user.itemtype);
@@ -53,11 +53,15 @@ exports.get_user_type = function(req,res,next){
 exports.log_in_user = function(req, res, next) {
     let user_info = JSON.parse(JSON.stringify(req.user));
     let user_email = user_info.email;
-    eic_user.count({contact: user_email}, function (err, count){ 
-      if(count>0){
-        return next();
-      } else {
+    eic_user.findOne({contact: user_email}, function(err, result) {
+      if(err) {
         return res.status(406).send();
+      } else {
+        if(result ===  null) {
+          return res.status(406).send();
+        }
+        res.locals.eicUserType = result.itemtype;
+        return next();
       }
-  });
+    });
 }

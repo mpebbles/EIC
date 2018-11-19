@@ -6,10 +6,15 @@ class ProfileStore extends EventEmitter {
   constructor() {
     super()
     this.profileInfo = [];
+    this.userType = "";
   }
 
   getInfo() {
     return this.profileInfo;
+  }
+
+  getUserType() {
+    return this.userType;
   }
 
   isEmpty() {
@@ -27,6 +32,11 @@ class ProfileStore extends EventEmitter {
       case "GET_INFO": {
         this.profileInfo = [];
         this.profileInfo.push(action.info);
+        this.emit("change");
+        break;
+      }
+      case "UPDATE_USER_TYPE": {
+        this.userType = action.info;
         this.emit("change");
         break;
       }

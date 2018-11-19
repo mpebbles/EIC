@@ -30,6 +30,22 @@ export function loadProfileInfo() {
   }
 }
 
+export function updateUserType(userType) {
+  switch(userType) {
+      case "Buddy":
+          dispatcher.dispatch({type: "UPDATE_USER_TYPE", info: userType})
+          break;
+      case "Student":
+          dispatcher.dispatch({type: "UPDATE_USER_TYPE", info: userType})
+          break;
+      case "Company":
+          dispatcher.dispatch({type: "UPDATE_USER_TYPE", info: userType})
+          break;
+      default:
+          console.log("Error: Invalid type in ProfileActions updateUserType()");
+          break;
+  }
+}
 
 export function updateProfileInfo(stateValues) {
   const token = localStorage.getItem('id_token');
@@ -39,7 +55,7 @@ export function updateProfileInfo(stateValues) {
     // TODO: send to Server
     // TODO: update local state in flux
   //  axios({ method: 'get', url: 'http://localhost:3000/api/get_buddy_partial/' + searchText, headers: { Authorization: `Bearer ${token}` },
-  //  }).then(res => {
+  //  }).thenStudent(res => {
       //const persons = res.data[0].buddy;
       //dispatcher.dispatch({type: "RECEIVE_BUDDY_SEARCH", resources: persons})
   //  })
