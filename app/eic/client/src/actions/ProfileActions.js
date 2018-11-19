@@ -13,13 +13,29 @@ export function uploadImage(uploadImage) {
     axios({ method: 'post', url: 'http://localhost:3000/api/add_user_image/',
     data: formData, headers: {'Content-Type': 'false', Authorization: `Bearer ${token}` },
     }).then(res => {
-      dispatcher.dispatch({type: "UPDATE_IMAGE", image: uploadImage});
+      console.log(file);
+      dispatcher.dispatch({type: "UPDATE_IMAGE", image: file});
     })
   }
   catch(err) {
-    console.log(err);
+    //console.log(err);
   }
 }
+
+export function downloadImage(email) {
+  const token = localStorage.getItem('id_token');
+  try {
+    axios({ method: 'get', url: 'http://localhost:3000/api/getUserImage/' + email,
+            headers: {Authorization: `Bearer ${token}` },
+    }).then(res => {
+      dispatcher.dispatch({type: "RECEIVE_IMAGE", image: res.data});
+    });
+  }
+  catch(err) {
+    //console.log(err);
+  }
+}
+
 
 export function loadProfileInfo() {
   const token = localStorage.getItem('id_token');

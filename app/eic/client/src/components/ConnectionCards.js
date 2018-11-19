@@ -1,10 +1,9 @@
 import React from "react";
 import * as CardsActions from "../actions/CardsActions";
 import CardsStore from "../stores/CardsStore";
-//import { library } from '@fortawesome/fontawesome-svg-core';
+import CardImage from "./CardImage";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-//import { fas } from '@fortawesome/free-solid-svg-icons';
-//import { fab } from '@fortawesome/free-brands-svg-icons';
+
 
 import '../css/stupid.css'
 import '../css/cards.css'
@@ -14,7 +13,6 @@ export default class ConnectionCards extends React.Component {
   constructor() {
     super();
     this.getCardsData = this.getCardsData.bind(this);
-
     this.state = {
       cardsData: [],
     };
@@ -43,10 +41,12 @@ export default class ConnectionCards extends React.Component {
   }
 
   getCardsData() {
+    var data = CardsStore.getCardsData();
     this.setState({
-      cardsData: CardsStore.getCardsData()
+      cardsData: data,
     });
   }
+
 
 
   render() {
@@ -56,7 +56,7 @@ export default class ConnectionCards extends React.Component {
       <ul className="container card_holder">
         { this.state.cardsData.map(person =>
           <li className="card lifted padded third connection_card">
-            <img src="" className="user_image" alt=""/>
+            <CardImage className="user_image" contact={person.contact}/>
             <p className="name">{person.user_name}</p>
             <p className="contact_info">{person.contact}</p>
             <p className="buddy_company">{person.company}</p>

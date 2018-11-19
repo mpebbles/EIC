@@ -51,6 +51,11 @@ class ProfileStore extends EventEmitter {
         reader.readAsDataURL(action.image);
         break;
       }
+      case "RECEIVE_IMAGE": {
+        this.profileImage =  "data:image/png;base64,"+ action.image;
+        this.emit("change");
+        break;
+      }
       default:
         break;
     }
