@@ -64,23 +64,26 @@ exports.addUserProfileImage = [
         user.findOne({'contact': contact})
         .exec(function(err, user){
           if(!user.userProfileImageId){
-            console.log('user doesnt have file');
             var newUserImage = new userProfileImage();
             newUserImage.userImage.data = fs.readFileSync(req.file.path);
-            newUserImage.save();
+            newUserImage.save(function(err){
+              if(err)return handleError(err);
+            });
             user.userProfileImageId = newUserImage.id;
-            user.save();
-            fs.unlink(req.file.path);
+            user.save(function(err){
+              if(err) return handleError(err);
+            });
+            fs.unlink(req.file.path, (err)=>{
+              if(err) throw err;
+            });
           }
           else{
-            console.log('found user with image');
             userProfileImage.findById(user.userProfileImageId,
             (function(err, userProfileImage){
               userProfileImage.userImage.data = fs.readFileSync(req.file.path);
               userProfileImage.save();
               fs.unlink(req.file.path, (err)=> {
                 if(err) throw err; 
-                console.log('could not delete file');
               });
             }));
           }
@@ -95,41 +98,16 @@ exports.getUserProfileImage = function(req, res, next){
     res.send('401 ERROR UNAUTHORISED TOKEN');
   }
   else{
-    var token_to_find_in_db = JSON.stringify(req.headers.authorization).split(" ")[1];
-    console.log(token_to_find_in_db);
-    token_to_find_in_db = token_to_find_in_db.substring(0,token_to_find_in_db.length - 1);
-    findEmailByToken(token_to_find_in_db, function(err, contact) {
-      user.findOne({'contact':'hycheng@ucsc.edu'})
-      .exec(function(err, user){
-        console.log(user.userProfileImageId);
-        userProfileImage.findById(user.userProfileImageId,
+    user.findOne({'contact': req.params.id})
+    .exec(function(err, user){
+      userProfileImage.findById(user.userProfileImageId,
         function(err, userProfileImage){
-          console.log(userProfileImage.id);
-          if(err){throw err;}
-          if(!userProfileImage){res.send('error image not found');}
+          if(!userProfileImage){res.send('404 ERROR IMAGE NOT FOUND');}
           else{
             res.send(userProfileImage.userImage.data);
           }
+
         });
-      });
     });
   }
-}
-
-exports.getTestImage = function(req, res, next){
-  user.findOne({'contact':'hycheng@ucsc.edu'})
-  .exec(function(err, user){
-    console.log(user.userProfileImageId);
-    userProfileImage.findById(user.userProfileImageId,
-      (function(err, userProfileImage){
-        console.log(userProfileImage.id);
-        if(err){throw err;}
-        if(!userProfileImage){res.send('error image not found');}
-        else{
-          res.send(userProfileImage.userImage.data);
-        }
-      }));
-   
-    
-  });
 }
