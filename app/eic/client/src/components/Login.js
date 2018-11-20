@@ -44,15 +44,18 @@ class Login extends Component {
         };
         fetch('http://localhost:3000/googleapi/v1/auth/google-login', options).then(r => {
             if(r.ok) {
+                console.log("Finished login call");
                 const token = r.headers.get('x-auth-token');
-								this.userTypeService.setUserType(r.headers.get('x-user-type'));
                 r.json().then(user => {
+                    console.log("In callback");
                     if (token) {
-                    	this.tokenService.setToken(token);
+                        this.userTypeService.setUserType(r.headers.get('x-user-type'));
+                        this.tokenService.setToken(token);
                         this.props.history.replace('/');
                     }
                 });
             } else {
+                console.log("Call not finished successfully");
                 if(r.status === 406) {
                     this.props.history.replace('/register');
                 }

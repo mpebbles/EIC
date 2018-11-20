@@ -1,5 +1,5 @@
 import decode from 'jwt-decode';
-import ECStore from '../stores/ECStore';
+
 export default class TokenService {
     // Initializing important variables
     constructor(domain) {
@@ -29,7 +29,6 @@ export default class TokenService {
 
     setToken(idToken) {
         localStorage.setItem('id_token', idToken);
-        ECStore.setAccountType();
     }
 
     getToken() {

@@ -1,14 +1,14 @@
 import React from "react";
 import * as ResourcesActions from "../actions/ResourcesActions";
 import ResourcesStore from "../stores/ResourcesStore";
-
+import ResourceEntry from "./ResourceEntry";
 
 export default class ResourcesContent extends React.Component {
   constructor() {
     super();
     this.getResources = this.getResources.bind(this);
     this.state = {
-      resources: [],
+      resources: ["Test1", "Test2"],
     };
   }
 
@@ -47,7 +47,7 @@ export default class ResourcesContent extends React.Component {
         <h3>Resources</h3>
         <p>This is dummy info from a GET request to satisfy the ajax learning requirement</p>
         <ul>
-        { this.state.resources.map(person => <li>{person.first_name}</li>)}
+        { this.state.resources.map(resource => <ResourceEntry content={resource} />)}
         </ul>
       </div>
     );

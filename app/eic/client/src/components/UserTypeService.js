@@ -6,8 +6,7 @@ export default class UserTypeService {
     }
 
     getUserType() {
-      const userType = localStorage.getItem('eic_user_type')
-      return userType;
+      return localStorage.getItem('eic_user_type')
     }
 
     setUserType(userType) {

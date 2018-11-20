@@ -8,6 +8,7 @@ import UserProfile from './pages/UserProfile'
 import './css/main.css'
 import './css/stupid.css'
 import TokenService from './components/TokenService';
+// import CreateResource from "./pages/CreateResource";
 
 export default class Layout extends React.Component {
 
@@ -33,6 +34,7 @@ export default class Layout extends React.Component {
             <Route path="/connect" component={EstablishConnections}/>
             <Route path="/userconnections" component={Connections}/>
             <Route path="/userprofile" component={UserProfile}/>
+            {/*<Route path="/createresource" component={CreateResource}/>*/}
             </div>
           </div>
         </BrowserRouter>

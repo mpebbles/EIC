@@ -3,14 +3,15 @@ import { GoogleLogout } from "react-google-oauth";
 import TokenService from "../components/TokenService";
 import * as ProfileActions from "../actions/ProfileActions";
 import ProfileStore from "../stores/ProfileStore";
-
 import '../css/profile.css'
+import UserTypeService from "../components/UserTypeService";
 
 export default class UserProfile extends React.Component {
 
   constructor() {
     super();
     this.tokenService = new TokenService();
+    this.userTypeService = new UserTypeService();
     this.getInfo = this.getInfo.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
     this.state = {
@@ -64,6 +65,7 @@ export default class UserProfile extends React.Component {
   logout = () => {
     console.log("Logging out");
     this.tokenService.logout();
+    this.userTypeService.setUserType("");
     this.goHome();
   };
 
