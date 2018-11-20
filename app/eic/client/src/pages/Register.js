@@ -1,12 +1,14 @@
 import React, { Component } from "react";
-import TokenService from '../components/TokenService';
 import { GoogleLogin } from 'react-google-oauth'
+import TokenService from '../components/TokenService';
+import UserTypeService from '../components/UserTypeService';
 
 class Register extends Component {
 
-    constructor(props) {
+  constructor(props) {
 		super(props);
 		this.tokenService = new TokenService();
+    this.userTypeService = new UserTypeService();
 	}
 
     executeLogin = (response) => {
@@ -23,6 +25,7 @@ class Register extends Component {
         };
         fetch('http://localhost:3000/googleapi/v1/auth/google-register', options).then(r => {
             const token = r.headers.get('x-auth-token');
+            this.userTypeService.setUserType(r.headers.get('x-user-type'));
             r.json().then(user => {
                 if (token) {
                     this.tokenService.setToken(token);
@@ -50,7 +53,7 @@ class Register extends Component {
 			  <div>
 			    <GoogleLogin onLoginSuccess={this.executeLogin} Text="Register"/>
 			  </div>
-			</center>  
+			</center>
 	  </div>
     );
   }

@@ -1,13 +1,13 @@
-import dispatcher from "../dispatcher";
 import axios from 'axios';
+import dispatcher from "../dispatcher";
+import UserTypeService from "../components/UserTypeService";
 
 export function loadProfileInfo() {
+  let userTypeService = new UserTypeService();
   const token = localStorage.getItem('id_token');
-  try {
-    axios({ method: 'get', url: 'http://localhost:3000/api/get_user_type/',
-    headers: { Authorization: `Bearer ${token}` },
-    }).then(res => {
-      if(res.data == 'Student') {
+  const userType = userTypeService.getUserType();
+
+      if(userType === 'Student') {
         axios({ method: 'get', url: 'http://localhost:3000/api/get_student_profile/',
         headers: { Authorization: `Bearer ${token}` },
       }).then(res_1 => {
@@ -15,7 +15,7 @@ export function loadProfileInfo() {
         dispatcher.dispatch({type: "GET_INFO", info: person})
         })
       }
-      else if(res.data == 'Buddy') {
+      else if(userType === 'Buddy') {
         axios({ method: 'get', url: 'http://localhost:3000/api/get_buddy_profile',
         headers: { Authorization: `Bearer ${token}` },
       }).then(res_2 => {
@@ -23,28 +23,12 @@ export function loadProfileInfo() {
           dispatcher.dispatch({type: "GET_INFO", info: persons});
         })
       }
-    })
-  }
-  catch(err) {
-    //console.log(err);
-  }
-}
-
-export function updateUserType(userType) {
-  switch(userType) {
-      case "Buddy":
-          dispatcher.dispatch({type: "UPDATE_USER_TYPE", info: userType})
-          break;
-      case "Student":
-          dispatcher.dispatch({type: "UPDATE_USER_TYPE", info: userType})
-          break;
-      case "Company":
-          dispatcher.dispatch({type: "UPDATE_USER_TYPE", info: userType})
-          break;
-      default:
-          console.log("Error: Invalid type in ProfileActions updateUserType()");
-          break;
-  }
+      else if(userType === "Company") {
+        console.log("Got Company userType");
+      }
+      else {
+        console.log("Invalid userType");
+      }
 }
 
 export function updateProfileInfo(stateValues) {

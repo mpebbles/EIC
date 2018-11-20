@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
 import { GoogleLogin } from 'react-google-oauth'
 import TokenService from './TokenService';
-import ProfileActions from '../actions/ProfileActions';
+import UserTypeService from './UserTypeService';
 
 class Login extends Component {
 
 	constructor() {
 		super();
 		this.tokenService = new TokenService();
+		this.userTypeService = new UserTypeService();
 	}
 
 	componentWillMount(){
@@ -44,8 +45,7 @@ class Login extends Component {
         fetch('http://localhost:3000/googleapi/v1/auth/google-login', options).then(r => {
             if(r.ok) {
                 const token = r.headers.get('x-auth-token');
-								const userType = r.headers.get('x-user-type');
-
+								this.userTypeService.setUserType(r.headers.get('x-user-type'));
                 r.json().then(user => {
                     if (token) {
                     	this.tokenService.setToken(token);

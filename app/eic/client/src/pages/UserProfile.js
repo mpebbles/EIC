@@ -15,7 +15,7 @@ export default class UserProfile extends React.Component {
     this.handleInputChange = this.handleInputChange.bind(this);
     this.state = {
       info: [],
-	    
+
       // for getting new values on save
       bio: "",
       company: "",
@@ -62,7 +62,9 @@ export default class UserProfile extends React.Component {
   }
 
   logout = () => {
+    console.log("Logging out");
     this.tokenService.logout();
+    this.goHome();
   };
 
   goHome = () => {

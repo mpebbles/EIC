@@ -1,13 +1,14 @@
 import React from "react";
-import * as ECActions from "../actions/ECActions";
-import * as CRActions from "../actions/CRActions";
-import ECStore from "../stores/ECStore";
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { fas } from '@fortawesome/free-solid-svg-icons';
 import { fab } from '@fortawesome/free-brands-svg-icons';
-import '../css/stupid.css'
-import '../css/generic.css'
+import * as ECActions from "../actions/ECActions";
+import * as CRActions from "../actions/CRActions";
+import ECStore from "../stores/ECStore";
+import '../css/stupid.css';
+import '../css/generic.css';
+import UserTypeService from "./UserTypeService";
 
 library.add(fas, fab);
 
@@ -15,6 +16,8 @@ export default class InfoBox extends React.Component {
 
   constructor(props) {
     super(props);
+    this.userTypeService = new UserTypeService();
+    this.userType = this.userTypeService.getUserType();
     this.state = {
       // toggle box is closed initially
       isOpened: false,
@@ -85,7 +88,7 @@ export default class InfoBox extends React.Component {
                   {this.props.biography}
                 </div>
 
-                {  ECStore.isStudentAccount()
+                { this.userType === "Student"
                   && ECStore.requestNotSent(this.props.email) && (
                   <div className="link">
                     <FontAwesomeIcon
@@ -98,7 +101,7 @@ export default class InfoBox extends React.Component {
                     />
                   </div>
                 )}
-                {ECStore.isStudentAccount()
+                { this.userType === "Student"
                   && !ECStore.requestNotSent(this.props.email) && (
                   <div className="link">
                     <FontAwesomeIcon
@@ -110,7 +113,7 @@ export default class InfoBox extends React.Component {
                     />
                   </div>
                 )}
-                {!ECStore.isStudentAccount() && (
+                { !this.userType === "Student" && (
                   <div className="bottom_icon_bar">
                     <FontAwesomeIcon
                       icon="check"
@@ -130,7 +133,6 @@ export default class InfoBox extends React.Component {
                     />
                   </div>
                 )}
-
               </div>
             )}
           </li>
