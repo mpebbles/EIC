@@ -269,7 +269,10 @@ exports.edit_buddy_profile = [
 						biography:req.body.biography,
 						skills: req.body.skills,
 						company: req.body.company,
-					}).exec();
+					})
+					.exec(function(err, buddy){
+						res.json({buddy});
+					});
 
      	});
 		};

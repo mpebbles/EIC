@@ -251,6 +251,7 @@ exports.edit_student_profile = [
 			res.send('401 ERROR UNAUTHORISED TOKEN');
 		}
 		else{
+			console.log(req);
 			var token_to_find_in_db = JSON.stringify(req.headers.authorization).split(" ")[1];
 			token_to_find_in_db = token_to_find_in_db.substring(0,token_to_find_in_db.length - 1);
 			findEmailByToken(token_to_find_in_db, function(err, contact) {
@@ -260,7 +261,6 @@ exports.edit_student_profile = [
 						biography:req.body.biography,
 						interests: req.body.interests
 					}).exec();
-
      	});
 		};
 	}
