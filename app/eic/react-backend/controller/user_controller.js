@@ -1,4 +1,6 @@
 var test = require('../models/Test');
+var User = require('../models/GoogleUser');
+var eic_user = require('../models/User');
 var googleUser = require('../models/GoogleUser');
 var user = require('../models/User');
 var student = require('../models/Student');
@@ -6,8 +8,13 @@ var buddy = require('../models/Buddy');
 var userProfileImage = require('../models/UserProfileImage');
 var goog_token = require('../utils/token.utils');
 var fs = require('fs');
+var User = require('../models/User');
+var Student = require('../models/Student')
+var Buddy = require('../models/Buddy')
+var token_utils = require('../utils/token.utils');
 var { findEmailByToken } = require('../models/GoogleUser');
 const {body,validationResult} = require('express-validator/check');
+
 exports.list_users = function(req, res, next) {
   //res.send('respond with a resource');
 
@@ -29,24 +36,20 @@ exports.list_db = function(req, res, next) {
 	});
 }
 
-//return user type
-exports.get_user_type = function(req,res,next){
-  // TODO: refactor and implement the token validation calls
-  if(!goog_token.validate_student_call(req)
-     && !goog_token.validate_buddy_call(req)
-     && !goog_token.validate_comany_call(req)) {
-       res.send('401 ERROR UNAUTHORISED TOKEN');
-  }
-  var token_to_find_in_db = JSON.stringify(req.headers.authorization).split(" ")[1];
-  token_to_find_in_db = token_to_find_in_db.substring(0,token_to_find_in_db.length - 1);
-  //console.log(token_to_find_in_db)
-  findEmailByToken(token_to_find_in_db, function(err, contact) {
-    console.log(contact);
-    user.findOne({'contact': contact})
-    .exec(function(err, account){
-      res.send(account.itemtype);
+exports.log_in_user = function(req, res, next) {
+    let user_info = JSON.parse(JSON.stringify(req.user));
+    let user_email = user_info.email;
+    eic_user.findOne({contact: user_email}, function(err, result) {
+      if(err) {
+        return res.status(406).send();
+      } else {
+        if(result ===  null) {
+          return res.status(406).send();
+        }
+        res.locals.eicUserType = result.itemtype;
+        return next();
+      }
     });
-  });
 }
 
 //this is the post request to add/update a user's profile image

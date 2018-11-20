@@ -3,14 +3,15 @@ import { GoogleLogout } from "react-google-oauth";
 import TokenService from "../components/TokenService";
 import * as ProfileActions from "../actions/ProfileActions";
 import ProfileStore from "../stores/ProfileStore";
-
 import '../css/profile.css'
+import UserTypeService from "../components/UserTypeService";
 
 export default class UserProfile extends React.Component {
 
   constructor() {
     super();
     this.tokenService = new TokenService();
+    this.userTypeService = new UserTypeService();
     this.getInfo = this.getInfo.bind(this);
     this.logout = this.logout.bind(this);
     this.goHome = this.goHome.bind(this)
@@ -19,6 +20,7 @@ export default class UserProfile extends React.Component {
     this.getImage = this.getImage.bind(this);
     this.state = {
       info: [{}],
+
       // for getting new values on save
       // 1 has existing value
       // 2 means user has left value blank
@@ -97,7 +99,9 @@ export default class UserProfile extends React.Component {
   }
 
   logout = () => {
+    console.log("Logging out");
     this.tokenService.logout();
+    this.userTypeService.setUserType("");
     this.goHome();
   };
 
@@ -169,7 +173,7 @@ export default class UserProfile extends React.Component {
             <button onClick={this.goHome.bind(this)}>Cancel</button>
           </div>
         </div>
-	  </div>
+      </div>
     );
   }
 }

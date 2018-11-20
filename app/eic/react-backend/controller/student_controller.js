@@ -4,7 +4,21 @@ var student = require('../models/Student');
 var googleUser = require('../models/GoogleUser');
 var goog_token = require('../utils/token.utils');
 var { findEmailByToken } = require('../models/GoogleUser');
+var mongoose = require('mongoose');
+
 const {body,validationResult} = require('express-validator/check');
+
+//Insert new student into database
+//Token validation not needed due to registration workflow
+exports.create_student_account = function(req,res,next){
+	new student({
+		user_name : req.header("x-user-name"),
+		contact : JSON.parse(JSON.stringify(req.user)).email
+	}).save(function(err, doc) {
+		if(err){console.log(err)};
+		return next();
+	});
+}
 
 //Returns all students and their info
 exports.get_student_info = function(req,res,next){

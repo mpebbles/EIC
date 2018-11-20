@@ -1,7 +1,7 @@
-import dispatcher from "../dispatcher";
 import axios from 'axios';
+import dispatcher from "../dispatcher";
+import UserTypeService from "../components/UserTypeService";
 import { factoryUpdateProfileInfo } from '../factory'
-
 
 export function uploadImage(uploadImage) {
   const token = localStorage.getItem('id_token');
@@ -36,14 +36,12 @@ export function downloadImage(email) {
   }
 }
 
-
 export function loadProfileInfo() {
+  let userTypeService = new UserTypeService();
   const token = localStorage.getItem('id_token');
-  try {
-    axios({ method: 'get', url: 'http://localhost:3000/api/get_user_type/',
-    headers: { Authorization: `Bearer ${token}` },
-    }).then(res => {
-      if(res.data === 'Student') {
+  const userType = userTypeService.getUserType();
+
+      if(userType === 'Student') {
         axios({ method: 'get', url: 'http://localhost:3000/api/get_student_profile/',
         headers: { Authorization: `Bearer ${token}` },
       }).then(res_1 => {
@@ -51,7 +49,7 @@ export function loadProfileInfo() {
         dispatcher.dispatch({type: "GET_INFO", info: person})
         })
       }
-      else if(res.data === 'Buddy') {
+      else if(userType === 'Buddy') {
         axios({ method: 'get', url: 'http://localhost:3000/api/get_buddy_profile',
         headers: { Authorization: `Bearer ${token}` },
       }).then(res_2 => {
@@ -59,13 +57,13 @@ export function loadProfileInfo() {
           dispatcher.dispatch({type: "GET_INFO", info: persons});
         })
       }
-    })
-  }
-  catch(err) {
-    //console.log(err);
-  }
+      else if(userType === "Company") {
+        console.log("Got Company userType");
+      }
+      else {
+        console.log("Invalid userType");
+      }
 }
-
 
 export function updateProfileInfo(state) {
   var sendObj = {};

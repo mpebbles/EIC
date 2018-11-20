@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
-import TokenService from './TokenService';
 import { GoogleLogin } from 'react-google-oauth'
+import TokenService from './TokenService';
+import UserTypeService from './UserTypeService';
 
 class Login extends Component {
 
 	constructor() {
 		super();
 		this.tokenService = new TokenService();
+		this.userTypeService = new UserTypeService();
 	}
 
 	componentWillMount(){
@@ -24,7 +26,6 @@ class Login extends Component {
 		                    Log In Here
 		                </h1>
 		            </div>
-
 		            <div>
 						<GoogleLogin onLoginSuccess={this.executeLogin}/>
 		            </div>
@@ -41,20 +42,26 @@ class Login extends Component {
             mode: 'cors',
             cache: 'default'
         };
-        fetch('http://localhost:3000/googleapi/v1/auth/google', options).then(r => {
-            const token = r.headers.get('x-auth-token');
-            r.json().then(user => {
-                if (token) {
-                	this.tokenService.setToken(token);
-                    this.props.history.replace('/');
+        fetch('http://localhost:3000/googleapi/v1/auth/google-login', options).then(r => {
+            if(r.ok) {
+                console.log("Finished login call");
+                const token = r.headers.get('x-auth-token');
+                r.json().then(user => {
+                    console.log("In callback");
+                    if (token) {
+                        this.userTypeService.setUserType(r.headers.get('x-user-type'));
+                        this.tokenService.setToken(token);
+                        this.props.history.replace('/');
+                    }
+                });
+            } else {
+                console.log("Call not finished successfully");
+                if(r.status === 406) {
+                    this.props.history.replace('/register');
                 }
-            });
+            }
         })
     };
-
-    onFailure = (error) => {
-      alert(error);
-    }
 
 }
 

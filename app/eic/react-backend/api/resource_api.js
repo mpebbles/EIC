@@ -1,4 +1,3 @@
-
 //Dependencies
 var express = require('express');
 var router = express.Router();
@@ -29,8 +28,6 @@ router.get('/get_buddy_email/:id',buddy_controller.get_buddy_email);
 
 //Gets partial matches for buddy
 router.get('/get_buddy_partial/:id',buddy_controller.get_buddy_partial);
-
-router.get('/get_user_type',user_controller.get_user_type);
 
 router.get('/add_pending_buddy/:buddy_email', student_controller.add_pending_buddy);
 

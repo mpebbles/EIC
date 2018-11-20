@@ -2,12 +2,12 @@ var mongoose = require('mongoose');
 
 const baseOptions = {
   discriminatorKey: 'itemtype', // our discriminator key, could be anything
-  collection: 'items', // the name of our collection
+  collection: 'users', // the name of our collection
 };
 
 // Our Base schema: these properties will be shared with our "real" schemas
 const userSchema = mongoose.model('User', new mongoose.Schema({
-    user_name: {type: String ,required: true, max: 100},
+    user_name: {type: String, required: true, max: 100},
     userProfileImageId: {type: String, required: true, max: 200},
     contact: {
         type: String, required: true,

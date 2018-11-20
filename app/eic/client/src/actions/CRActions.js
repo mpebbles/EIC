@@ -1,7 +1,6 @@
 import dispatcher from "../dispatcher";
 import axios from 'axios';
 
-
 export function loadRequests() {
   const token = localStorage.getItem('id_token');
   try {
