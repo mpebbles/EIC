@@ -71,6 +71,11 @@ export default class UserProfile extends React.Component {
         if(this.state.info[0].hasOwnProperty('interests')) {
           this.setState({interests: this.state.info[0].interests})
         }
+
+        // trigger image fetch since we now have email
+        if(this.state.profileImage === null) {
+          ProfileActions.downloadImage(this.state.info[0].contact);
+        }
       })
   }
 

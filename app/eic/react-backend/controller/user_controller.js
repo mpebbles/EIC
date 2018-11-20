@@ -50,7 +50,6 @@ exports.get_user_type = function(req,res,next){
 }
 
 //this is the post request to add/update a user's profile image
-
 exports.addUserProfileImage = [
   (req, res, next) => {
     if(!goog_token.validate_student_call(req)){
@@ -59,7 +58,7 @@ exports.addUserProfileImage = [
     else{
       var token_to_find_in_db = JSON.stringify(req.headers.authorization).split(" ")[1];
       token_to_find_in_db = token_to_find_in_db.substring(0,token_to_find_in_db.length - 1);
-    
+
       findEmailByToken(token_to_find_in_db, function(err, contact) {
         user.findOne({'contact': contact})
         .exec(function(err, user){
@@ -83,16 +82,18 @@ exports.addUserProfileImage = [
               userProfileImage.userImage.data = fs.readFileSync(req.file.path);
               userProfileImage.save();
               fs.unlink(req.file.path, (err)=> {
-                if(err) throw err; 
+                if(err) throw err;
               });
             }));
           }
+          res.send();
         });
       });
     }
-
   }
 ]
+
+
 exports.getUserProfileImage = function(req, res, next){
   if(!goog_token.validate_buddy_call(req)){
     res.send('401 ERROR UNAUTHORISED TOKEN');
@@ -104,7 +105,10 @@ exports.getUserProfileImage = function(req, res, next){
         function(err, userProfileImage){
           if(!userProfileImage){res.send('404 ERROR IMAGE NOT FOUND');}
           else{
-            res.send(userProfileImage.userImage.data);
+            //res.send(userProfileImage.userImage.data);
+            //res.writeHead(200, {'Content-Type': 'image/jpeg'});
+            //res.end(userProfileImage.userImage.data)
+            res.send(Buffer.from(userProfileImage.userImage.data).toString('base64'))
           }
 
         });
