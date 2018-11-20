@@ -10,60 +10,58 @@ import TokenService from "./TokenService";
 import ProtectedRoute from "./ProtectedRoute";
 
 class NavigationPage extends Component {
-
   constructor() {
     super();
     this.tokenService = new TokenService();
   }
 
-  componentDidMount(){
-    if(!this.tokenService.loggedIn()){
-      this.props.history.replace('/login');
+  componentDidMount() {
+    if (!this.tokenService.loggedIn()) {
+      this.props.history.replace("/login");
     }
   }
 
   render() {
     return (
-        <Router>
-          <div>
-            <ul>
-              <li>
-                <Link to="/">Homepage</Link>
-              </li>
-              <li>
-                <Link to="/resources">Resources</Link>
-              </li>
-              <li>
-                <Link to="/contracts">Contracts</Link>
-              </li>
-              <li>
-                <Link to="/search">Search</Link>
-              </li>
-              <li>
-                <Link to="/profile">Profile</Link>
-              </li>
-              <div>
-                  <GoogleLogout onLogoutSuccess={this.logout}/>
-              </div>
-            </ul>
+      <Router>
+        <div>
+          <ul>
+            <li>
+              <Link to="/">Homepage</Link>
+            </li>
+            <li>
+              <Link to="/resources">Resources</Link>
+            </li>
+            <li>
+              <Link to="/contracts">Contracts</Link>
+            </li>
+            <li>
+              <Link to="/search">Search</Link>
+            </li>
+            <li>
+              <Link to="/profile">Profile</Link>
+            </li>
+            <div>
+              <GoogleLogout onLogoutSuccess={this.logout} />
+            </div>
+          </ul>
 
-            <hr />
+          <hr />
 
-            <ProtectedRoute exact path="/" component={InfoPage} />
-            <ProtectedRoute path="/resources" component={Resources} />
-            <ProtectedRoute path="/contracts" component={Contracts} />
-            <ProtectedRoute path="/search" component={Search} />
-            <ProtectedRoute path="/profile" component={UserProfile} />
-          </div>
-        </Router>
+          <ProtectedRoute exact path="/" component={InfoPage} />
+          <ProtectedRoute path="/resources" component={Resources} />
+          <ProtectedRoute path="/contracts" component={Contracts} />
+          <ProtectedRoute path="/search" component={Search} />
+          <ProtectedRoute path="/profile" component={UserProfile} />
+        </div>
+      </Router>
     );
   }
 
   logout = () => {
     this.tokenService.logout();
-    this.props.history.replace('/login');
+    this.props.history.replace("/login");
   };
-  
 }
 
 export default NavigationPage;

@@ -1,6 +1,6 @@
 import React from "react";
-import BuddySearch from "../components/BuddySearch"
-import ConnectionRequest from "../components/ConnectionRequest"
+import BuddySearch from "../components/BuddySearch";
+import ConnectionRequest from "../components/ConnectionRequest";
 import UserTypeService from "../components/UserTypeService";
 
 export default class EstablishConnections extends React.Component {
@@ -11,21 +11,20 @@ export default class EstablishConnections extends React.Component {
   }
 
   render() {
-    if(this.userType === "Student") {
+    if (this.userType === "Student") {
       return (
         <div>
           <h3>Find Buddies</h3>
-          <BuddySearch/>
+          <BuddySearch />
         </div>
-        );
-    }
-    else {
+      );
+    } else {
       return (
         <div>
           <h3>Connection Requests</h3>
           <ConnectionRequest />
         </div>
-      )
+      );
     }
   }
 }

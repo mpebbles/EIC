@@ -1,6 +1,5 @@
-
 import React from "react";
-import ConnectionCards from "../components/ConnectionCards"
+import ConnectionCards from "../components/ConnectionCards";
 
 export default class Connections extends React.Component {
   render() {

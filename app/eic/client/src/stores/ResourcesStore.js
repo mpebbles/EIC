@@ -3,9 +3,8 @@ import dispatcher from "../dispatcher";
 
 class ResourcesStore extends EventEmitter {
   constructor() {
-    super()
+    super();
     this.resources = [];
-
   }
 
   getAll() {
@@ -15,14 +14,13 @@ class ResourcesStore extends EventEmitter {
   isEmpty() {
     if (!this.resources.length) {
       return true;
-    }
-    else {
+    } else {
       return false;
     }
   }
 
   handleActions(action) {
-    switch(action.type) {
+    switch (action.type) {
       //case "CREATE_RESOURCE": {
       //  this.createResource(action.text);
       //  break;
@@ -37,8 +35,6 @@ class ResourcesStore extends EventEmitter {
     }
   }
 }
-
-
 
 const resourcesStore = new ResourcesStore();
 dispatcher.register(resourcesStore.handleActions.bind(resourcesStore));

@@ -3,7 +3,7 @@ import dispatcher from "../dispatcher";
 
 class ECStore extends EventEmitter {
   constructor() {
-    super()
+    super();
     this.searchResults = [];
     this.sentRequests = [];
   }
@@ -20,7 +20,7 @@ class ECStore extends EventEmitter {
   }
 
   handleActions(action) {
-    switch(action.type) {
+    switch (action.type) {
       case "RECEIVE_BUDDY_SEARCH": {
         this.searchResults = action.resources;
         this.emit("change");
@@ -36,7 +36,6 @@ class ECStore extends EventEmitter {
     }
   }
 }
-
 
 const ecStore = new ECStore();
 dispatcher.register(ecStore.handleActions.bind(ecStore));

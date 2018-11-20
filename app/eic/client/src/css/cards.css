@@ -27,16 +27,16 @@
   color: #999999;
 }
 
-.button_bottom{
+.button_bottom {
   width: 100%;
   float: right;
   padding: 2%;
 }
 
 .delete_icon {
-  position:absolute;
-  bottom:10px;
-  right:10px;
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
 }
 
 .card_skills {

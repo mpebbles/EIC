@@ -4,8 +4,8 @@ import dispatcher from "../dispatcher";
 
 class CardsStore extends EventEmitter {
   constructor() {
-    super()
-    this.cardInfo = []
+    super();
+    this.cardInfo = [];
   }
 
   getCardsData() {
@@ -15,15 +15,13 @@ class CardsStore extends EventEmitter {
   isEmpty() {
     if (!this.cardInfo.length) {
       return true;
-    }
-    else {
+    } else {
       return false;
     }
   }
 
-
   handleActions(action) {
-    switch(action.type) {
+    switch (action.type) {
       case "RECEIVE_CARDS_DATA": {
         this.cardInfo = action.cardData;
         this.emit("change");
@@ -31,7 +29,8 @@ class CardsStore extends EventEmitter {
       }
       case "REMOVE_CARD": {
         this.cardInfo = this.cardInfo.filter(
-          person=>person.contact !== action.cardEmail);
+          person => person.contact !== action.cardEmail
+        );
         this.emit("change");
         break;
       }
@@ -40,7 +39,6 @@ class CardsStore extends EventEmitter {
     }
   }
 }
-
 
 const cardsStore = new CardsStore();
 dispatcher.register(cardsStore.handleActions.bind(cardsStore));

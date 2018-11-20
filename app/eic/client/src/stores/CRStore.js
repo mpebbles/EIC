@@ -4,7 +4,7 @@ import dispatcher from "../dispatcher";
 
 class CRStore extends EventEmitter {
   constructor() {
-    super()
+    super();
     this.requests = [];
   }
 
@@ -15,14 +15,13 @@ class CRStore extends EventEmitter {
   isEmpty() {
     if (!this.requests.length) {
       return true;
-    }
-    else {
+    } else {
       return false;
     }
   }
 
   handleActions(action) {
-    switch(action.type) {
+    switch (action.type) {
       case "RECEIVE_REQUESTS": {
         this.requests = action.requests;
         this.emit("change");
@@ -30,7 +29,8 @@ class CRStore extends EventEmitter {
       }
       case "REMOVE_REQUEST": {
         this.requests = this.requests.filter(
-          person=> person.contact !== action.removeEmail);
+          person => person.contact !== action.removeEmail
+        );
         this.emit("change");
         break;
       }
@@ -39,8 +39,6 @@ class CRStore extends EventEmitter {
     }
   }
 }
-
-
 
 const cRStore = new CRStore();
 dispatcher.register(cRStore.handleActions.bind(cRStore));

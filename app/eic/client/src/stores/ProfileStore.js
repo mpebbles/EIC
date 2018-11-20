@@ -3,7 +3,7 @@ import dispatcher from "../dispatcher";
 
 class ProfileStore extends EventEmitter {
   constructor() {
-    super()
+    super();
     this.profileInfo = [];
     this.profileImage = null;
   }
@@ -19,15 +19,13 @@ class ProfileStore extends EventEmitter {
   isEmpty() {
     if (!this.profileInfo.length) {
       return true;
-    }
-    else {
+    } else {
       return false;
     }
   }
 
-
   handleActions(action) {
-    switch(action.type) {
+    switch (action.type) {
       case "GET_INFO": {
         this.profileInfo = [];
         this.profileInfo.push(action.info);
@@ -51,7 +49,7 @@ class ProfileStore extends EventEmitter {
         break;
       }
       case "RECEIVE_IMAGE": {
-        this.profileImage =  "data:image/png;base64,"+ action.image;
+        this.profileImage = "data:image/png;base64," + action.image;
         this.emit("change");
         break;
       }
@@ -60,7 +58,6 @@ class ProfileStore extends EventEmitter {
     }
   }
 }
-
 
 const profileStore = new ProfileStore();
 dispatcher.register(profileStore.handleActions.bind(profileStore));

@@ -8,7 +8,7 @@ export default class ResourcesContent extends React.Component {
     super();
     this.getResources = this.getResources.bind(this);
     this.state = {
-      resources: ["Test1", "Test2"],
+      resources: ["Test1", "Test2"]
     };
   }
 
@@ -23,9 +23,8 @@ export default class ResourcesContent extends React.Component {
     // We can always call ResourcesActions.loadResources() when needed
     if (ResourcesStore.isEmpty()) {
       ResourcesActions.loadResources();
-    }
-    else {
-      this.getResources()
+    } else {
+      this.getResources();
     }
   }
 
@@ -36,18 +35,22 @@ export default class ResourcesContent extends React.Component {
 
   getResources() {
     this.setState({
-      resources: ResourcesStore.getAll(),
+      resources: ResourcesStore.getAll()
     });
   }
 
   render() {
-
     return (
       <div>
         <h3>Resources</h3>
-        <p>This is dummy info from a GET request to satisfy the ajax learning requirement</p>
+        <p>
+          This is dummy info from a GET request to satisfy the ajax learning
+          requirement
+        </p>
         <ul>
-        { this.state.resources.map(resource => <ResourceEntry content={resource} />)}
+          {this.state.resources.map(resource => (
+            <ResourceEntry content={resource} />
+          ))}
         </ul>
       </div>
     );

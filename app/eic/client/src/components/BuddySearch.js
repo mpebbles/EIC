@@ -1,9 +1,9 @@
 import React from "react";
 import * as ECActions from "../actions/ECActions";
 import ECStore from "../stores/ECStore";
-import InfoBox from "./InfoBox"
+import InfoBox from "./InfoBox";
 
-import '../css/generic.css'
+import "../css/generic.css";
 
 export default class BuddySearch extends React.Component {
   constructor() {
@@ -13,7 +13,7 @@ export default class BuddySearch extends React.Component {
 
     this.state = {
       searchBarValue: "Search for a buddy by name or by skills...",
-      searchResults: [],
+      searchResults: []
     };
   }
 
@@ -39,15 +39,24 @@ export default class BuddySearch extends React.Component {
   }
 
   render() {
-
     return (
       <div>
-        <input className="searchBar" placeholder={this.state.searchBarValue} onChange={(e) => {this.handleChange(e)}}/>
+        <input
+          className="searchBar"
+          placeholder={this.state.searchBarValue}
+          onChange={e => {
+            this.handleChange(e);
+          }}
+        />
         <ul className="list_container">
-        { this.state.searchResults.map(person =>
-          <InfoBox email={person.contact} biography={person.biography}
-            skills={person.skills} name={person.user_name}/>
-        )}
+          {this.state.searchResults.map(person => (
+            <InfoBox
+              email={person.contact}
+              biography={person.biography}
+              skills={person.skills}
+              name={person.user_name}
+            />
+          ))}
         </ul>
       </div>
     );
