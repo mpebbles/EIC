@@ -5,6 +5,7 @@ import Resources from "./pages/Resources";
 import EstablishConnections from "./pages/EstablishConnections";
 import Connections from "./pages/Connections";
 import UserProfile from "./pages/UserProfile";
+import Contracts from "./pages/Contracts"
 import "./css/main.css";
 import "./css/stupid.css";
 import TokenService from "./components/TokenService";
@@ -31,6 +32,7 @@ export default class Layout extends React.Component {
             <div id="content">
               <Route exact path="/" component={Resources} />
               <Route path="/connect" component={EstablishConnections} />
+              <Route path="/contracts" component={Contracts} />
               <Route path="/userconnections" component={Connections} />
               <Route path="/userprofile" component={UserProfile} />
               {/*<Route path="/createresource" component={CreateResource}/>*/}

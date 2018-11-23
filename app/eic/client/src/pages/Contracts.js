@@ -2,7 +2,7 @@ import React, { Component } from "react";
 
 class Contracts extends Component {
   render() {
-    return <h1>Contracts</h1>;
+    return <h3>Contracts</h3>;
   }
 }
 
