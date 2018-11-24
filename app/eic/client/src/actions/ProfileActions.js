@@ -63,9 +63,16 @@ export function loadProfileInfo() {
       dispatcher.dispatch({ type: "GET_INFO", info: persons });
     });
   } else if (userType === "Company") {
-    console.log("Got Company userType");
+    axios({
+      method: "get",
+      url: "http://localhost:3000/api/get_company_profile",
+      headers: { Authorization: `Bearer ${token}` }
+    }).then(res_3 => {
+      const persons = res_3.data[0].a_user;
+      dispatcher.dispatch({ type: "GET_INFO", info: persons });
+    });
   } else {
-    console.log("Invalid userType");
+    //console.log("Invalid userType");
   }
 }
 
@@ -99,6 +106,8 @@ export function updateProfileInfo(state) {
       postURL = "http://localhost:3000/api/edit_buddy_profile/";
     } else if (this.state.info[0].itemtype === "Student") {
       postURL = "http://localhost:3000/api/edit_student_profile/";
+    } else if (this.state.info[0].itemtype === "Company") {
+      postURL = "http://localhost:3000/api/edit_company_profile/";
     }
     const args = {
       method: "post",
