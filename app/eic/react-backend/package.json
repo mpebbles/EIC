@@ -6,6 +6,9 @@
     "start": "node ./bin/www",
     "test": "mocha --timeout 10000"
   },
+  "engines": {
+     "node": "10.11.0"
+  },
   "dependencies": {
     "async": "^2.6.1",
     "chai": "^4.2.0",
