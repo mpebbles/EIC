@@ -9,6 +9,7 @@ var buddy_controller = require("../controller/buddy_controller");
 var student_controller = require("../controller/student_controller");
 var user_controller = require("../controller/user_controller");
 var resourceController = require("../controller/resourceController");
+var companyController = require("../controller/companyController");
 
 //get all students
 router.get("/get_all_student", student_controller.get_student_info);
@@ -99,5 +100,13 @@ router.post(
   "/deleteResourceByTitle/",
   resourceController.deleteResourceByTitle
 );
+
+// requires: contact
+router.post("/createCompanyAccount/", companyController.createCompanyAccount);
+
+router.get("/getCompanyInfo/", companyController.getCompanyInfo);
+
+router.post("/editCompanyProfile/", companyController.editCompanyProfile);
+
 
 module.exports = router;
