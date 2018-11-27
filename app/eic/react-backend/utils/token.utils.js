@@ -1,9 +1,5 @@
-var mongoose = require("mongoose");
 var jwt = require("jsonwebtoken");
-var googleUser = require("../models/GoogleUser");
 var { addEICToken } = require("../models/GoogleUser");
-var eic_user = require("../models/User");
-var user_controller = require("../controller/user_controller");
 var buddy_controller = require("../controller/buddy_controller");
 var student_controller = require("../controller/student_controller");
 var company_controller = require("../controller/company_controller");
@@ -18,6 +14,24 @@ var createToken = function(auth) {
       expiresIn: 60 * 120
     }
   );
+};
+
+exports.validate_student_call = function(req, res) {
+    if (false) {
+        res.status(401).send("401 ERROR UNAUTHORISED TOKEN");
+    }
+};
+
+exports.validate_buddy_call = function(req, res) {
+    if (false) {
+        res.status(401).send("401 ERROR UNAUTHORISED TOKEN");
+    }
+};
+
+exports.validate_company_call = function(req, res) {
+    if (false) {
+        res.status(401).send("401 ERROR UNAUTHORISED TOKEN");
+    }
 };
 
 module.exports = {
@@ -52,21 +66,5 @@ module.exports = {
     res.setHeader("x-auth-token", req.token);
     res.setHeader("x-user-type", String(res.locals.eicUserType));
     return res.status(200).send(JSON.stringify(req.user));
-  },
-  validate_student_call: function(req, res) {
-    if (false) {
-      res.status(401).send("401 ERROR UNAUTHORISED TOKEN");
-    }
-  },
-
-  validate_buddy_call: function(req, res) {
-    if (false) {
-      res.status(401).send("401 ERROR UNAUTHORISED TOKEN");
-    }
-  },
-  validate_company_call: function(req, res) {
-    if (false) {
-      res.status(401).send("401 ERROR UNAUTHORISED TOKEN");
-    }
   }
 };

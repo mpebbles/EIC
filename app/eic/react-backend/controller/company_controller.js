@@ -1,6 +1,11 @@
 var company = require("../models/Company");
-var mongoose = require("mongoose");
-
+var {
+    generateToken,
+    ensureUserExists,
+    putTokenInDB,
+    registerUser,
+    sendToken
+} = require("../utils/token.utils");
 //Insert new student into database
 //Token validation not needed due to registration workflow
 exports.create_company_account = function(req, res, next) {

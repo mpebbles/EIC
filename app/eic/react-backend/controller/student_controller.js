@@ -2,7 +2,7 @@ var test = require("../models/Test");
 var buddy = require("../models/Buddy");
 var student = require("../models/Student");
 var googleUser = require("../models/GoogleUser");
-var goog_token = require("../utils/token.utils");
+var tokenUtils = require("../utils/token.utils");
 var { findEmailByToken } = require("../models/GoogleUser");
 var mongoose = require("mongoose");
 
@@ -24,64 +24,61 @@ exports.create_student_account = function(req, res, next) {
 
 //Returns all students and their info
 exports.get_student_info = function(req, res, next) {
-  if (!goog_token.validate_student_call(req)) {
-    res.send("401 ERROR UNAUTHORISED TOKEN");
-  } else {
+    tokenUtils.validate_student_call(req, res);
     student.find().exec(function(err, student) {
       if (err) {
         return next(err);
       }
       res.json([{ student }]);
     });
-  }
 };
 
 //Gets information based on the specific email
 exports.get_student_email = function(req, res, next) {
-  if (!goog_token.validate_student_call(req)) {
-    res.send("401 ERROR UNAUTHORISED TOKEN");
-  } else {
+    tokenUtils.validate_student_call(req, res);
     student.find({ contact: req.params.id }).exec(function(err, student) {
       if (err) {
         return next(err);
       }
       res.json([{ student }]);
     });
-  }
 };
 
 // Gets buddy profile info based off of token
 exports.get_student_profile = function(req, res, next) {
-  if (!goog_token.validate_buddy_call(req)) {
-    res.send("401 ERROR UNAUTHORISED TOKEN");
-  } else {
+    tokenUtils.validate_student_call(req, res);
+    console.log("Made it past token verify");
     var token_to_find_in_db = JSON.stringify(req.headers.authorization).split(
       " "
     )[1];
+
+
     token_to_find_in_db = token_to_find_in_db.substring(
       0,
       token_to_find_in_db.length - 1
     );
+
+    console.log("Token is", token_to_find_in_db);
+
     findEmailByToken(token_to_find_in_db, function(err, contact) {
       if (err) {
         return next(err);
       }
+      console.log("Searching for contact", contact);
       student
         .findOne({ contact: contact })
         // this is a_user to make front end logic easier
         .exec(function(err, a_user) {
+            console.log("Found result", a_user);
           res.json([{ a_user }]);
         });
     });
-  }
+
 };
 
 //Get students who have partial matches based on the user name
 exports.get_student_partial = function(req, res, next) {
-  if (!goog_token.validate_student_call(req)) {
-    res.send("401 ERROR UNAUTHORISED TOKEN");
-  } else {
-    //console.log(googleUser.find());
+    tokenUtils.validate_student_call(req, res);
     student
       .find({ user_name: { $regex: req.params.id, $options: "i" } })
       .limit(10)
@@ -91,14 +88,11 @@ exports.get_student_partial = function(req, res, next) {
         }
         res.json([{ student }]);
       });
-  }
 };
 
 //Adds buddy to this student's pending_buddy[],
 exports.add_pending_buddy = function(req, res, next) {
-  if (!goog_token.validate_student_call(req)) {
-    res.send("401 ERROR UNAUTHORISED TOKEN");
-  } else {
+    tokenUtils.validate_student_call(req, res);
     var token_to_find_in_db = JSON.stringify(req.headers.authorization).split(
       " "
     )[1];
@@ -125,14 +119,11 @@ exports.add_pending_buddy = function(req, res, next) {
           });
       });
     });
-  }
 };
 
 //Adds student to this buddy's student[] from pending_student[]
 exports.accept_pending_buddy = function(req, res, next) {
-  if (!goog_token.validate_student_call(req)) {
-    res.send("401 ERROR UNAUTHORISED TOKEN");
-  } else {
+    tokenUtils.validate_student_call(req, res);
     var token_to_find_in_db = JSON.stringify(req.headers.authorization).split(
       " "
     )[1];
@@ -178,14 +169,11 @@ exports.accept_pending_buddy = function(req, res, next) {
           });
       });
     });
-  }
 };
 
 //Delete buddy from this student's pending_buddy[]
 exports.reject_pending_buddy = function(req, res, next) {
-  if (!goog_token.validate_buddy_call(req)) {
-    res.send("401 ERROR UNAUTHORISED TOKEN");
-  } else {
+    tokenUtils.validate_student_call(req, res);
     var token_to_find_in_db = JSON.stringify(req.headers.authorization).split(
       " "
     )[1];
@@ -220,14 +208,11 @@ exports.reject_pending_buddy = function(req, res, next) {
       });
       res.send();
     });
-  }
 };
 
 //Delete buddy/student connection
 exports.reject_buddy = function(req, res, next) {
-  if (!goog_token.validate_buddy_call(req)) {
-    res.send("401 ERROR UNAUTHORISED TOKEN");
-  } else {
+    tokenUtils.validate_student_call(req, res);
     var token_to_find_in_db = JSON.stringify(req.headers.authorization).split(
       " "
     )[1];
@@ -261,14 +246,11 @@ exports.reject_buddy = function(req, res, next) {
       });
       res.send();
     });
-  }
 };
 
 //View this student's pending buddies
 exports.get_pending_buddy = function(req, res, next) {
-  if (!goog_token.validate_student_call(req)) {
-    res.send("401 ERROR UNAUTHORISED TOKEN");
-  } else {
+    tokenUtils.validate_student_call(req, res);
     var token_to_find_in_db = JSON.stringify(req.headers.authorization).split(
       " "
     )[1];
@@ -290,14 +272,11 @@ exports.get_pending_buddy = function(req, res, next) {
           });
       });
     });
-  }
 };
 
 //View this student's accepted buddies
 exports.get_buddy = function(req, res, next) {
-  if (!goog_token.validate_student_call(req)) {
-    res.send("401 ERROR UNAUTHORISED TOKEN");
-  } else {
+    tokenUtils.validate_student_call(req, res);
     var token_to_find_in_db = JSON.stringify(req.headers.authorization).split(
       " "
     )[1];
@@ -319,16 +298,12 @@ exports.get_buddy = function(req, res, next) {
           });
       });
     });
-  }
 };
 
 exports.edit_student_profile = [
   (req, res, next) => {
-    if (!goog_token.validate_student_call(req)) {
-      res.send("401 ERROR UNAUTHORISED TOKEN");
-    } else {
-      console.log(req);
-      var token_to_find_in_db = JSON.stringify(req.headers.authorization).split(
+     tokenUtils.validate_student_call(req, res);
+     var token_to_find_in_db = JSON.stringify(req.headers.authorization).split(
         " "
       )[1];
       token_to_find_in_db = token_to_find_in_db.substring(
@@ -346,6 +321,5 @@ exports.edit_student_profile = [
           )
           .exec();
       });
-    }
   }
 ];

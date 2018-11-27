@@ -2,7 +2,6 @@ var express = require("express");
 var router = express.Router();
 var {
   generateToken,
-  ensureUserExists,
   putTokenInDB,
   registerUser,
   sendToken

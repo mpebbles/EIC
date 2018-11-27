@@ -59,9 +59,6 @@ exports.log_in_user = function(req, res, next) {
 //this is the post request to add/update a user's profile image
 exports.addUserProfileImage = [
   (req, res, next) => {
-    if (!goog_token.validate_student_call(req)) {
-      res.send("401 ERROR UNAUTHORISED TOKEN");
-    } else {
       var token_to_find_in_db = JSON.stringify(req.headers.authorization).split(
         " "
       )[1];
@@ -100,14 +97,10 @@ exports.addUserProfileImage = [
           res.send();
         });
       });
-    }
   }
 ];
 
 exports.getUserProfileImage = function(req, res, next) {
-  if (!goog_token.validate_buddy_call(req)) {
-    res.send("401 ERROR UNAUTHORISED TOKEN");
-  } else {
     user.findOne({ contact: req.params.id }).exec(function(err, user) {
       userProfileImage.findById(user.userProfileImageId, function(
         err,
@@ -125,5 +118,4 @@ exports.getUserProfileImage = function(req, res, next) {
         }
       });
     });
-  }
 };

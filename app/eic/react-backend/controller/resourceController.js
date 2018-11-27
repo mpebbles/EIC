@@ -1,14 +1,8 @@
-var test = require("../models/Test");
-var User = require("../models/GoogleUser");
 var resource = require("../models/Resource");
-var goog_token = require("../utils/token.utils");
 var { findEmailByToken } = require("../models/GoogleUser");
 
 exports.createResource = [
   (req, res, next) => {
-    if (!goog_token.validate_student_call(req)) {
-      res.send("401 ERROR UNAUTHORISED TOKEN");
-    } else {
       var token_to_find_in_db = JSON.stringify(req.headers.authorization).split(
         " "
       )[1];
@@ -34,14 +28,10 @@ exports.createResource = [
           }
         });
       });
-    }
   }
 ];
 
 exports.getResources = function(req, res, next) {
-  if (!goog_token.validate_student_call(req)) {
-    res.send("401 ERROR UNAUTHORISED TOKEN");
-  } else {
     resource
       .find()
       .limit(10)
@@ -51,13 +41,9 @@ exports.getResources = function(req, res, next) {
         }
         res.json([{ resources }]);
       });
-  }
 };
 
 exports.getResourceByCreator = function(req, res, next) {
-  if (!goog_token.validate_student_call(req)) {
-    res.send("401 ERROR UNAUTHORISED TOKEN");
-  } else {
     resource
       .find({ creator: req.params.creator })
       .exec(function(err, resources) {
@@ -66,26 +52,18 @@ exports.getResourceByCreator = function(req, res, next) {
         }
         res.json([{ resources }]);
       });
-  }
 };
 
 exports.getResourceByTitle = function(req, res, next) {
-  if (!goog_token.validate_student_call(req)) {
-    res.send("401 ERROR UNAUTHORISED TOKEN");
-  } else {
     resource.find({ title: req.params.title }).exec(function(err, resources) {
       if (err) {
         return next(err);
       }
       res.json([{ resources }]);
     });
-  }
 };
 
 exports.deleteResourceByTitle = function(req, res, next) {
-  if (!goog_token.validate_student_call(req)) {
-    res.send("401 ERROR UNAUTHORISED TOKEN");
-  } else {
     resource
       .findOne({ title: req.params.title })
       .exec(function(err, aResource) {
@@ -98,5 +76,4 @@ exports.deleteResourceByTitle = function(req, res, next) {
           }
         });
       });
-  }
 };
