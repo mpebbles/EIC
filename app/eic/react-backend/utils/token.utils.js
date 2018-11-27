@@ -6,7 +6,7 @@ var eic_user = require("../models/User");
 var user_controller = require("../controller/user_controller");
 var buddy_controller = require("../controller/buddy_controller");
 var student_controller = require("../controller/student_controller");
-var company_controller = require("../controller/company_controller");
+var company_controller = require("../controller/companyController");
 
 var createToken = function(auth) {
   return jwt.sign(
