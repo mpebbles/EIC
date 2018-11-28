@@ -1,7 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import "./css/index.css";
-//import './css/stupid.css'
 import * as serviceWorker from "./serviceWorker";
 import Layout from "./Layout";
 import Login from "./components/Login";
@@ -9,11 +8,9 @@ import Register from "./pages/Register";
 import { GoogleAPI } from "react-google-oauth";
 import config from "./config.json";
 import { BrowserRouter, Route } from "react-router-dom";
+import { runAll } from "./testing/driver";
 
-//import { runAll } from "./testing/driver";
-
-// also remember to set supplyTestValues to true in factory.js if any test will be run
-//runAll();
+if (config.RUN_UNIT_TESTS === "true") runAll();
 
 ReactDOM.render(
   <GoogleAPI
