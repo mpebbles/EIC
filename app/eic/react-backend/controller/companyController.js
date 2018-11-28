@@ -6,8 +6,7 @@ var { findEmailByToken } = require("../models/GoogleUser");
 exports.createCompanyAccount = function(req, res, next) {
   new company({
     user_name: req.header("x-user-name"),
-    contact: JSON.parse(JSON.stringify(req.user)).email,
-    userProfileImageId: "5bfd8e869525d02037349b53"
+    contact: JSON.parse(JSON.stringify(req.user)).email
   }).save(function(err, doc) {
     if (err) {
       console.log(err);
