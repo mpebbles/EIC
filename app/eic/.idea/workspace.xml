@@ -2,16 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d52dbc58-8615-4f8c-a8c4-540f054ba6c6" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/react-backend/Procfile" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/react-backend/controller/companyController.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/react-backend/uploads/cd1477a691bf7c2c6e0852de7995ff3d" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/Layout.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/Layout.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/actions/ProfileActions.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/actions/ProfileActions.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/NavBar.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/NavBar.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/pages/Contracts.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/pages/Contracts.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/react-backend/api/resource_api.js" beforeDir="false" afterPath="$PROJECT_DIR$/react-backend/api/resource_api.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/react-backend/controller/company_controller.js" beforeDir="false" afterPath="$PROJECT_DIR$/react-backend/controller/company_controller.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/react-backend/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/react-backend/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/react-backend/controller/buddy_controller.js" beforeDir="false" afterPath="$PROJECT_DIR$/react-backend/controller/buddy_controller.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/react-backend/controller/companyController.js" beforeDir="false" afterPath="$PROJECT_DIR$/react-backend/controller/companyController.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/react-backend/controller/student_controller.js" beforeDir="false" afterPath="$PROJECT_DIR$/react-backend/controller/student_controller.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/react-backend/models/GoogleUser.js" beforeDir="false" afterPath="$PROJECT_DIR$/react-backend/models/GoogleUser.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -27,64 +22,15 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/react-backend/controller/user_controller.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1989">
-              <caret line="117" column="9" selection-start-line="117" selection-start-column="9" selection-end-line="117" selection-end-column="9" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/react-backend/controller/student_controller.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1207">
-              <caret line="71" column="46" selection-start-line="71" selection-start-column="46" selection-end-line="71" selection-end-column="46" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/react-backend/models/GoogleUser.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="293">
-              <caret line="84" column="14" selection-start-line="84" selection-start-column="14" selection-end-line="84" selection-end-column="14" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/react-backend/controller/resourceController.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="17">
-              <caret line="1" selection-start-line="1" selection-end-line="1" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/react-backend/controller/company_controller.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="119">
-              <caret line="7" column="36" selection-start-line="7" selection-start-column="36" selection-end-line="7" selection-end-column="36" />
+            <state relative-caret-position="162">
+              <caret line="104" column="66" lean-forward="true" selection-start-line="104" selection-start-column="66" selection-end-line="104" selection-end-column="66" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/react-backend/controller/companyController.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="34">
-              <caret line="2" lean-forward="true" selection-start-line="2" selection-end-line="2" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/react-backend/controller/buddy_controller.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="289">
-              <caret line="17" selection-start-line="17" selection-end-line="17" />
-            </state>
-          </provider>
+        <entry file="file://$PROJECT_DIR$/react-backend/models/UserProfileImage.js">
+          <provider selected="true" editor-type-id="text-editor" />
         </entry>
       </file>
     </leaf>
@@ -106,20 +52,20 @@
         <option value="$PROJECT_DIR$/client/src/pages/UserProfile.js" />
         <option value="$PROJECT_DIR$/client/src/actions/ProfileActions.js" />
         <option value="$PROJECT_DIR$/client/src/actions/CardsActions.js" />
-        <option value="$PROJECT_DIR$/react-backend/models/User.js" />
-        <option value="$PROJECT_DIR$/react-backend/controller/buddy_controller.js" />
-        <option value="$PROJECT_DIR$/react-backend/controller/user_controller.js" />
         <option value="$PROJECT_DIR$/react-backend/controller/resourceController.js" />
         <option value="$PROJECT_DIR$/react-backend/controller/company_controller.js" />
         <option value="$PROJECT_DIR$/react-backend/routes/index.js" />
         <option value="$PROJECT_DIR$/react-backend/utils/token.utils.js" />
-        <option value="$PROJECT_DIR$/react-backend/controller/student_controller.js" />
         <option value="$PROJECT_DIR$/react-backend/models/GoogleUser.js" />
         <option value="$PROJECT_DIR$/react-backend/controller/companyController.js" />
+        <option value="$PROJECT_DIR$/react-backend/controller/buddy_controller.js" />
+        <option value="$PROJECT_DIR$/react-backend/controller/student_controller.js" />
+        <option value="$PROJECT_DIR$/react-backend/models/User.js" />
+        <option value="$PROJECT_DIR$/react-backend/controller/user_controller.js" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
+  <component name="ProjectFrameBounds" extendedState="7">
     <option name="x" value="77" />
     <option name="y" value="47" />
     <option name="width" value="1279" />
@@ -231,14 +177,15 @@
       <workItem from="1543275280407" duration="1254000" />
       <workItem from="1543283561762" duration="2504000" />
       <workItem from="1543310784848" duration="577000" />
+      <workItem from="1543343194837" duration="1793000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="15093000" />
+    <option name="totallyTimeSpent" value="16886000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="67" y="27" width="1299" height="741" extended-state="6" />
+    <frame x="67" y="27" width="1299" height="741" extended-state="7" />
     <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.25" />
@@ -326,9 +273,6 @@
     <entry file="file://$PROJECT_DIR$/react-backend/models/Buddy.js">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/react-backend/models/UserProfileImage.js">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/react-backend/routes/users.js">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -359,13 +303,6 @@
     <entry file="file://$PROJECT_DIR$/react-backend/models/Student.js">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/react-backend/models/User.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="12" column="37" selection-start-line="12" selection-start-column="37" selection-end-line="12" selection-end-column="37" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/react-backend/models/Company.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="34">
@@ -373,38 +310,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/react-backend/controller/user_controller.js">
+    <entry file="file://$PROJECT_DIR$/react-backend/controller/companyController.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1989">
-          <caret line="117" column="9" selection-start-line="117" selection-start-column="9" selection-end-line="117" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/react-backend/controller/student_controller.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1207">
-          <caret line="71" column="46" selection-start-line="71" selection-start-column="46" selection-end-line="71" selection-end-column="46" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/react-backend/controller/resourceController.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="1" selection-start-line="1" selection-end-line="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/react-backend/controller/buddy_controller.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
-          <caret line="17" selection-start-line="17" selection-end-line="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/react-backend/models/GoogleUser.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="293">
-          <caret line="84" column="14" selection-start-line="84" selection-start-column="14" selection-end-line="84" selection-end-column="14" />
+        <state relative-caret-position="136">
+          <caret line="8" column="55" lean-forward="true" selection-start-line="8" selection-start-column="55" selection-end-line="9" selection-end-column="50" />
         </state>
       </provider>
     </entry>
@@ -415,12 +324,50 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/react-backend/controller/companyController.js">
+    <entry file="file://$PROJECT_DIR$/react-backend/controller/buddy_controller.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" lean-forward="true" selection-start-line="2" selection-end-line="2" />
+        <state relative-caret-position="289">
+          <caret line="17" column="4" selection-start-line="17" selection-start-column="4" selection-end-line="17" selection-end-column="4" />
         </state>
       </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/react-backend/controller/student_controller.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="272">
+          <caret line="16" column="4" selection-start-line="16" selection-start-column="4" selection-end-line="16" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/react-backend/models/GoogleUser.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="26">
+          <caret line="70" column="10" lean-forward="true" selection-start-line="70" selection-start-column="10" selection-end-line="70" selection-end-column="10" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/react-backend/controller/resourceController.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="1" selection-start-line="1" selection-end-line="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/react-backend/models/User.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="9" column="9" lean-forward="true" selection-start-line="9" selection-start-column="9" selection-end-line="9" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/react-backend/controller/user_controller.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="162">
+          <caret line="104" column="66" lean-forward="true" selection-start-line="104" selection-start-column="66" selection-end-line="104" selection-end-column="66" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/react-backend/models/UserProfileImage.js">
+      <provider selected="true" editor-type-id="text-editor" />
     </entry>
   </component>
 </project>

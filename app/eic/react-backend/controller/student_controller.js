@@ -13,7 +13,8 @@ const { body, validationResult } = require("express-validator/check");
 exports.create_student_account = function(req, res, next) {
   new student({
     user_name: req.header("x-user-name"),
-    contact: JSON.parse(JSON.stringify(req.user)).email
+    contact: JSON.parse(JSON.stringify(req.user)).email,
+    userProfileImageId: "5bfd8e869525d02037349b53"
   }).save(function(err, doc) {
     if (err) {
       console.log(err);
