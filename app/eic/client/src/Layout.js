@@ -10,7 +10,7 @@ import "./css/main.css";
 import "./css/stupid.css";
 import TokenService from "./components/TokenService";
 import CreateResource from "./pages/CreateResource";
-import ViewResource from "./pages/CreateResource";
+import ViewResource from "./pages/ViewResource";
 
 export default class Layout extends React.Component {
   constructor() {
