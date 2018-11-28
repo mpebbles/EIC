@@ -1,12 +1,13 @@
 import dispatcher from "../dispatcher";
 import axios from "axios";
+import config from "../config.json";
 
 export function loadRequests() {
   const token = localStorage.getItem("id_token");
   try {
     axios({
       method: "get",
-      url: "http://localhost:3000/api/get_pending_student/",
+      url: config.BASE_URL + "/api/get_pending_student/",
       headers: { Authorization: `Bearer ${token}` }
     }).then(res => {
       const persons = res.data[0].a_student;
@@ -22,7 +23,7 @@ export function denyRequest(email) {
   try {
     axios({
       method: "get",
-      url: "http://localhost:3000/api/reject_pending_student/" + email,
+      url: config.BASE_URL + "/api/reject_pending_student/" + email,
       headers: { Authorization: `Bearer ${token}` }
     }).then(res => {
       alert("Request deleted!");
@@ -38,7 +39,7 @@ export function acceptRequest(email) {
   try {
     axios({
       method: "get",
-      url: "http://localhost:3000/api/accept_pending_student/" + email,
+      url: config.BASE_URL + "/api/accept_pending_student/" + email,
       headers: { Authorization: `Bearer ${token}` }
     }).then(res => {
       alert("Request accepted!");

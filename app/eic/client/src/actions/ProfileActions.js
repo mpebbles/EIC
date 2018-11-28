@@ -2,6 +2,7 @@ import axios from "axios";
 import dispatcher from "../dispatcher";
 import UserTypeService from "../components/UserTypeService";
 import { factoryUpdateProfileInfo } from "../factory";
+import config from "../config.json";
 
 export function uploadImage(uploadImage) {
   const token = localStorage.getItem("id_token");
@@ -12,7 +13,7 @@ export function uploadImage(uploadImage) {
   try {
     axios({
       method: "post",
-      url: "http://localhost:3000/api/add_user_image/",
+      url: config.BASE_URL + "/api/add_user_image/",
       data: formData,
       headers: { "Content-Type": "false", Authorization: `Bearer ${token}` }
     }).then(res => {
@@ -29,7 +30,7 @@ export function downloadImage(email) {
   try {
     axios({
       method: "get",
-      url: "http://localhost:3000/api/getUserImage/" + email,
+      url: config.BASE_URL + "/api/getUserImage/" + email,
       headers: { Authorization: `Bearer ${token}` }
     }).then(res => {
       dispatcher.dispatch({ type: "RECEIVE_IMAGE", image: res.data });
@@ -47,7 +48,7 @@ export function loadProfileInfo() {
   if (userType === "Student") {
     axios({
       method: "get",
-      url: "http://localhost:3000/api/get_student_profile/",
+      url: config.BASE_URL + "/api/get_student_profile/",
       headers: { Authorization: `Bearer ${token}` }
     }).then(res_1 => {
       const person = res_1.data[0].a_user;
@@ -56,7 +57,7 @@ export function loadProfileInfo() {
   } else if (userType === "Buddy") {
     axios({
       method: "get",
-      url: "http://localhost:3000/api/get_buddy_profile",
+      url: config.BASE_URL + "/api/get_buddy_profile",
       headers: { Authorization: `Bearer ${token}` }
     }).then(res_2 => {
       const persons = res_2.data[0].a_user;
@@ -65,7 +66,7 @@ export function loadProfileInfo() {
   } else if (userType === "Company") {
     axios({
       method: "get",
-      url: "http://localhost:3000/api/get_company_profile",
+      url: config.BASE_URL + "/api/get_company_profile",
       headers: { Authorization: `Bearer ${token}` }
     }).then(res_3 => {
       const persons = res_3.data[0].a_user;
@@ -103,11 +104,11 @@ export function updateProfileInfo(state) {
   try {
     var postURL = "";
     if (this.state.info[0].itemtype === "Buddy") {
-      postURL = "http://localhost:3000/api/edit_buddy_profile/";
+      postURL = config.BASE_URL + "/api/edit_buddy_profile/";
     } else if (this.state.info[0].itemtype === "Student") {
-      postURL = "http://localhost:3000/api/edit_student_profile/";
+      postURL = config.BASE_URL + "/api/edit_student_profile/";
     } else if (this.state.info[0].itemtype === "Company") {
-      postURL = "http://localhost:3000/api/edit_company_profile/";
+      postURL = config.BASE_URL + "/api/edit_company_profile/";
     }
     const args = {
       method: "post",
