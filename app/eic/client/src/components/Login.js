@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { GoogleLogin } from "react-google-oauth";
 import TokenService from "./TokenService";
 import UserTypeService from "./UserTypeService";
+import config from '../config.json';
 
 class Login extends Component {
   constructor() {
@@ -48,7 +49,7 @@ class Login extends Component {
       mode: "cors",
       cache: "default"
     };
-    fetch("http://localhost:3000/googleapi/v1/auth/google-login", options).then(
+    fetch(config.BASE_URL + "/googleapi/v1/auth/google-login", options).then(
       r => {
         if (r.ok) {
           console.log("Finished login call");
