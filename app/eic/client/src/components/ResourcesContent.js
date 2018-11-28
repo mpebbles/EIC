@@ -1,15 +1,17 @@
 import React from "react";
+import { withRouter } from "react-router-dom";
 import * as ResourcesActions from "../actions/ResourcesActions";
 import ResourcesStore from "../stores/ResourcesStore";
 import ResourceEntry from "./ResourceEntry";
 
-export default class ResourcesContent extends React.Component {
+
+class ResourcesContent extends React.Component {
   constructor() {
     super();
     this.getResources = this.getResources.bind(this);
     this.newResource = this.newResource.bind(this);
     this.state = {
-      resources: []
+      resources: ["Test1", "Test2", "Test3"]
     };
   }
 
@@ -41,7 +43,8 @@ export default class ResourcesContent extends React.Component {
   }
 
   newResource() {
-    this.props.router.push('/resource/create');
+    console.log("Navigating with history");
+    this.props.history.push('/resource/create');
   }
 
   render() {
@@ -62,3 +65,5 @@ export default class ResourcesContent extends React.Component {
     );
   }
 }
+
+export default withRouter(ResourcesContent);
