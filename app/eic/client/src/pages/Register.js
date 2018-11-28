@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { GoogleLogin } from "react-google-oauth";
 import TokenService from "../components/TokenService";
 import UserTypeService from "../components/UserTypeService";
+import config from '../config.js'
 
 class Register extends Component {
   constructor(props) {
@@ -32,7 +33,7 @@ class Register extends Component {
       }
     };
     fetch(
-      "http://localhost:3000/googleapi/v1/auth/google-register",
+      config.BASE_URL + "/googleapi/v1/auth/google-register",
       options
     ).then(r => {
       const token = r.headers.get("x-auth-token");
