@@ -1,17 +1,13 @@
 import React from "react";
 import ResourcesContent from "../components/ResourcesContent";
+import CreateResource from "../pages/CreateResource";
 
 export default class Resources extends React.Component {
-  // newResource() {
-  //   this.props.history.replace('/login');
-  // }
-
   render() {
     // search bar and create resources can go here in new components
     return (
       <div>
-        {/*<button onClick={this.newResource()} type="button">Create Resource</button>*/}
-        <ResourcesContent />
+        <ResourcesContent/>
       </div>
     );
   }

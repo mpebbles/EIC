@@ -9,7 +9,8 @@ import Contracts from "./pages/Contracts"
 import "./css/main.css";
 import "./css/stupid.css";
 import TokenService from "./components/TokenService";
-// import CreateResource from "./pages/CreateResource";
+import CreateResource from "./pages/CreateResource";
+import ViewResource from "./pages/CreateResource";
 
 export default class Layout extends React.Component {
   constructor() {
@@ -31,11 +32,12 @@ export default class Layout extends React.Component {
             <NavBar />
             <div id="content">
               <Route exact path="/" component={Resources} />
+              <Route path="/resource/create" component={CreateResource} />
+              <Route path="/resource/view" component={ViewResource} />
               <Route path="/connect" component={EstablishConnections} />
               <Route path="/contracts" component={Contracts} />
               <Route path="/userconnections" component={Connections} />
               <Route path="/userprofile" component={UserProfile} />
-              {/*<Route path="/createresource" component={CreateResource}/>*/}
             </div>
           </div>
         </BrowserRouter>

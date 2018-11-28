@@ -14,18 +14,18 @@ exports.createResource = [
         if (err) {
           return next(err);
         }
-        var date1 = new Date(Date.now());
-        var newResource = new resource({
+        var date = new Date(Date.now());
+        new resource({
           title: req.body.title,
           creator: contact,
           creation_date: date.toDateString(),
           related_skills: req.body.skills,
           content: req.body.content
-        });
-        newResource.save(function(err) {
+        }).save(function(err) {
           if (err) {
             return next(err);
           }
+          return next();
         });
       });
   }

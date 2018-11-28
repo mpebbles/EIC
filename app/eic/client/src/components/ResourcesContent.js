@@ -7,8 +7,9 @@ export default class ResourcesContent extends React.Component {
   constructor() {
     super();
     this.getResources = this.getResources.bind(this);
+    this.newResource = this.newResource.bind(this);
     this.state = {
-      resources: ["Test1", "Test2"]
+      resources: []
     };
   }
 
@@ -39,10 +40,15 @@ export default class ResourcesContent extends React.Component {
     });
   }
 
+  newResource() {
+    this.props.router.push('/resource/create');
+  }
+
   render() {
     return (
       <div>
         <h3>Resources</h3>
+        <button onClick={this.newResource}>Create Resource</button>
         <p>
           This is dummy info from a GET request to satisfy the ajax learning
           requirement
