@@ -27,16 +27,26 @@ class ResourcesStore extends EventEmitter {
 
   handleActions(action) {
     switch (action.type) {
-      //case "CREATE_RESOURCE": {
-      //  this.createResource(action.text);
-      //  break;
-      //}
+      case "CREATE_RESOURCE": {
+        this.resources.push(action.resource);
+        this.emit("change");
+        break;
+      }
+      case "DELETE_RESOURCE": {
+        this.resources = this.resources.filter(function(item){
+          return item._id !== action.resource;
+        });
+        console.log("New resources are", this.resources);
+        this.emit("change");
+        break;
+      }
       case "RECEIVE_RESOURCES": {
         this.resources = action.resources;
         this.emit("change");
         break;
       }
       default:
+        console.log("Uncaught action in ResourcesStore");
         break;
     }
   }

@@ -4,7 +4,6 @@ import * as ResourcesActions from "../actions/ResourcesActions";
 import ResourcesStore from "../stores/ResourcesStore";
 import ResourceEntry from "./ResourceEntry";
 
-
 class ResourcesContent extends React.Component {
   constructor() {
     super();
@@ -16,14 +15,10 @@ class ResourcesContent extends React.Component {
   }
 
   componentWillMount() {
-    //ResourcesActions.loadResources();
     ResourcesStore.on("change", this.getResources);
   }
 
   componentDidMount() {
-    // To avoid reloading data if not needed when component mounts
-    // Will be called first time component mounts
-    // We can always call ResourcesActions.loadResources() when needed
     if (ResourcesStore.isEmpty()) {
       ResourcesActions.loadResources();
     } else {
@@ -32,7 +27,6 @@ class ResourcesContent extends React.Component {
   }
 
   componentWillUnmount() {
-    // Remember to do this to avoid memory leaks
     ResourcesStore.removeListener("change", this.getResources);
   }
 
@@ -50,8 +44,12 @@ class ResourcesContent extends React.Component {
     return (
       <div>
         <div>
-          <h3>Resources</h3>
-          <button onClick={this.newResource}>Create Resource</button>
+            <div>
+              <h3>Resources</h3>
+            </div>
+          <div>
+            <button onClick={this.newResource}>Create Resource</button>
+          </div>
         </div>
         <ul>
           {this.state.resources.map(resource => (

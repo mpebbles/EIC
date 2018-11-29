@@ -79,27 +79,14 @@ exports.deleteResourceByTitle = function(req, res, next) {
 };
 
 exports.deleteResourceById = function(req, res, next) {
+
     console.log("Got params", req.body);
-    resource.deleteOne({ _id: req.body.id }, function (err, obj) {
-        if (err) {
-            return res.text(err);
-        } else {
-            console.log("Deleted item");
-            return next();
-        }
+
+    resource.findOneAndDelete({_id: req.body.id}).then((result) => {
+        console.log(result);
+        console.log("Done with delete");
     });
 
-    // dbo.collection("customers").deleteOne(myquery, function(err, obj) {
-    // });
-        // .findOne({ _id: req.body.id })
-        // .exec(function(err, aResource) {
-        //     if (err) {
-        //         return next(err);
-        //     }
-        //     aResource.remove(function(err) {
-        //         if (err) {
-        //             return next(err);
-        //         }
-        //     });
-        // });
+    return next();
+
 };

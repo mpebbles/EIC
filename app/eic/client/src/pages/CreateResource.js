@@ -1,7 +1,5 @@
 import React, { Component } from "react";
-import axios from "axios";
-import config from "../config";
-import dispatcher from "../dispatcher";
+import * as ResourceActions from "../actions/ResourcesActions";
 
 class CreateResource extends Component {
     constructor() {
@@ -15,24 +13,8 @@ class CreateResource extends Component {
     }
 
     postNewResource() {
-        const token = localStorage.getItem("id_token");
-        var sendObj = {};
-        sendObj["title"] = this.state.title;
-        sendObj["skills"] = this.state.skills;
-        sendObj["content"] = this.state.content;
-        try {
-            axios({
-                method: "post",
-                url: config.BASE_URL + "/api/createResource/",
-                data: sendObj,
-                headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` }
-            }).then(res => {
-                window.location.reload(true);
-            });
-        } catch (err) {
-            console.log(err);
-        }
-
+        ResourceActions.createResource(this.state.title, this.state.skills, this.state.content);
+        window.location.reload(true);
     }
 
   render() {
