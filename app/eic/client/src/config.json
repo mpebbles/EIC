@@ -1,5 +1,5 @@
 {
-	"GOOGLE_CLIENT_ID": "741844619041-1j2dcick90i5np2b8cef4g4i0hf9vlh1.apps.googleusercontent.com",
+  "GOOGLE_CLIENT_ID": "741844619041-1j2dcick90i5np2b8cef4g4i0hf9vlh1.apps.googleusercontent.com",
   "RUN_UNIT_TESTS": "false",
   "BASE_URL": "http://localhost:3000"
 }
