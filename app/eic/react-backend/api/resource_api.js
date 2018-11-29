@@ -96,10 +96,9 @@ router.get("/getResourceByCreator/", resourceController.getResourceByCreator);
 
 router.get("/getResourceByTitle/", resourceController.getResourceByTitle);
 
-router.post(
-  "/deleteResourceByTitle/",
-  resourceController.deleteResourceByTitle
-);
+router.post("/deleteResourceByTitle/", resourceController.deleteResourceByTitle);
+
+router.post("/deleteResourceById/", resourceController.deleteResourceById);
 
 // requires: contact
 router.post("/createCompanyAccount/", companyController.createCompanyAccount);

@@ -11,7 +11,7 @@ class ResourcesContent extends React.Component {
     this.getResources = this.getResources.bind(this);
     this.newResource = this.newResource.bind(this);
     this.state = {
-      resources: ["Test1", "Test2", "Test3"]
+      resources: []
     };
   }
 
@@ -43,19 +43,16 @@ class ResourcesContent extends React.Component {
   }
 
   newResource() {
-    console.log("Navigating with history");
     this.props.history.push('/resource/create');
   }
 
   render() {
     return (
       <div>
-        <h3>Resources</h3>
-        <button onClick={this.newResource}>Create Resource</button>
-        <p>
-          This is dummy info from a GET request to satisfy the ajax learning
-          requirement
-        </p>
+        <div>
+          <h3>Resources</h3>
+          <button onClick={this.newResource}>Create Resource</button>
+        </div>
         <ul>
           {this.state.resources.map(resource => (
             <ResourceEntry content={resource} />

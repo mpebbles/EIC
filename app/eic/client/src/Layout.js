@@ -33,7 +33,7 @@ export default class Layout extends React.Component {
             <div id="content">
               <Route exact path="/" component={Resources} />
               <Route path="/resource/create" component={CreateResource} />
-              <Route path="/resource/view" component={ViewResource} />
+              <Route path="/resource/view=:id" component={ViewResource} />
               <Route path="/connect" component={EstablishConnections} />
               <Route path="/contracts" component={Contracts} />
               <Route path="/userconnections" component={Connections} />

@@ -14,6 +14,7 @@ export default class NavBar extends React.Component {
     let userTypeService = new UserTypeService();
     const userType = userTypeService.getUserType();
     this.isCompany = userType === "Company";
+    this.isStudent = userType === "Student";
   }
 
   render() {
@@ -28,7 +29,7 @@ export default class NavBar extends React.Component {
             className="nav_item_left"
           />
         </Link>
-        {this.isCompany && (
+        {(this.isCompany || this.isStudent) && (
           <Link to="/contracts">
             <FontAwesomeIcon
               icon="file-contract"

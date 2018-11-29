@@ -11,6 +11,12 @@ class ResourcesStore extends EventEmitter {
     return this.resources;
   }
 
+  getResourceById(id) {
+      return this.resources.find(function(item){
+        return item._id === id;
+      });
+  }
+
   isEmpty() {
     if (!this.resources.length) {
       return true;

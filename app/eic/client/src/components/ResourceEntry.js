@@ -1,5 +1,5 @@
 import React from "react";
-import { withRouter, Link } from "react-router-dom";
+import { withRouter } from "react-router-dom";
 
 class ResourceEntry extends React.Component {
 
@@ -8,16 +8,18 @@ class ResourceEntry extends React.Component {
     this.viewResource = this.viewResource.bind(this);
   }
 
-    viewResource() {
-      console.log("navigating to view");
-        this.props.history.push('/resource/view');
-    }
+  viewResource() {
+    this.props.history.push('/resource/view=' + String(this.props.content._id));
+  }
 
   render() {
     return (
       <div>
-          <h6><a onClick={this.viewResource}>{this.props.content}</a></h6>
-        {this.props.content}
+          <h6><a onClick={this.viewResource}>{this.props.content.title}</a></h6>
+        {this.props.content.content}
+        {this.props.content.creator}
+        {this.props.content.creation_date}
+        {this.props.content._id}
       </div>
     );
   }
