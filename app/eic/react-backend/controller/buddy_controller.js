@@ -284,7 +284,7 @@ exports.get_pending_student = function(req, res, next) {
 
 //View this buddy's accepted students
 exports.get_student = function(req, res, next) {
-  token_utils.validate_student_call(req, res);
+  token_utils.validate_buddy_call(req, res);
 
   var token_to_find_in_db = JSON.stringify(req.headers.authorization).split(
     " "
@@ -311,9 +311,8 @@ exports.get_student = function(req, res, next) {
 
 exports.edit_buddy_profile = [
   (req, res, next) => {
-    if (!goog_token.validate_student_call(req)) {
-      res.send("401 ERROR UNAUTHORISED TOKEN");
-    } else {
+      token_utils.validate_buddy_call(req, res);
+
       var token_to_find_in_db = JSON.stringify(req.headers.authorization).split(
         " "
       )[1];
@@ -335,6 +334,5 @@ exports.edit_buddy_profile = [
             res.json({ buddy });
           });
       });
-    }
   }
 ];
