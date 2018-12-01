@@ -93,3 +93,6 @@ module.exports = {
   addEICToken: googleUserSchema.statics.addEICToken,
   findEmailByToken: googleUserSchema.statics.findEmailByToken
 };
+
+
+module.exports = mongoose.model("GoogleUser");

@@ -3,34 +3,49 @@ process.env.NODE_ENV = "test";
 let mongoose = require("mongoose");
 let student = require("../models/Student");
 let buddy = require("../models/Buddy");
+let googleUser = require("../models/GoogleUser")
 let chai = require("chai");
 let chaiHttp = require("chai-http");
 let app = require("../app");
-let should = chai.should;
+let should = chai.should();
 
 chai.use(chaiHttp);
 
-describe("/POST buddy information", () => {
+describe("/POST edit buddy information", () => {
   it("it should POST a buddy information", done => {
-    let buddy = {
-      biography: "Graduated at Pepperdine",
-      skills: "C++, HTML, JAVA",
-      company: "Wizards of the Coast"
+    let buddyParam = {
+      biography: "Graduated at UCSC",
+      skills: "C++, Java, JavaScript",
+      company: "MICROSOFT"
     };
-    chai
-      .request(app)
-      .post("/edit_student_profile")
+    googleUser.findOne({contact: 'hycheng@ucsc.edu'},function(err, buddy){
+    	 chai.request(app)
+      .post("/api/edit_buddy_profile")
       .set(
         "Authorization",
-        "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjViZWIzZjJlZGJiN2M3MDJjZThhMWZlYyIsImlhdCI6MTU0MjM0ODE4MywiZXhwIjoxNTQyMzU1MzgzfQ.-av6OMJuxm0zWOc8AhOuaJHbinK2nVEPZe981__eZlU"
+        "Bearer "+ buddy.eic_token
       )
-      .send(buddy)
+      .send(buddyParam)
       .end((err, res) => {
-        res.should.exist(res.body);
-        res.should.have.property("biography");
-        res.should.have.property("skills");
-        res.should.have.property("company");
+        res.body.buddy.should.have.property("biography");
+        res.body.buddy.should.have.property("skills");
+        res.body.buddy.should.have.property("company");
         done();
       });
+    });
+
+   
   });
+});
+
+
+
+describe("/GET get buddy information", () => {
+	it("it should GET a buddy's information", done => {
+		cha.request(app)
+		.get("/api/get_buddy_email/hycheng@ucsc.edu")
+		.end((err, res) => {
+			
+		});
+	});
 });

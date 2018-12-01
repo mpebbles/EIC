@@ -27,7 +27,6 @@ exports.getCompanyInfo = function(req, res, next) {
 
 exports.editCompanyProfile = [
   (req, res, next) => {
-      console.log(req);
       var token_to_find_in_db = JSON.stringify(req.headers.authorization).split(
         " "
       )[1];

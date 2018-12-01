@@ -313,7 +313,6 @@ exports.get_student = function(req, res, next) {
 exports.edit_buddy_profile = [
   (req, res, next) => {
       token_utils.validate_buddy_call(req, res);
-
       var token_to_find_in_db = JSON.stringify(req.headers.authorization).split(
         " "
       )[1];
