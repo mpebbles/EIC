@@ -34,7 +34,6 @@ exports.createResource = [
 exports.getResources = function(req, res, next) {
     resource
       .find()
-      .limit(10)
       .exec(function(err, resources) {
         if (err) {
           return next(err);

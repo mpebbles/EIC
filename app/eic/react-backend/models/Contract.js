@@ -1,11 +1,16 @@
-var mongoose = require('mongoose');
+var mongoose = require("mongoose");
 
-var Schema = mongoose.Schema;
+var contractSchema = mongoose.model(
+	"Contract",
+	new mongoose.Schema({
+        title: {type: String, required: true, max: 100},
+        pay: {type: String, required: true, max: 100},
+        location: {type: String, required: true, max: 100},
+        creator: {type: String, required: true, max: 100},
+        related_skills: [{type: String, required: false, max: 100}],
+        creation_date: {type: String, required: true, max: 100},
+        description: {type: String, required: true, max: 2000}
+    })
+);
 
-var contractSchema = new Schema({
-	company_name: {type: String , required: true, max: 100},
-	related_skills: [{type: String, required: false , max 100}],
-	related_resources: [{type: Schema.Type.ObjectId , required: false , ref: 'resource'}]
-});
-
-exports.Contract = mongoose.model('Contract', contractSchema );
+module.exports = mongoose.model("Contract");

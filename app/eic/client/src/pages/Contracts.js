@@ -1,9 +1,14 @@
 import React, { Component } from "react";
+import ContractsContent from "../components/ContractsContent";
 
 class Contracts extends Component {
-  render() {
-    return <h3>Contracts</h3>;
-  }
+    render() {
+        return (
+            <div>
+                <ContractsContent/>
+            </div>
+        );
+    }
 }
 
 export default Contracts;

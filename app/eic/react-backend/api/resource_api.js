@@ -10,6 +10,7 @@ var student_controller = require("../controller/student_controller");
 var user_controller = require("../controller/user_controller");
 var resourceController = require("../controller/resourceController");
 var companyController = require("../controller/companyController");
+var contractController = require("../controller/contractController");
 
 //get all students
 router.get("/get_all_student", student_controller.get_student_info);
@@ -106,6 +107,12 @@ router.post("/createCompanyAccount/", companyController.createCompanyAccount);
 router.get("/getCompanyInfo/", companyController.getCompanyInfo);
 
 router.post("/editCompanyProfile/", companyController.editCompanyProfile);
+
+router.post("/createContract/", contractController.createContract);
+
+router.get("/getContracts/", contractController.getContracts);
+
+router.post("/deleteContractById/", contractController.deleteContractById);
 
 
 module.exports = router;

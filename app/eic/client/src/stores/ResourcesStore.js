@@ -36,7 +36,6 @@ class ResourcesStore extends EventEmitter {
         this.resources = this.resources.filter(function(item){
           return item._id !== action.resource;
         });
-        console.log("New resources are", this.resources);
         this.emit("change");
         break;
       }
@@ -46,7 +45,6 @@ class ResourcesStore extends EventEmitter {
         break;
       }
       default:
-        console.log("Uncaught action in ResourcesStore");
         break;
     }
   }
