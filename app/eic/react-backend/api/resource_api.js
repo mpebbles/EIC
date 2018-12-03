@@ -106,6 +106,8 @@ router.post("/createCompanyAccount/", companyController.createCompanyAccount);
 
 router.get("/getCompanyInfo/", companyController.getCompanyInfo);
 
+router.get("/getCompanyEmail/:id", companyController.getCompanyEmail);
+
 router.post("/editCompanyProfile/", companyController.editCompanyProfile);
 
 router.post("/createContract/", contractController.createContract);

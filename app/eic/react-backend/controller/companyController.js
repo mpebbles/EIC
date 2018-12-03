@@ -25,6 +25,17 @@ exports.getCompanyInfo = function(req, res, next) {
     });
 };
 
+//Gets information based on the specific email
+exports.getCompanyEmail = function(req, res, next) {
+    tokenUtils.validate_company_call(req, res);
+    company.find({ contact: req.params.id }).exec(function(err, company) {
+      if (err) {
+        return next(err);
+      }
+      res.json([{ company }]);
+    });
+};
+
 exports.editCompanyProfile = [
   (req, res, next) => {
       var token_to_find_in_db = JSON.stringify(req.headers.authorization).split(
