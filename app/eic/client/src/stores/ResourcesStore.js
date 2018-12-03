@@ -12,9 +12,9 @@ class ResourcesStore extends EventEmitter {
   }
 
   getResourceById(id) {
-      return this.resources.find(function(item){
-        return item._id === id;
-      });
+    return this.resources.find(function(item) {
+      return item._id === id;
+    });
   }
 
   isEmpty() {
@@ -33,7 +33,7 @@ class ResourcesStore extends EventEmitter {
         break;
       }
       case "DELETE_RESOURCE": {
-        this.resources = this.resources.filter(function(item){
+        this.resources = this.resources.filter(function(item) {
           return item._id !== action.resource;
         });
         this.emit("change");

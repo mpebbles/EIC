@@ -37,16 +37,16 @@ class ResourcesContent extends React.Component {
   }
 
   newResource() {
-    this.props.history.push('/resource/create');
+    this.props.history.push("/resource/create");
   }
 
   render() {
     return (
       <div>
         <div>
-            <div>
-              <h3>Resources</h3>
-            </div>
+          <div>
+            <h3>Resources</h3>
+          </div>
           <div>
             <button onClick={this.newResource}>Create Resource</button>
           </div>

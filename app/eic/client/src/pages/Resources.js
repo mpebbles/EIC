@@ -6,7 +6,7 @@ export default class Resources extends React.Component {
     // search bar and create resources can go here in new components
     return (
       <div>
-        <ResourcesContent/>
+        <ResourcesContent />
       </div>
     );
   }

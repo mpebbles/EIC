@@ -12,10 +12,9 @@ const { sanitizeBody } = require("express-validator/filter");
 //Insert new buddy into database
 //Token validation not needed due to registration workflow
 exports.create_buddy_account = function(req, res, next) {
-
   new buddy({
     user_name: req.header("x-user-name"),
-    contact: req.user.contact,
+    contact: req.user.contact
   }).save(function(err, doc) {
     if (err) {
       console.log(err);
@@ -312,27 +311,27 @@ exports.get_student = function(req, res, next) {
 
 exports.edit_buddy_profile = [
   (req, res, next) => {
-      token_utils.validate_buddy_call(req, res);
-      var token_to_find_in_db = JSON.stringify(req.headers.authorization).split(
-        " "
-      )[1];
-      token_to_find_in_db = token_to_find_in_db.substring(
-        0,
-        token_to_find_in_db.length - 1
-      );
-      findEmailByToken(token_to_find_in_db, function(err, contact) {
-        buddy
-          .findOneAndUpdate(
-            { contact: contact },
-            {
-              biography: req.body.biography,
-              skills: req.body.skills,
-              company: req.body.company
-            }
-          )
-          .exec(function(err, buddy) {
-            res.json({ buddy });
-          });
-      });
+    token_utils.validate_buddy_call(req, res);
+    var token_to_find_in_db = JSON.stringify(req.headers.authorization).split(
+      " "
+    )[1];
+    token_to_find_in_db = token_to_find_in_db.substring(
+      0,
+      token_to_find_in_db.length - 1
+    );
+    findEmailByToken(token_to_find_in_db, function(err, contact) {
+      buddy
+        .findOneAndUpdate(
+          { contact: contact },
+          {
+            biography: req.body.biography,
+            skills: req.body.skills,
+            company: req.body.company
+          }
+        )
+        .exec(function(err, buddy) {
+          res.json({ buddy });
+        });
+    });
   }
 ];

@@ -17,21 +17,21 @@ var createToken = function(auth) {
 };
 
 exports.validate_student_call = function(req, res) {
-    if (false) {
-        res.status(401).send("401 ERROR UNAUTHORISED TOKEN");
-    }
+  if (false) {
+    res.status(401).send("401 ERROR UNAUTHORISED TOKEN");
+  }
 };
 
 exports.validate_buddy_call = function(req, res) {
-    if (false) {
-        res.status(401).send("401 ERROR UNAUTHORISED TOKEN");
-    }
+  if (false) {
+    res.status(401).send("401 ERROR UNAUTHORISED TOKEN");
+  }
 };
 
 exports.validate_company_call = function(req, res) {
-    if (false) {
-        res.status(401).send("401 ERROR UNAUTHORISED TOKEN");
-    }
+  if (false) {
+    res.status(401).send("401 ERROR UNAUTHORISED TOKEN");
+  }
 };
 
 module.exports = {
@@ -46,7 +46,7 @@ module.exports = {
   registerUser: function(req, res, next) {
     let account_type = req.header("x-account-type");
     let user_name = req.header("x-user-name");
-    let user_email = JSON.parse(JSON.stringify(req.user)).email;
+    let user_email = req.user.contact; //JSON.parse(JSON.stringify(req.user)).email;
     console.log("Insert into database", account_type, user_name, user_email);
 
     if (account_type === "Buddy") {
@@ -56,7 +56,7 @@ module.exports = {
       student_controller.create_student_account(req, res, next);
       res.locals.eicUserType = "Student";
     } else if (account_type === "Company") {
-      company_controller.create_company_account(req, res, next);
+      company_controller.createCompanyAccount(req, res, next);
       res.locals.eicUserType = "Company";
     } else {
       return res.status(500);

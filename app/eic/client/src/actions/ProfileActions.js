@@ -66,7 +66,7 @@ export function loadProfileInfo() {
   } else if (userType === "Company") {
     axios({
       method: "get",
-      url: config.BASE_URL + "/api/get_company_profile",
+      url: config.BASE_URL + "/api/getCompanyProfile",
       headers: { Authorization: `Bearer ${token}` }
     }).then(res_3 => {
       const persons = res_3.data[0].a_user;
@@ -108,7 +108,7 @@ export function updateProfileInfo(state) {
     } else if (this.state.info[0].itemtype === "Student") {
       postURL = config.BASE_URL + "/api/edit_student_profile/";
     } else if (this.state.info[0].itemtype === "Company") {
-      postURL = config.BASE_URL + "/api/edit_company_profile/";
+      postURL = config.BASE_URL + "/api/editCompanyProfile/";
     }
     const args = {
       method: "post",

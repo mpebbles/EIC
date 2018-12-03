@@ -97,7 +97,10 @@ router.get("/getResourceByCreator/", resourceController.getResourceByCreator);
 
 router.get("/getResourceByTitle/", resourceController.getResourceByTitle);
 
-router.post("/deleteResourceByTitle/", resourceController.deleteResourceByTitle);
+router.post(
+  "/deleteResourceByTitle/",
+  resourceController.deleteResourceByTitle
+);
 
 router.post("/deleteResourceById/", resourceController.deleteResourceById);
 
@@ -106,7 +109,7 @@ router.post("/createCompanyAccount/", companyController.createCompanyAccount);
 
 router.get("/getCompanyInfo/", companyController.getCompanyInfo);
 
-router.get("/getCompanyEmail/:id", companyController.getCompanyEmail);
+router.get("/getCompanyProfile/", companyController.getCompanyProfile);
 
 router.post("/editCompanyProfile/", companyController.editCompanyProfile);
 
@@ -115,6 +118,5 @@ router.post("/createContract/", contractController.createContract);
 router.get("/getContracts/", contractController.getContracts);
 
 router.post("/deleteContractById/", contractController.deleteContractById);
-
 
 module.exports = router;

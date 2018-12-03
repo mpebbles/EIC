@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { GoogleLogin } from "react-google-oauth";
 import TokenService from "../components/TokenService";
 import UserTypeService from "../components/UserTypeService";
-import config from '../config.json'
+import config from "../config.json";
 
 class Register extends Component {
   constructor(props) {
@@ -32,19 +32,18 @@ class Register extends Component {
         "x-user-name": document.getElementById("username").value
       }
     };
-    fetch(
-      config.BASE_URL + "/googleapi/v1/auth/google-register",
-      options
-    ).then(r => {
-      const token = r.headers.get("x-auth-token");
-      this.userTypeService.setUserType(r.headers.get("x-user-type"));
-      r.json().then(user => {
-        if (token) {
-          this.tokenService.setToken(token);
-          this.props.history.replace("/");
-        }
-      });
-    });
+    fetch(config.BASE_URL + "/googleapi/v1/auth/google-register", options).then(
+      r => {
+        const token = r.headers.get("x-auth-token");
+        this.userTypeService.setUserType(r.headers.get("x-user-type"));
+        r.json().then(user => {
+          if (token) {
+            this.tokenService.setToken(token);
+            this.props.history.replace("/");
+          }
+        });
+      }
+    );
   };
 
   render() {

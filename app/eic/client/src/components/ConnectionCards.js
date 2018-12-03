@@ -76,8 +76,7 @@ export default class ConnectionCards extends React.Component {
         {this.state.cardsData.length === 0 && (
           <p className="default_mesage">
             {" "}
-            You have no connections at this time.
-            {" "}
+            You have no connections at this time.{" "}
           </p>
         )}
       </div>
