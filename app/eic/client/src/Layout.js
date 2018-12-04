@@ -5,7 +5,7 @@ import Resources from "./pages/Resources";
 import EstablishConnections from "./pages/EstablishConnections";
 import Connections from "./pages/Connections";
 import UserProfile from "./pages/UserProfile";
-import Contracts from "./pages/Contracts"
+import Contracts from "./pages/Contracts";
 import "./css/main.css";
 import "./css/stupid.css";
 import TokenService from "./components/TokenService";

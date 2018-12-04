@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { GoogleLogin } from "react-google-oauth";
 import TokenService from "./TokenService";
 import UserTypeService from "./UserTypeService";
-import config from '../config.json';
+import config from "../config.json";
 
 class Login extends Component {
   constructor() {

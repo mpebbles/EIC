@@ -6,64 +6,66 @@ import ContractEntry from "./ContractEntry";
 import UserTypeService from "./UserTypeService";
 
 class ContractsContent extends React.Component {
-    constructor() {
-        super();
-        this.getContracts = this.getContracts.bind(this);
-        this.newContract = this.newContract.bind(this);
-        let userTypeService = new UserTypeService();
-        const userType = userTypeService.getUserType();
-        this.isCompany = userType === "Company";
-        this.state = {
-            contracts: []
-        };
-    }
 
-    componentWillMount() {
-        ContractsStore.on("change", this.getContracts);
-    }
+  constructor() {
+    super();
+    this.getContracts = this.getContracts.bind(this);
+    this.newContract = this.newContract.bind(this);
+    let userTypeService = new UserTypeService();
+    const userType = userTypeService.getUserType();
+    this.isCompany = userType === "Company";
+    this.state = {
+      contracts: []
+    };
+  }
 
-    componentDidMount() {
-        if (ContractsStore.isEmpty()) {
-            ContractsActions.loadContracts();
-        } else {
-            this.getContracts();
-        }
-    }
+  componentWillMount() {
+    ContractsStore.on("change", this.getContracts);
+  }
 
-    componentWillUnmount() {
-        ContractsStore.removeListener("change", this.getContracts);
+  componentDidMount() {
+    if (ContractsStore.isEmpty()) {
+      ContractsActions.loadContracts();
+    } else {
+      this.getContracts();
     }
+  }
 
-    getContracts() {
-        this.setState({
-            contracts: ContractsStore.getAll()
-        });
-    }
+  componentWillUnmount() {
+    ContractsStore.removeListener("change", this.getContracts);
+  }
 
-    newContract() {
-        this.props.history.push('/contract/create');
-    }
+  getContracts() {
+    this.setState({
+      contracts: ContractsStore.getAll()
+    });
+  }
 
-    render() {
-        return (
+  newContract() {
+    this.props.history.push("/contract/create");
+  }
+
+  render() {
+    return (
+      <div>
+        <div>
+          <div>
+            <h3>Contracts</h3>
+          </div>
+          {this.isCompany && (
             <div>
-                <div>
-                    <div>
-                        <h3>Contracts</h3>
-                    </div>
-                    { this.isCompany &&
-                    <div>
-                        <button onClick={this.newContract}>Create Contract</button>
-                    </div> }
-                </div>
-                <ul>
-                    {this.state.contracts.map(contract => (
-                        <ContractEntry content={contract} />
-                    ))}
-                </ul>
+              <button onClick={this.newContract}>Create Contract</button>
             </div>
-        );
-    }
+          )}
+        </div>
+        <ul>
+          {this.state.contracts.map(contract => (
+            <ContractEntry content={contract} />
+          ))}
+        </ul>
+      </div>
+    );
+  }
 }
 
 export default withRouter(ContractsContent);

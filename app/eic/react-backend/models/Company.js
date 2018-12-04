@@ -7,6 +7,7 @@ var companySchema = user.discriminator(
   "Company",
   new Schema({
     company_name: { type: String, required: false, max: 100 },
+    biography: { type: String, required: false, max: 100 },
     contracts: [
       { type: Schema.Types.ObjectId, required: false, ref: "contract" }
     ]

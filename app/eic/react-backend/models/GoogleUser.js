@@ -94,5 +94,4 @@ module.exports = {
   findEmailByToken: googleUserSchema.statics.findEmailByToken
 };
 
-
 module.exports = mongoose.model("GoogleUser");
