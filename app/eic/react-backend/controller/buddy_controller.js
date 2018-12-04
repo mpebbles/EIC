@@ -252,7 +252,7 @@ exports.reject_student = function(req, res, next) {
 
 //View this buddy's pending students
 exports.get_pending_student = function(req, res, next) {
-  token_utils.validate_student_call(req, res);
+  token_utils.validate_buddy_call(req, res);
 
   var token_to_find_in_db = JSON.stringify(req.headers.authorization).split(
     " "
