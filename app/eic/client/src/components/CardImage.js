@@ -1,6 +1,7 @@
 import React from "react";
 import axios from "axios";
 import "../css/cards.css";
+import config from '../config.json';
 
 export default class CardImage extends React.Component {
   constructor() {
@@ -20,7 +21,7 @@ export default class CardImage extends React.Component {
     try {
       axios({
         method: "get",
-        url: "http://localhost:3000/api/getUserImage/" + email,
+        url: config.BASE_URL + "/api/getUserImage/" + email,
         headers: { Authorization: `Bearer ${token}` }
       }).then(res => {
         this.setState({ image: "data:image/png;base64," + res.data });

@@ -11,19 +11,19 @@ export function loadCardsData() {
   if (userType === "Student") {
     axios({
       method: "get",
-      url: config.BASE_URL + "/api/get_buddy/",
+      url: config.BASE_URL + "/api/getBuddy/",
       headers: { Authorization: `Bearer ${token}` }
     }).then(res_1 => {
-      const persons = res_1.data[0].a_buddy;
+      const persons = res_1.data[0].aBuddy;
       dispatcher.dispatch({ type: "RECEIVE_CARDS_DATA", cardData: persons });
     });
   } else if (userType === "Buddy") {
     axios({
       method: "get",
-      url: config.BASE_URL + "/api/get_student/",
+      url: config.BASE_URL + "/api/getStudent/",
       headers: { Authorization: `Bearer ${token}` }
     }).then(res_2 => {
-      const persons = res_2.data[0].a_student;
+      const persons = res_2.data[0].aStudent;
       dispatcher.dispatch({ type: "RECEIVE_CARDS_DATA", cardData: persons });
     });
   } else if (userType === "Company") {
@@ -39,7 +39,7 @@ export function deleteConnection(email) {
     if (userType === "Student") {
       axios({
         method: "get",
-        url: config.BASE_URL + "/api/reject_buddy/" + email,
+        url: config.BASE_URL + "/api/rejectBuddy/" + email,
         headers: { Authorization: `Bearer ${token}` }
       }).then(res_1 => {
         if (
@@ -52,7 +52,7 @@ export function deleteConnection(email) {
     } else if (userType === "Buddy") {
       axios({
         method: "get",
-        url: config.BASE_URL + "/api/reject_student/" + email,
+        url: config.BASE_URL + "/api/rejectStudent/" + email,
         headers: { Authorization: `Bearer ${token}` }
       }).then(res_2 => {
         if (

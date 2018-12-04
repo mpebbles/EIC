@@ -6,7 +6,7 @@ var tokenUtils = require("../utils/token.utils");
 //Token validation not needed due to registration workflow
 exports.createCompanyAccount = function(req, res, next) {
   new company({
-    user_name: req.header("x-user-name"),
+    userName: req.header("x-user-name"),
     contact: req.user.contact
   }).save(function(err, doc) {
     if (err) {
@@ -28,40 +28,40 @@ exports.getCompanyInfo = function(req, res, next) {
 
 exports.getCompanyProfile = function(req, res, next) {
   console.log("zero");
-  tokenUtils.validate_company_call(req, res);
-  var token_to_find_in_db = JSON.stringify(req.headers.authorization).split(
+  tokenUtils.validateCompanyCall(req, res);
+  var tokenToFindInDb = JSON.stringify(req.headers.authorization).split(
     " "
   )[1];
-  token_to_find_in_db = token_to_find_in_db.substring(
+  tokenToFindInDb = tokenToFindInDb.substring(
     0,
-    token_to_find_in_db.length - 1
+    tokenToFindInDb.length - 1
   );
   console.log("one");
-  findEmailByToken(token_to_find_in_db, function(err, contact) {
+  findEmailByToken(tokenToFindInDb, function(err, contact) {
     if (err) {
       return next(err);
     }
     console.log("two");
     company
       .findOne({ contact: contact })
-      // this is a_user to make front end logic easier
-      .exec(function(err, a_user) {
-        console.log(a_user);
-        res.json([{ a_user }]);
+      // this is aUser to make front end logic easier
+      .exec(function(err, aUser) {
+        console.log(aUser);
+        res.json([{ aUser }]);
       });
   });
 };
 
 exports.editCompanyProfile = [
   (req, res, next) => {
-    var token_to_find_in_db = JSON.stringify(req.headers.authorization).split(
+    var tokenToFindInDb = JSON.stringify(req.headers.authorization).split(
       " "
     )[1];
-    token_to_find_in_db = token_to_find_in_db.substring(
+    tokenToFindInDb = tokenToFindInDb.substring(
       0,
-      token_to_find_in_db.length - 1
+      tokenToFindInDb.length - 1
     );
-    findEmailByToken(token_to_find_in_db, function(err, contact) {
+    findEmailByToken(tokenToFindInDb, function(err, contact) {
       company
         .findOneAndUpdate(
           { contact: contact },

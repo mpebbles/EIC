@@ -4,9 +4,9 @@ var Schema = mongoose.Schema;
 var ObjectId = mongoose.ObjectId;
 
 var googleUserSchema = new Schema({
-  user_name: { type: String, required: true, max: 100 },
-  full_name: { type: String, required: true, max: 100 },
-  eic_token: { type: String, required: false },
+  userName: { type: String, required: true, max: 100 },
+  fullName: { type: String, required: true, max: 100 },
+  eicToken: { type: String, required: false },
   skills: [{ type: String, required: false, max: 100 }],
   contact: {
     type: String,
@@ -41,14 +41,14 @@ googleUserSchema.statics.upsertGoogleUser = function(
       // no user was found, lets create a new one
       if (!user) {
         var newUser = new that({
-          full_name: profile.displayName,
-          user_name: profile.emails[0].value,
+          fullName: profile.displayName,
+          userName: profile.emails[0].value,
           contact: profile.emails[0].value,
           googleProvider: {
             id: profile.id,
             token: accessToken
           },
-          eic_token: ""
+          eicToken: ""
         });
         //console.log("HERE!!!!!!")
         newUser.save(function(error, savedUser) {
@@ -67,7 +67,7 @@ googleUserSchema.statics.upsertGoogleUser = function(
 googleUserSchema.statics.addEICToken = function(req, res, next) {
   mongoose
     .model("GoogleUser")
-    .update({ _id: req.user._id }, { $set: { eic_token: req.token } }, function(
+    .update({ _id: req.user._id }, { $set: { eicToken: req.token } }, function(
       err,
       result
     ) {
@@ -75,28 +75,28 @@ googleUserSchema.statics.addEICToken = function(req, res, next) {
     });
 };
 
-googleUserSchema.statics.findEmailByToken = function(token_str, next_func) {
+googleUserSchema.statics.findEmailByToken = function(tokenStr, nextFunc) {
   mongoose
     .model("GoogleUser")
-    .findOne({ eic_token: token_str })
+    .findOne({ eicToken: tokenStr })
     .exec(function(err, user) {
       if (user == null) {
-        console.log(token_str);
+        console.log(tokenStr);
       } else {
-        next_func(err, user.contact);
+        nextFunc(err, user.contact);
       }
     });
 };
 
-googleUserSchema.statics.findUsertypeByToken = function(token_str, next_func) {
+googleUserSchema.statics.findUsertypeByToken = function(tokenStr, nextFunc) {
   mongoose
     .model("GoogleUser")
-    .findOne({ eic_token: token_str })
+    .findOne({ eicToken: tokenStr })
     .exec(function(err, user) {
       if (user == null) {
-        console.log(token_str);
+        console.log(tokenStr);
       } else {
-        next_func(err, user.itemtype);
+        nextFunc(err, user.itemtype);
       }
     });
 };

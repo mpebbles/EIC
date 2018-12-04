@@ -13,7 +13,7 @@ export function uploadImage(uploadImage) {
   try {
     axios({
       method: "post",
-      url: config.BASE_URL + "/api/add_user_image/",
+      url: config.BASE_URL + "/api/addUserImage/",
       data: formData,
       headers: { "Content-Type": "false", Authorization: `Bearer ${token}` }
     }).then(res => {
@@ -48,19 +48,19 @@ export function loadProfileInfo() {
   if (userType === "Student") {
     axios({
       method: "get",
-      url: config.BASE_URL + "/api/get_student_profile/",
+      url: config.BASE_URL + "/api/getStudentProfile/",
       headers: { Authorization: `Bearer ${token}` }
     }).then(res_1 => {
-      const person = res_1.data[0].a_user;
+      const person = res_1.data[0].aUser;
       dispatcher.dispatch({ type: "GET_INFO", info: person });
     });
   } else if (userType === "Buddy") {
     axios({
       method: "get",
-      url: config.BASE_URL + "/api/get_buddy_profile",
+      url: config.BASE_URL + "/api/getBuddyProfile",
       headers: { Authorization: `Bearer ${token}` }
     }).then(res_2 => {
-      const persons = res_2.data[0].a_user;
+      const persons = res_2.data[0].aUser;
       dispatcher.dispatch({ type: "GET_INFO", info: persons });
     });
   } else if (userType === "Company") {
@@ -69,7 +69,7 @@ export function loadProfileInfo() {
       url: config.BASE_URL + "/api/getCompanyProfile",
       headers: { Authorization: `Bearer ${token}` }
     }).then(res_3 => {
-      const persons = res_3.data[0].a_user;
+      const persons = res_3.data[0].aUser;
       dispatcher.dispatch({ type: "GET_INFO", info: persons });
     });
   } else {
@@ -104,9 +104,9 @@ export function updateProfileInfo(state) {
   try {
     var postURL = "";
     if (this.state.info[0].itemtype === "Buddy") {
-      postURL = config.BASE_URL + "/api/edit_buddy_profile/";
+      postURL = config.BASE_URL + "/api/editBuddyProfile/";
     } else if (this.state.info[0].itemtype === "Student") {
-      postURL = config.BASE_URL + "/api/edit_student_profile/";
+      postURL = config.BASE_URL + "/api/editStudentProfile/";
     } else if (this.state.info[0].itemtype === "Company") {
       postURL = config.BASE_URL + "/api/editCompanyProfile/";
     }

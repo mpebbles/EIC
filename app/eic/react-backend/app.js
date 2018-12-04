@@ -40,7 +40,7 @@ app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "jade");
 
 var indexRouter = require("./routes/index");
-var apiRouter = require("./api/resource_api");
+var apiRouter = require("./api/resourceApi");
 
 app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies.
 app.use(bodyParser.json({ limit: "5mb" }));

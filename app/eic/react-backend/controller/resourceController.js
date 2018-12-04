@@ -3,14 +3,14 @@ var { findEmailByToken } = require("../models/GoogleUser");
 
 exports.createResource = [
   (req, res, next) => {
-    var token_to_find_in_db = JSON.stringify(req.headers.authorization).split(
+    var tokenToFindInDb = JSON.stringify(req.headers.authorization).split(
       " "
     )[1];
-    token_to_find_in_db = token_to_find_in_db.substring(
+    tokenToFindInDb = tokenToFindInDb.substring(
       0,
-      token_to_find_in_db.length - 1
+      tokenToFindInDb.length - 1
     );
-    findEmailByToken(token_to_find_in_db, function(err, contact) {
+    findEmailByToken(tokenToFindInDb, function(err, contact) {
       if (err) {
         return next(err);
       }
@@ -18,8 +18,8 @@ exports.createResource = [
       new resource({
         title: req.body.title,
         creator: contact,
-        creation_date: date.toDateString(),
-        related_skills: req.body.skills,
+        creationDate: date.toDateString(),
+        relatedSkills: req.body.skills,
         content: req.body.content
       }).save(function(err) {
         if (err) {

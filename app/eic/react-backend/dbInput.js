@@ -21,12 +21,12 @@ var students = [];
 var buddies = [];
 
 //Takes input and creates a student based on parameters
-function student_create(user_name, email, full_name, biography, cb) {
+function studentCreate(userName, email, fullName, biography, cb) {
   var student = new Student({
-    user_name: user_name,
+    userName: userName,
     contact: email,
     biography: biography,
-    full_name: full_name
+    fullName: fullName
   });
   student.save(function(err) {
     if (err) {
@@ -39,9 +39,9 @@ function student_create(user_name, email, full_name, biography, cb) {
   });
 }
 
-function buddy_create(user_name, email, cb) {
+function buddyCreate(userName, email, cb) {
   var buddy = new Buddy({
-    user_name: user_name,
+    userName: userName,
     contact: email
   });
   buddy.save(function(err) {
@@ -64,7 +64,7 @@ function createStudent(cb) {
   async.parallel(
     [
       function(callback) {
-        student_create(
+        studentCreate(
           "Dolo4",
           "dolo4@gmail.com",
           "Dolores Hubert",
@@ -73,7 +73,7 @@ function createStudent(cb) {
         );
       },
       function(callback) {
-        student_create(
+        studentCreate(
           "MScol",
           "mscolariasdf@gmail.com",
           "Matt Scol",
@@ -91,10 +91,10 @@ function createBuddy(cb) {
   async.parallel(
     [
       function(callback) {
-        buddy_create("Dutch", "odst1@gmail.com", callback);
+        buddyCreate("Dutch", "odst1@gmail.com", callback);
       },
       function(callback) {
-        buddy_create("Mickey", "mickJaeger@gmail.com", callback);
+        buddyCreate("Mickey", "mickJaeger@gmail.com", callback);
       }
     ],
     cb
