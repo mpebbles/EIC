@@ -1,8 +1,8 @@
 var jwt = require("jsonwebtoken");
 var { addEICToken, findUsertypeByToken } = require("../models/GoogleUser");
-var buddy_controller = require("../controller/buddy_controller");
-var student_controller = require("../controller/student_controller");
-var company_controller = require("../controller/companyController");
+var buddyController = require("../controller/buddyController");
+var studentController = require("../controller/studentController");
+var companyController = require("../controller/companyController");
 
 var createToken = function(auth) {
   return jwt.sign(
@@ -16,15 +16,15 @@ var createToken = function(auth) {
   );
 };
 
-exports.validate_student_call = function(req, res) {
-  var token_to_find_in_db = JSON.stringify(req.headers.authorization).split(
+exports.validateStudentCall = function(req, res) {
+  var tokenToFindInDb = JSON.stringify(req.headers.authorization).split(
     " "
   )[1];
-  token_to_find_in_db = token_to_find_in_db.substring(
+  tokenToFindInDb = tokenToFindInDb.substring(
     0,
-    token_to_find_in_db.length - 1
+    tokenToFindInDb.length - 1
   );
-  findUsertypeByToken(token_to_find_in_db, function(err, type) {
+  findUsertypeByToken(tokenToFindInDb, function(err, type) {
     if (err) {
       return next(err);
     } else if (type !== "Student") {
@@ -34,15 +34,15 @@ exports.validate_student_call = function(req, res) {
   });
 };
 
-exports.validate_buddy_call = function(req, res) {
-  var token_to_find_in_db = JSON.stringify(req.headers.authorization).split(
+exports.validateBuddyCall = function(req, res) {
+  var tokenToFindInDb = JSON.stringify(req.headers.authorization).split(
     " "
   )[1];
-  token_to_find_in_db = token_to_find_in_db.substring(
+  tokenToFindInDb = tokenToFindInDb.substring(
     0,
-    token_to_find_in_db.length - 1
+    tokenToFindInDb.length - 1
   );
-  findUsertypeByToken(token_to_find_in_db, function(err, type) {
+  findUsertypeByToken(tokenToFindInDb, function(err, type) {
     if (err) {
       return next(err);
     } else if (type !== "Buddy") {
@@ -52,15 +52,15 @@ exports.validate_buddy_call = function(req, res) {
   });
 };
 
-exports.validate_company_call = function(req, res) {
-  var token_to_find_in_db = JSON.stringify(req.headers.authorization).split(
+exports.validateCompanyCall = function(req, res) {
+  var tokenToFindInDb = JSON.stringify(req.headers.authorization).split(
     " "
   )[1];
-  token_to_find_in_db = token_to_find_in_db.substring(
+  tokenToFindInDb = tokenToFindInDb.substring(
     0,
-    token_to_find_in_db.length - 1
+    tokenToFindInDb.length - 1
   );
-  findUsertypeByToken(token_to_find_in_db, function(err, type) {
+  findUsertypeByToken(tokenToFindInDb, function(err, type) {
     if (err) {
       return next(err);
     } else if (type !== "Company") {
@@ -80,19 +80,19 @@ module.exports = {
     return next();
   },
   registerUser: function(req, res, next) {
-    let account_type = req.header("x-account-type");
-    let user_name = req.header("x-user-name");
-    let user_email = req.user.contact; //JSON.parse(JSON.stringify(req.user)).email;
-    console.log("Insert into database", account_type, user_name, user_email);
+    let accountType = req.header("x-account-type");
+    let userName = req.header("x-user-name");
+    let userEmail = req.user.contact; //JSON.parse(JSON.stringify(req.user)).email;
+    console.log("Insert into database", accountType, userName, userEmail);
 
-    if (account_type === "Buddy") {
-      buddy_controller.create_buddy_account(req, res, next);
+    if (accountType === "Buddy") {
+      buddyController.createBuddyAccount(req, res, next);
       res.locals.eicUserType = "Buddy";
-    } else if (account_type === "Student") {
-      student_controller.create_student_account(req, res, next);
+    } else if (accountType === "Student") {
+      studentController.createStudentAccount(req, res, next);
       res.locals.eicUserType = "Student";
-    } else if (account_type === "Company") {
-      company_controller.createCompanyAccount(req, res, next);
+    } else if (accountType === "Company") {
+      companyController.createCompanyAccount(req, res, next);
       res.locals.eicUserType = "Company";
     } else {
       return res.status(500);
