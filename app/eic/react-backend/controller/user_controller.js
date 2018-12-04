@@ -7,7 +7,7 @@ const { body, validationResult } = require("express-validator/check");
 
 exports.log_in_user = function(req, res, next) {
   let user_info = JSON.parse(JSON.stringify(req.user));
-  let user_email = user_info.email;
+  let user_email = user_info.contact;
   eic_user.findOne({ contact: user_email }, function(err, result) {
     if (err) {
       return res.status(406).send();
