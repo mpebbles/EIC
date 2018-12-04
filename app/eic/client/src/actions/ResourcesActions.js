@@ -10,7 +10,6 @@ export function loadResources() {
     headers: { Authorization: `Bearer ${token}` }
   }).then(res => {
     var resources = JSON.stringify(res.data);
-    console.log(resources);
     resources = JSON.parse(resources);
     resources = JSON.parse(JSON.stringify(resources[0])).resources;
     dispatcher.dispatch({ type: "RECEIVE_RESOURCES", resources: resources });
@@ -27,7 +26,6 @@ export function deleteResource(id) {
     headers: { Authorization: `Bearer ${token}` },
     data: sendObj
   }).then(res => {
-    console.log("Delete resource", id);
     dispatcher.dispatch({ type: "DELETE_RESOURCE", resource: id });
   });
 }
