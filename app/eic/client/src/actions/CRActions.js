@@ -26,11 +26,11 @@ export function denyRequest(email) {
       url: config.BASE_URL + "/api/reject_pending_student/" + email,
       headers: { Authorization: `Bearer ${token}` }
     }).then(res => {
-      alert("Request deleted!");
+      //alert("Request deleted!");
       dispatcher.dispatch({ type: "REMOVE_REQUEST", removeEmail: email });
     });
   } catch (err) {
-    console.log(err);
+    //console.log(err);
   }
 }
 
@@ -42,10 +42,10 @@ export function acceptRequest(email) {
       url: config.BASE_URL + "/api/accept_pending_student/" + email,
       headers: { Authorization: `Bearer ${token}` }
     }).then(res => {
-      alert("Request accepted!");
+      //alert("Request accepted!");
       dispatcher.dispatch({ type: "REMOVE_REQUEST", removeEmail: email });
     });
   } catch (err) {
-    console.log(err);
+    //console.log(err);
   }
 }
