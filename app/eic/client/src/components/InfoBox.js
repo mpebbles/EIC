@@ -106,7 +106,7 @@ export default class InfoBox extends React.Component {
                   />
                 </div>
               )}
-            {!this.userType === "Student" && (
+            {!this.userType === "Buddy" && (
               <div className="bottom_icon_bar">
                 <FontAwesomeIcon
                   icon="check"
