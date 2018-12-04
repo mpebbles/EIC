@@ -1,44 +1,9 @@
-var test = require("../models/Test");
-var User = require("../models/GoogleUser");
 var eic_user = require("../models/User");
-var googleUser = require("../models/GoogleUser");
 var user = require("../models/User");
-var student = require("../models/Student");
-var buddy = require("../models/Buddy");
 var userProfileImage = require("../models/UserProfileImage");
-var goog_token = require("../utils/token.utils");
 var fs = require("fs");
-var User = require("../models/User");
-var Student = require("../models/Student");
-var Buddy = require("../models/Buddy");
-var token_utils = require("../utils/token.utils");
 var { findEmailByToken } = require("../models/GoogleUser");
 const { body, validationResult } = require("express-validator/check");
-
-exports.list_users = function(req, res, next) {
-  //res.send('respond with a resource');
-
-  // And insert something like this instead:
-  res.json([
-    {
-      id: 1,
-      username: "samsepi0l"
-    },
-    {
-      id: 2,
-      username: "D0loresH4ze"
-    }
-  ]);
-};
-
-exports.list_db = function(req, res, next) {
-  test.find().exec(function(err, list_test) {
-    if (err) {
-      return next(err);
-    }
-    res.json([{ list_test }]);
-  });
-};
 
 exports.log_in_user = function(req, res, next) {
   let user_info = JSON.parse(JSON.stringify(req.user));

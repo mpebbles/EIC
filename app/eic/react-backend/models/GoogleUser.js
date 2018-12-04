@@ -88,10 +88,24 @@ googleUserSchema.statics.findEmailByToken = function(token_str, next_func) {
     });
 };
 
+googleUserSchema.statics.findUsertypeByToken = function(token_str, next_func) {
+  mongoose
+    .model("GoogleUser")
+    .findOne({ eic_token: token_str })
+    .exec(function(err, user) {
+      if (user == null) {
+        console.log(token_str);
+      } else {
+        next_func(err, user.itemtype);
+      }
+    });
+};
+
 exports.GoogleUser = mongoose.model("GoogleUser", googleUserSchema);
 module.exports = {
   addEICToken: googleUserSchema.statics.addEICToken,
-  findEmailByToken: googleUserSchema.statics.findEmailByToken
+  findEmailByToken: googleUserSchema.statics.findEmailByToken,
+  findUsertypeByToken: googleUserSchema.statics.findUsertypeByToken
 };
 
 module.exports = mongoose.model("GoogleUser");

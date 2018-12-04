@@ -43,11 +43,7 @@ exports.getContracts = function(req, res, next) {
 };
 
 exports.deleteContractById = function(req, res, next) {
-  console.log("Got params", req.body);
-
   contract.findOneAndDelete({ _id: req.body.id }).then(result => {
-    console.log(result);
-    console.log("Done with delete");
   });
 
   return next();

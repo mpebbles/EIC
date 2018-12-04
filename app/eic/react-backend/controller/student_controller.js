@@ -1,11 +1,7 @@
-var test = require("../models/Test");
 var buddy = require("../models/Buddy");
 var student = require("../models/Student");
-var googleUser = require("../models/GoogleUser");
 var tokenUtils = require("../utils/token.utils");
 var { findEmailByToken } = require("../models/GoogleUser");
-var mongoose = require("mongoose");
-
 const { body, validationResult } = require("express-validator/check");
 
 //Insert new student into database

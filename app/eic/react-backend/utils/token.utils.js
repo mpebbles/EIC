@@ -1,5 +1,5 @@
 var jwt = require("jsonwebtoken");
-var { addEICToken } = require("../models/GoogleUser");
+var { addEICToken, findUsertypeByToken } = require("../models/GoogleUser");
 var buddy_controller = require("../controller/buddy_controller");
 var student_controller = require("../controller/student_controller");
 var company_controller = require("../controller/companyController");
@@ -16,22 +16,55 @@ var createToken = function(auth) {
   );
 };
 
-exports.validate_student_call = function(req, res) {
-  if (false) {
-    res.status(401).send("401 ERROR UNAUTHORISED TOKEN");
-  }
+exports.validate_student_call = function (req, res) {
+  var token_to_find_in_db = JSON.stringify(req.headers.authorization).split(
+    " "
+  )[1];
+  token_to_find_in_db = token_to_find_in_db.substring(
+    0,
+    token_to_find_in_db.length - 1
+  );
+  findUsertypeByToken(token_to_find_in_db, function (err, type) {
+    if (err) {
+      return next(err);
+    } else if (type !== "Student") {
+      res.status(401).send("401 ERROR UNAUTHORISED TOKEN");
+    }
+  });
 };
 
-exports.validate_buddy_call = function(req, res) {
-  if (false) {
-    res.status(401).send("401 ERROR UNAUTHORISED TOKEN");
-  }
+exports.validate_buddy_call = function (req, res) {
+  var token_to_find_in_db = JSON.stringify(req.headers.authorization).split(
+    " "
+  )[1];
+  token_to_find_in_db = token_to_find_in_db.substring(
+  0,
+  token_to_find_in_db.length - 1
+  );
+  findUsertypeByToken(token_to_find_in_db, function (err, type) {
+    if (err) {
+      return next(err);
+    } else if (type !== "Buddy") {
+      res.status(401).send("401 ERROR UNAUTHORISED TOKEN");
+    }
+  });
 };
 
-exports.validate_company_call = function(req, res) {
-  if (false) {
-    res.status(401).send("401 ERROR UNAUTHORISED TOKEN");
-  }
+exports.validate_company_call = function (req, res) {
+  var token_to_find_in_db = JSON.stringify(req.headers.authorization).split(
+    " "
+  )[1];
+  token_to_find_in_db = token_to_find_in_db.substring(
+    0,
+    token_to_find_in_db.length - 1
+  );
+  findUsertypeByToken(token_to_find_in_db, function (err, type) {
+    if (err) {
+      return next(err);
+    } else if (type !== "Company") {
+      res.status(401).send("401 ERROR UNAUTHORISED TOKEN");
+    }
+  });
 };
 
 module.exports = {

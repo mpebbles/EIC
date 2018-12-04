@@ -72,11 +72,7 @@ exports.deleteResourceByTitle = function(req, res, next) {
 };
 
 exports.deleteResourceById = function(req, res, next) {
-  console.log("Got params", req.body);
-
   resource.findOneAndDelete({ _id: req.body.id }).then(result => {
-    console.log(result);
-    console.log("Done with delete");
   });
 
   return next();
