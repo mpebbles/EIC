@@ -6,7 +6,7 @@ var {
   registerUser,
   sendToken
 } = require("../utils/token.utils");
-var { log_in_user } = require("../controller/user_controller");
+var { logInUser } = require("../controller/userController");
 var passport = require("passport");
 var config = require("../config");
 var request = require("request");
@@ -24,7 +24,7 @@ router.route("/auth/google-login").post(
     next();
   },
   generateToken,
-  log_in_user,
+  logInUser,
   putTokenInDB,
   sendToken
 );
