@@ -42,7 +42,7 @@ exports.addUserProfileImage = [
           });
           user.userProfileImageId = newUserImage.id;
           user.save(function(err) {
-            if (err) return handleError(err);
+            if (err) return; /*handleError(err);*/
           });
           fs.unlink(req.file.path, err => {
             if (err) throw err;

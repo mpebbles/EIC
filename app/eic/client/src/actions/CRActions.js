@@ -7,10 +7,10 @@ export function loadRequests() {
   try {
     axios({
       method: "get",
-      url: config.BASE_URL + "/api/get_pending_student/",
+      url: config.BASE_URL + "/api/getPendingStudent/",
       headers: { Authorization: `Bearer ${token}` }
     }).then(res => {
-      const persons = res.data[0].a_student;
+      const persons = res.data[0].aStudent;
       dispatcher.dispatch({ type: "RECEIVE_REQUESTS", requests: persons });
     });
   } catch (err) {
@@ -23,7 +23,7 @@ export function denyRequest(email) {
   try {
     axios({
       method: "get",
-      url: config.BASE_URL + "/api/reject_pending_student/" + email,
+      url: config.BASE_URL + "/api/rejectPendingStudent/" + email,
       headers: { Authorization: `Bearer ${token}` }
     }).then(res => {
       //alert("Request deleted!");
@@ -39,7 +39,7 @@ export function acceptRequest(email) {
   try {
     axios({
       method: "get",
-      url: config.BASE_URL + "/api/accept_pending_student/" + email,
+      url: config.BASE_URL + "/api/acceptPendingStudent/" + email,
       headers: { Authorization: `Bearer ${token}` }
     }).then(res => {
       //alert("Request accepted!");

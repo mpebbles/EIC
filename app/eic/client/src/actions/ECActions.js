@@ -11,7 +11,7 @@ export function loadBuddySearchResults(searchText) {
   try {
     axios({
       method: "get",
-      url: config.BASE_URL + "/api/get_buddy_partial/" + searchText,
+      url: config.BASE_URL + "/api/getBuddyPartial/" + searchText,
       headers: { Authorization: `Bearer ${token}` }
     }).then(res => {
       const persons = res.data[0].buddy;
@@ -27,7 +27,7 @@ export function sendRequest(buddyEmail) {
   try {
     axios({
       method: "get",
-      url: config.BASE_URL + "/api/add_pending_student/" + buddyEmail,
+      url: config.BASE_URL + "/api/addPendingStudent/" + buddyEmail,
       headers: { Authorization: `Bearer ${token}` }
     }).then(res => {
       // if anything needs to be done after, write it here
