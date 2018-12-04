@@ -3,12 +3,16 @@ import { withRouter } from "react-router-dom";
 import * as ContractsActions from "../actions/ContractsActions";
 import ContractsStore from "../stores/ContractsStore";
 import ContractEntry from "./ContractEntry";
+import UserTypeService from "./UserTypeService";
 
 class ContractsContent extends React.Component {
     constructor() {
         super();
         this.getContracts = this.getContracts.bind(this);
         this.newContract = this.newContract.bind(this);
+        let userTypeService = new UserTypeService();
+        const userType = userTypeService.getUserType();
+        this.isCompany = userType === "Company";
         this.state = {
             contracts: []
         };
@@ -47,9 +51,10 @@ class ContractsContent extends React.Component {
                     <div>
                         <h3>Contracts</h3>
                     </div>
+                    { this.isCompany &&
                     <div>
                         <button onClick={this.newContract}>Create Contract</button>
-                    </div>
+                    </div> }
                 </div>
                 <ul>
                     {this.state.contracts.map(contract => (

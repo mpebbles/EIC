@@ -9,6 +9,11 @@
   background-color: #f5f5f5;
 }
 
+.list_item {
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
 .expanded_box {
   width: 100%;
 }

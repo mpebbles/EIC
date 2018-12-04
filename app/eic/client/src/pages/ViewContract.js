@@ -43,7 +43,7 @@ class ViewContract extends React.Component {
                         Created on: {this.state.contract.creator}
                     </div>
                     <div>
-                        {this.state.contract.description}
+                        <br/><br/>{this.state.contract.description}
                     </div>
                 </div> }
             </div>

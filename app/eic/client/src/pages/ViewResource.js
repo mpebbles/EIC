@@ -32,14 +32,14 @@ class ViewResource extends Component {
                 <div>
                   <h6>{this.state.resource.title}</h6>
                   <button onClick={this.deleteResource}>Delete Resource</button>
-                    <div>
+                    <div className="list_item">
                         Author: {this.state.resource.creator}
                     </div>
-                    <div>
+                    <div className="list_item">
                         Created on: {this.state.resource.creation_date}
                     </div>
                     <div>
-                        {this.state.resource.content}
+                        <br/><br/>{this.state.resource.content}
                     </div>
                 </div> }
             </div>

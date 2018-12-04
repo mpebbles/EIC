@@ -16,10 +16,7 @@ class ResourceEntry extends React.Component {
     return (
       <div>
           <h6><a onClick={this.viewResource}>{this.props.content.title}</a></h6>
-        {this.props.content.content}
-        {this.props.content.creator}
-        {this.props.content.creation_date}
-        {this.props.content._id}
+        {this.props.content.content.substring(0, 200) + "..."}
       </div>
     );
   }

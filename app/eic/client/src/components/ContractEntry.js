@@ -16,10 +16,7 @@ class ContractEntry extends React.Component {
         return (
             <div>
                 <h6><a onClick={this.viewContract}>{this.props.content.title}</a></h6>
-                {this.props.content.content}
-                {this.props.content.creator}
-                {this.props.content.creation_date}
-                {this.props.content._id}
+                {this.props.content.description.substring(0, 200) + "..."}
             </div>
         );
     }
