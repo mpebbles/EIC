@@ -17,12 +17,10 @@ class ViewResource extends Component {
     let newResource = ResourcesStore.getResourceById(
       this.props.match.params.id
     );
-    console.log("Loaded resource", newResource);
     this.setState({ resource: newResource, doneLoading: true });
   }
 
   deleteResource() {
-    console.log("Deleted resource", this.state.resource._id);
     ResourceActions.deleteResource(this.state.resource._id);
     this.props.history.push("/");
   }
