@@ -23,8 +23,8 @@ describe("/POST edit buddy information", () => {
     googleUser.findOne({ contact: "hycheng@ucsc.edu" }, function(err, buddy) {
       chai
         .request(app)
-        .post("/api/edit_buddy_profile")
-        .set("Authorization", "Bearer " + buddy.eic_token)
+        .post("/api/editBuddyProfile")
+        .set("Authorization", "Bearer " + buddy.eicToken)
         .send(buddyParam)
         .end((err, res) => {
           res.body.buddy.should.have.property("biography"),
@@ -40,11 +40,11 @@ describe("/GET get buddy information by email", () => {
   it("it should GET a buddy's information", done => {
     chai
       .request(app)
-      .get("/api/get_buddy_email/hycheng@ucsc.edu")
+      .get("/api/getBuddyEmail/hycheng@ucsc.edu")
       .end((err, res) => {
         res.body[0].buddy[0].should.have.property("biography"),
           res.body[0].buddy[0].should.have.property("skills"),
-          res.body[0].buddy[0].should.have.property("user_name"),
+          res.body[0].buddy[0].should.have.property("userName"),
           res.body[0].buddy[0].should.have.property("company"),
           res.body[0].buddy[0].should.have.property("_id");
         done();
@@ -56,12 +56,12 @@ describe("/GET student information by email", () => {
   it("it should GET a student information", done => {
     chai
       .request(app)
-      .get("/api/get_student_email/eicstudent2143@gmail.com")
+      .get("/api/getStudentEmail/eicstudent2143@gmail.com")
       .end((err, res) => {
-        res.body[0].student[0].should.have.property("user_name"),
+        res.body[0].student[0].should.have.property("userName"),
           res.body[0].student[0].should.have.property("biography"),
           res.body[0].student[0].should.have.property("buddy"),
-          res.body[0].student[0].should.have.property("pending_buddy"),
+          res.body[0].student[0].should.have.property("pendingBuddy"),
           done();
       });
   });
@@ -82,7 +82,7 @@ describe("/POST create new contract", () => {
       chai
         .request(app)
         .post("/api/createContract/")
-        .set("Authorization", "Bearer " + buddy.eic_token)
+        .set("Authorization", "Bearer " + buddy.eicToken)
         .send(contractParam)
         .end((err, res) => {
           contract.findOne({ title: contractParam.title }, function(
@@ -92,10 +92,10 @@ describe("/POST create new contract", () => {
             contract.should.have.property("title"),
               contract.should.have.property("creator"),
               contract.should.have.property("description"),
-              contract.should.have.property("creation_date"),
+              contract.should.have.property("creationDate"),
               contract.should.have.property("pay"),
               contract.should.have.property("location"),
-              contract.should.have.property("related_skills");
+              contract.should.have.property("relatedSkills");
             contract.remove();
             done();
           });
@@ -119,12 +119,12 @@ describe("/POST create new company user", () => {
         .set("x-user-name", "MICROSOFT")
         .auth("user", testUser)
         .end((err, res) => {
-          company.findOne({ copmany_name: "MICROSOFT" }, function(
+          company.findOne({ copmanyName: "MICROSOFT" }, function(
             err,
             company
           ) {
             console.log(company);
-            company.should.have.property("company_name"),
+            company.should.have.property("companyName"),
               company.should.have.property("contracts"),
               done();
           });
