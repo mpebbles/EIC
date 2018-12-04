@@ -173,7 +173,7 @@ exports.accept_pending_student = function(req, res, next) {
 
 //Delete student from this buddy's pending_student[] and this buddy from the the specified student's pending_buddy[]
 exports.reject_pending_student = function(req, res, next) {
-  token_utils.validate_buddy_call(res, req);
+  //token_utils.validate_buddy_call(res, req);
 
   var token_to_find_in_db = JSON.stringify(req.headers.authorization).split(
     " "
