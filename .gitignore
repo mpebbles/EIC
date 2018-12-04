@@ -1,9 +1,9 @@
-./app/eic/.idea
+./app/eic/.idea/
 
 
-./app/eic/client/node_modules
+./app/eic/client/node_modules/
 ./app/eic/client/coverage
-./app/eic/client/build
+./app/eic/client/build/
 ./app/eic/client/.DS_Store
 ./app/eic/client/.env.local
 ./app/eic/client/.env.development.local
@@ -13,5 +13,5 @@
 ./app/eic/client/yarn-debug.log*
 ./app/eic/client/yarn-error.log*
 
-./app/eic/react-backend/node_modules
-./app/eic/react-backend/public/*
+./app/eic/react-backend/node_modules/
+./app/eic/react-backend/public/
