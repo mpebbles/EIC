@@ -7,7 +7,7 @@ var buddySchema = user.discriminator(
   "Buddy",
   new Schema({
     student: [{ type: Schema.Types.ObjectId, required: false, ref: "student" }],
-    pending_student: [
+    pendingStudent: [
       { type: Schema.Types.ObjectId, required: false, ref: "student" }
     ],
     company: { type: String, required: false, max: 100 },

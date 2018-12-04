@@ -10,7 +10,7 @@ const userSchema = mongoose.model(
   "User",
   new mongoose.Schema(
     {
-      user_name: { type: String, required: true, max: 100 },
+      userName: { type: String, required: true, max: 100 },
       userProfileImageId: { type: String, required: false, max: 200 },
       contact: {
         type: String,

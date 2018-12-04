@@ -7,8 +7,8 @@ var contractSchema = mongoose.model(
     pay: { type: String, required: true, max: 100 },
     location: { type: String, required: true, max: 100 },
     creator: { type: String, required: true, max: 100 },
-    related_skills: [{ type: String, required: false, max: 100 }],
-    creation_date: { type: String, required: true, max: 100 },
+    relatedSkills: [{ type: String, required: false, max: 100 }],
+    creationDate: { type: String, required: true, max: 100 },
     description: { type: String, required: true, max: 2000 }
   })
 );
